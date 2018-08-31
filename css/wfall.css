@@ -1,0 +1,21 @@
+.mphone-img{
+    top: 0;
+    width: 100px;
+    height: 100px;
+    right: -100px;
+    display: none;
+    z-index: 999;
+    position: absolute;
+}
+.small-icon{
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+}
+.notes{
+    color: darkorange;
+}
+.site-search{
+    border-left: 1px solid #9E9E9E;
+    padding-left: 10px;
+}

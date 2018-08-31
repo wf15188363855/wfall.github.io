@@ -3,20 +3,7 @@
  */
 //设为首页 999 设为主页函数
 function SetHome(obj,url){
-    try{
-        obj.style.behavior='url(#default#homepage)';
-        obj.setHomePage(url);
-    }catch(e){
-        if(window.netscape){
-            try{
-                netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-            }catch(e){
-                alert("抱歉，此操作被浏览器拒绝！\n\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'");
-            }
-        }else{
-            alert("抱歉，您所使用的浏览器无法完成此操作。\n\n您需要手动将【"+url+"】设置为首页。");
-        }
-    }
+    alert("请您同时按“Ctrl+D”,然后按“Enter键”。\n\n即可将本站【"+url+"】添加至书签栏内。");
 }
 
 //加入收藏函数
@@ -344,165 +331,6 @@ var tools = {
 
 };
 
-/* 百度搜索框 start */
-var searchData = {
-    news: {
-        action: "http://news.baidu.com/ns",
-        name: "word",
-        btn: "搜 索",
-        img: ["static/images/news.gif", "百度新闻"],
-        url: "http://news.baidu.com/ns",
-        params: {
-
-        }
-    },
-    web: {
-        action: "http://tj.16999.com/wd.php",
-        name: "wd",
-        btn: "百度一下",
-        img: ["static/images/baidu.gif", "百度首页"],
-        url: "http://tj.16999.com/wd.php",
-        params: {
-            /*tn: BaiduTn.tn,
-             ch: BaiduTn.ch*/
-        }
-    },
-    music: {
-        action: "http://mp3.baidu.com/m",
-        name: "word",
-        btn: "百度一下",
-        img: ["static/images/mp3.gif", "百度MP3"],
-        // url: "http://music.baidu.com/?ie=utf-8&ct=134217728&word=&tn="+hkxs_1_pg+"&ch="+BaiduTn.ch,
-        url: "http://music.baidu.com/?ie=utf-8&ct=134217728&word=&tn=hkxs_1_pg&ch=1",
-        // url:"http://music.baidu.com/?ie=utf-8&amp;ct=134217728&amp;word=&amp;tn=hkxs_1_pg&amp;ch=1",
-        params: {
-            /*
-             tn: BaiduTn.tn,
-             ch: BaiduTn.ch,
-             f: "ms",
-             ct: "134217728"
-             */
-            tn: "hkxs_1_pg",
-            ch: 1,
-            f: "ms",
-            ct: "134217728",
-            ie: "utf-8"
-        }
-    },
-    video: {
-        action: "http://v.16999.com/",
-        name: "q",
-        btn: "影视搜索",
-        img: ["static/images/999_video.png", "999影视"],
-        url: "http://v.16999.com/",
-        params: {
-            ct:'search'
-        }
-    },
-    image: {
-        action: "http://image.baidu.com/i",
-        name: "word",
-        btn: "百度一下",
-        img: ["static/images/pic.gif", "百度图片"],
-        url: "http://image.baidu.com/",
-        params: {
-            tn: "baiduimage"
-        }
-    },
-    zhidao: {
-        action: "http://zhidao.baidu.com/search",
-        name: "word",
-        btn: "百度一下",
-        img: ["static/images/zhidao.gif", "百度知道"],
-        url: "http://zhidao.baidu.com/search",
-        params: {
-        }
-    },
-    taobao: {
-        action: "http://search8.taobao.com/browse/search_auction.htm",
-        name: "q",
-        btn: "淘宝搜索",
-        img: ["static/images/taobao.gif", "淘宝网"],
-        url: "http://www.taobao.com/",
-        params: {
-            pid: "mm_33075817_10716569_35254476",
-            commend: "all",
-            search_type: "action",
-            user_action: "initiative",
-            f: "D9_5_1",
-            at_topsearch: "1",
-            sid: "(05ba391dbdcada4634d4077c189eeef7)",
-            sort: "",
-            spercent: "0"
-        }
-    },
-    baike: {
-        action: "http://baike.baidu.com/search/word",
-        name: "word",
-        btn: "搜索词条",
-        img: ["static/images/baike.gif", "百度百科"],
-        url: "http://baike.baidu.com/",
-        params: {
-            ie:'gbk'
-        }
-    },
-    ditu: {
-        action: "http://map.baidu.com/m",
-        name: "word",
-        btn: "搜索地图",
-        img: ["static/images/ditu.gif", "百度地图"],
-        url: "http://map.baidu.com/",
-        params: {
-            ie:'gbk'
-        }
-    }
-}
-
-
-/*  搜索框 api */
-var _autoCompleteData = {};
-var rd = new Date().getTime();
-_autoCompleteData.url = "http://unionsug.baidu.com/su?p=3&cb=baiduSU&t="+rd+"&wd=";
-_autoCompleteData.hotUrl = 'http://api.16999.com/static/hot-keyword.js?callback=hotSU&t='+rd;
-var baiduSU = function(data){
-    _autoCompleteData.data = data.s;
-}
-var taobaoSU = function(data){
-    var tbData = data.result;
-    var tbArr = [];
-    for(var i=0; i<tbData.length; i++){
-        tbArr.push(tbData[i][0]);
-    }
-    _autoCompleteData.data = tbArr;
-}
-
-
-
-/* 热门关键字下拉 */
-var hotSU = function(data, num){
-    data = data.split(',');
-    _autoCompleteData.hotData = data;
-    $('#j_auto_btn').find('.num').html(num);
-
-    var _hotNew = tools.cookie.get('__hotNewNum_');
-    var nowTime = new Date().getTime(),
-        lastTime = _hotNew == undefined ? nowTime - 3600000 : _hotNew;
-
-    if(nowTime - lastTime >= 3600000 && num != 0){
-        $('#j_auto_btn').find('.num').css({'visibility':'visible','background':'#fe5a5a'});
-    }else{
-        $('#j_auto_btn').find('.num').css({'visibility':'hidden','background':'#fff'});
-    }
-}
-
-/* 新闻更新数量 */
-// $.getScript(_autoCompleteData.hotUrl);
-$.ajax({
-    url: _autoCompleteData.hotUrl,
-    dataType: "script",
-    scriptCharset: 'gb2312'
-});
-
 (function($){
     $.extend($.fn, {
         xAutocomplete: function(opts){
@@ -827,27 +655,6 @@ $.ajax({
 
 /* 百度搜索框 end */
 
-
-
-/* 用户登录成功后回调函数 */
-var loginout = function(){
-    $.ajax({
-        url: 'http://www.16999.com/member/?ac=loginout',
-        type: 'GET',
-        dataType: 'jsonp',
-        success:function(data){
-            // var data = eval('('+data+')');
-            if(data.status == 'y'){
-                location.reload();
-            }
-            else{
-                alert('服务器延时，请稍候退出。')
-            }
-        }
-    });
-}
-
-
 $(function(){
 
 
@@ -924,28 +731,6 @@ $(function(){
             $('.search-list').siblings('i').removeClass('i-add-rotate');
         });
     }
-
-
-    //用户登录，输出网址
-    (function(){
-        $.ajax({
-            url:'http://www.16999.com/member/?ct=api&ac=info',
-            type:'GET',
-            dataType:'jsonp',
-            success:function(data){
-                if ( data.status == 'error' ) {
-                    $('.login li').eq(0).html('<a target="_blank" href="http://www.16999.com/member/?ac=login">登录</a>');
-                    $('.login li').eq(1).html('<a target="_blank" href="http://www.16999.com/member/?ac=reg">注册</a>');
-                }else{
-                    $('.login li').eq(0).html('<a href="/member">'+data.username+'</a>');
-                    $('.login li').eq(1).html('<a href="javascript:;" onclick="loginout();" id="quit">退出</a>');
-                }
-            }
-        });
-    }());
-
-
-
 
     /* 一周天气列表 */
     if ($('.all-weather').get(0)) {
@@ -1056,65 +841,6 @@ $(function(){
         });
 
     }());
-
-
-
-
-    //百度搜索框
-    (function(){
-
-        var setSearchForm = function(type){
-            var form = $('#j_search_form'),
-                btn = $("#j_search_btn"),
-                logo = $("#j_search_logo"),
-                word = $("#j_search_word");
-            form.find('input[type="hidden"]').remove();
-
-            //获取当前数据
-            var data = searchData[type];
-
-            form.attr('action', data.action);
-            for (i in data.params) {
-                $('<input type="hidden" value="'+data.params[i]+'" name="'+i+'" />').appendTo(form);
-            }
-            word.attr('name', data.name);
-            logo.attr('href', data.url);
-            logo.find('img').attr('src', data.img[0]).attr('alt', data.img[1])
-            btn.html(data.btn);
-            word.focus();
-            if(type == 'web'){
-                $('#j_auto_btn').css('visibility', 'visible');
-            }
-            else{
-                $('#j_auto_btn').css('visibility', 'hidden');
-            }
-            if(type != 'taobao'){
-                _autoCompleteData.url = "http://unionsug.baidu.com/su?p=3&cb=baiduSU&t="+rd+"&wd=";
-            }
-            else{
-                _autoCompleteData.url = "http://suggest.taobao.com/sug?code=utf-8&callback=taobaoSU&rd="+rd+"&q=";
-            }
-            $('#j_key_'+type).show().siblings().hide();
-        }
-
-        $('#j_search_tab').find('li').click(function(){
-            var rel = $(this).attr('rel');
-            var thisIndex = $(this).index();
-            $(this).addClass('current').siblings().removeClass('current');
-            $('#all_ad ul').eq(thisIndex).show().siblings('ul').hide();
-            setSearchForm(rel);
-            // if(changeTN){setTN();}
-        });
-
-        $.fn.xAutocomplete({
-            node: $('#j_search_word'),
-            extBtn: $('#j_auto_btn'),
-            extSource: _autoCompleteData.hotData
-        });
-
-    })();
-
-
 
     //调用轮播
     $.fn.xTaber({
