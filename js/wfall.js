@@ -63,3 +63,8 @@ function threeDim() {
     window.open("iframe3D/iframe3D.html");
     /*window.location = "https://www.baidu.com"*/
 }
+
+//H5游戏跳转
+function game() {
+    window.open("tuya/tuya.html");
+}
