@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>鲸落TV</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div class="container">
+    <canvas id="canvas">
+        Aww, your browser doesn't support HTML5!  <!--哦，你的浏览器不支持HTML5-->
+    </canvas>
+
+    <div id="mainMenu">
+        <h1>doodle jump  <!--涂鸦跳跃--></h1>
+        <h3>using HTML5,</h3>
+        <h3>...by <a href="https://www.wfall.cn/" target="_blank">鲸落TV</a></h3>
+        <p class="info">
+            <!--use-->用
+            <span class="key left">←</span>
+            <span class="key right">→</span> <!--to move and space to (re) start...-->去左右移动
+        </p>
+        <a class="button" href="javascript:init()">Play</a>
+    </div>
+
+    <div id="gameOverMenu">
+        <h1>Game Over!</h1>
+        <h3 id="go_score">you scored 0 points</h3>
+
+        <a class="button" href="javascript:reset()">重新开始</a>
+        <a id="tweetBtn" target="_blank" class="button tweet" href="#">返回首页</a>
+
+    </div>
+
+    <!-- Preloading image ;) -->
+    <img id="sprite" src="http://i.imgur.com/2WEhF.png" />
+    <!--<img id="sprite" src="img/hahahah.png" />           可DIY自定义图片-->
+    <div id="scoreBoard">
+        <p id="score">0</p>
+    </div>
+
+</div>
+<script src="js/index.js"></script>
+</body>
+</html>
