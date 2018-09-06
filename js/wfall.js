@@ -68,3 +68,8 @@ function threeDim() {
 function game() {
     window.open("tuya/tuya.html");
 }
+
+//H5 VR虚拟现实跳转
+function wfallVR() {
+    window.open("wfallstar/index.html");
+}
