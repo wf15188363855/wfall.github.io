@@ -329,8 +329,8 @@ code {
 }
 .buttons{
     position: fixed;
-    bottom: 2em;
-    right: 2em;
+    bottom: 1em;
+    right: 1em;
 }
 .logo{
     position: relative;
