@@ -1,517 +1,150 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>鲸落</title>
-    <link rel="icon" href="logimg/logo.ico" type="image/x-icon"/>
-    <meta name="Keywords" content="鲸落" />
-    <meta name="Description" content="鲸落" />
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/wfall.css">
-    <base target="_blank">
-    <script type="text/javascript">
-/*        try{
-            if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-                alert("我是手机端");
-                /!*window.location.href="../移动端报表3(rem版本)/index.html";*!/
-            }else{
-                alert("我是pc端");
-                /!*window.location.href="cindex.html";*!/
-            }
-        }catch(e){}*/
-    </script>
+    <title>鲸落WFall</title>
+    <link rel="icon" href="img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=Poiret+One);
+        body {
+            overflow: hidden;
+            width: 100%;
+            margin: 0;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
 </head>
-<body>
-
-<div class="top-info">
-    <div class="row">
-        <ul class="top-nav fl">
-            <li><a href="javascript:;" target="_self">推荐</a></li>
-            <li><a href="javascript:;">影视</a></li>
-            <li><a href="javascript:;" onclick="game()">游戏</a></li>
-            <li><a href="javascript:;">音乐</a></li>
-            <li><a href="javascript:;">新闻</a></li>
-            <li><a href="javascript:;">购物</a></li>
-            <li><a href="javascript:;">图片</a></li>
-            <li><a href="javascript:;">旅游</a></li>
-            <li><a href="javascript:;">小说</a></li>
-            <li><a href="javascript:;">笑话</a></li>
-            <li><a href="javascript:;">生活百科</a></li>
-        </ul>
-
-        <div class="classify-nav fl">
-            <div class="classify-icon-w">
-                <i class="classify-icon">
-                    <span class="cn1"></span>
-                    <span class="cn2"></span>
-                    <span class="cn3"></span>
-                    <span class="cn4"></span>
-                </i>
+<body onload="disableInfo()">
+<!--以下是logo-->
+<div class="logo">
+    <div class="logo_name">
+        <img src="img/wf_logo.png" width="100" alt="">
+    </div>
+</div>
+<!--以下是页面标题-->
+<div class="p-summary">
+    <span>鲸落WFall</span>
+    <span class="zhushi">(注释：长按鼠标在背景拖动，拉出挡板去阻止小球坠落)</span>
+</div>
+<!--以下是canvas滑落小球-->
+<canvas id="canv" style="position: absolute; left: 0px; top: 0px;"></canvas>
+<!--以下是变形导航-->
+<div>
+    <svg class="hidden">
+        <!-- All deco shapes -->
+        <defs>
+            <path id="deco1" d="M 161,54.69 C 230.4,4.986 303.7,8.661 414.4,92.19 465.7,130.9 432.3,211.4 460,279.5 481,331.2 449.7,430.4 381.1,427 287.1,422.3 172.4,503.8 99.27,444.6 21.03,381.1 10.32,258.3 55.25,145.6 73.73,99.3 129.3,77.36 161,54.69 Z" />
+            <path id="deco2" d="M 119.8,69.41 C 213.5,18.01 367.2,-1.306 440.4,76.58 482.9,121.9 435.3,200.8 432.9,262.9 431.1,310.6 461.3,372.1 427.7,406 342.4,492 158.3,499.3 64.62,422.5 10.09,377.8 18.76,282.6 32.51,213.5 43.46,158.4 70.61,96.36 119.8,69.41 Z"
+            />
+            <path id="deco3" d="M 77.03,75.72 C 147.9,0.2308 309,13.37 387.6,80.44 471.8,152.4 517.2,325.6 442.9,407.5 350.2,509.8 43.77,516.2 29.67,378.8 20.48,289.3 80.25,270.4 87.78,212 93.61,166.8 45.85,108.9 77.03,75.72 Z" />
+            <path id="deco4" d="M 38.35,160.1 C 74.92,86.34 178.1,44.04 260.1,51.51 348.2,59.54 441.6,126.9 473.5,209.4 499.3,276 485,371.9 431.9,419.6 348.2,494.9 185.6,517.4 95.49,449.9 16.71,390.8 -5.393,248.3 38.35,160.1 Z" />
+            <path id="deco5" d="M 49.94,386.5 C 9.795,286.4 7.674,129.7 94.72,65.99 188.4,-2.586 371.8,28.99 438.1,124.3 486.9,194.5 503.7,389.2 390.4,376.4 277.1,363.5 238.6,482 155.1,469.7 110.9,463.2 66.57,428 49.94,386.5 Z" />
+            <path id="deco6" d="M 261.7,380.3 C 204.7,399.8 154.1,482.7 98.91,458.5 26.64,426.9 13.2,309.8 29.35,232.6 43.76,163.6 101.4,97.37 167.4,72.34 248,41.97 422.1,-2.762 423.4,107.7 424.6,218.1 507.5,272.4 464.3,336.7 425.7,394.2 327,357.9 261.7,380.3 Z"
+            />
+            <path id="deco7" d="M 451.9,392.4 C 365.4,455.1 212.9,465.1 131.6,395.9 55.74,331.3 2.509,152.7 87.24,100.3 135.8,70.3 177.8,170.2 227.3,198.6 307.2,244.4 442.2,228.9 478.7,313.5 489.7,339 474.4,376.1 451.9,392.4 Z" />
+        </defs>
+    </svg>
+    <main>
+        <div class="content content--grid">
+            <div class="item item--style-1" data-animation-path-duration="800" data-animation-path-easing="easeInOutCubic" data-path-elasticity="300" data-morph-path="M 189,80.37 C 232.6,46.67 352.5,67.06 350.9,124.1 349.5,173.4 311.7,168 312.4,248.1 312.9,301.1 382.5,319.2 368.5,379.1 349.4,460.6 137.7,467.5 117.6,386.3 98.68,309.7 171.5,292.2 183.6,240.1 195.7,188.2 123.8,130.7 189,80.37 Z"
+                 data-path-scaleX="0.8" data-path-scaleY="1.1" data-path-translateX="0" data-path-translateY="30" data-path-rotate="5" data-animation-image-duration="800" data-animation-image-easing="easeInOutQuart" data-image-elasticity="300" data-image-scaleX="1.2"
+                 data-image-scaleY="1.2" data-image-translateX="-20" data-image-translateY="-45" data-image-rotate="-5" data-animation-deco-duration="1300" data-animation-deco-easing="easeOutQuad" data-deco-elasticity="300" data-deco-scaleX="0.8" data-deco-scaleY="0.9"
+                 data-deco-translateX="-5" data-deco-translateY="-5" data-deco-rotate="2">
+                <svg class="item__svg" width="500px" height="500px" viewBox="0 0 500 500">
+                    <clipPath id="clipShape1">
+                        <path class="item__clippath" d="M 189,80.37 C 243,66.12 307.3,87.28 350.9,124.1 389.3,156.6 417,211.2 418.1,263.4 419.1,305.7 401.8,355.6 368.5,379.1 298.8,428 179.2,446.4 117.6,386.3 65.4,335.3 78.55,230.3 105.5,160.5 119.7,123.6 152.6,89.85 189,80.37 Z"
+                        />
+                    </clipPath>
+                    <g class="item__deco">
+                        <use xlink:href="#deco1" />
+                    </g>
+                    <g clip-path="url(#clipShape1)">
+                        <image class="item__img" xlink:href="img/organic1.png" x="0" y="0" height="500px" width="500px" />
+                    </g>
+                </svg>
+                <div class="item__meta" id="Video_one">
+                    <div class="item__number">
+                        <span class="item__specimen">ONE</span>
+                        <span class="item__reference">看视频</span>
+                    </div>
+                    <h2 class="item__title">WFall&nbsp;&&nbsp;视频</h2>
+                    <h3 class="item__subtitle">全网视频，找你想看</h3>
+                </div>
             </div>
-            <span class="cn-word">分类导航</span>
-            <i class="classify-triangle triangle"></i>
 
-            <div class="classify">
-                <span class="cn-line"></span>
-                <dl class="classify-all">
-                    <dt><i>•</i>生活服务</dt>
 
-                    <dd><a href="javascript:;">生活</a></dd>
-                    <dd><a href="javascript:;">汽车</a></dd>
-                    <dd><a href="javascript:;">房产</a></dd>
-                    <dd><a href="javascript:;">旅游</a></dd>
-                    <dd><a href="javascript:;">美食</a></dd>
-                    <dd><a href="javascript:;">招聘</a></dd>
-                    <dd><a href="javascript:;">地图</a></dd>
-                    <dd><a href="javascript:;">购物</a></dd>
-                    <dd><a href="javascript:;">彩票</a></dd>
-                    <dd><a href="javascript:;">银行</a></dd>
-                    <dd><a href="javascript:;">股票</a></dd>
-                    <dd><a href="javascript:;">基金</a></dd>
-                    <dd><a href="javascript:;">保险</a></dd>
-                    <dd><a href="javascript:;">居家</a></dd>
-                </dl>
-                <dl class="classify-all mt10">
-                    <dt><i>•</i>休闲娱乐</dt>
+            <div class="item item&#45;&#45;style-2" data-animation-path-duration="1500" data-animation-path-easing="easeOutElastic" data-morph-path="M 418.1,159.8 C 460.9,222.9 497,321.5 452.4,383.4 417.2,432.4 371.2,405.6 271.3,420.3 137.2,440 90.45,500.6 42.16,442.8 -9.572,381 86.33,289.1 117.7,215.5 144.3,153.4 145.7,54.21 212.7,36.25 290.3,15.36 373.9,94.6 418.1,159.8 Z"
+                 data-path-scaleY="1.1" data-image-scaleX="1.3" data-image-scaleY="1.3" data-animation-deco-duration="2000" data-animation-deco-delay="100" data-deco-rotate="-10">
+                <svg class="item__svg" width="500px" height="500px" viewBox="0 0 500 500">
+                    <clipPath id="clipShape2">
+                        <path class="item__clippath" d="M 378.1,121.2 C 408.4,150 417.2,197.9 411,245.8 404.8,293.7 383.5,341.7 353.4,370.7 303.2,419.1 198.7,427.7 144.5,383.8 86.18,336.5 67.13,221.3 111.9,161 138.6,125 188.9,99.62 240.7,90.92 292.4,82.24 345.6,90.32 378.1,121.2 Z"
+                        />
+                    </clipPath>
+                    <g class="item__deco">
+                        <use xlink:href="#deco2" />
+                    </g>
+                    <g clip-path="url(#clipShape2)">
+                        <image class="item__img" xlink:href="img/organic2.png" x="0" y="0" height="500px" width="500px" />
+                    </g>
+                </svg>
+                <div class="item__meta" id="Shop_two">
+                    <div class="item__number">
+                        <span class="item__specimen">TWO</span>
+                        <span class="item__reference">爱海淘</span>
+                    </div>
+                    <h2 class="item__title">WFall&nbsp;&&nbsp;爱购</h2>
+                    <h3 class="item__subtitle">品牌好物，即点即购</h3>
+                </div>
+            </div>
 
-                    <dd><a href="javascript:;">视频</a></dd>
-                    <dd><a href="javascript:;">新闻</a></dd>
-                    <dd><a href="javascript:;">美图</a></dd>
-                    <dd><a href="javascript:;">小说</a></dd>
-                    <dd><a href="javascript:;">游戏</a></dd>
-                    <dd><a href="javascript:;">音乐</a></dd>
-                    <dd><a href="javascript:;">笑话</a></dd>
-                    <dd><a href="javascript:;">动漫</a></dd>
-                    <dd><a href="javascript:;">娱乐</a></dd>
-                    <dd><a href="javascript:;">社交</a></dd>
-                    <dd><a href="javascript:;">时尚</a></dd>
-                    <dd><a href="javascript:;">明星</a></dd>
-                    <dd><a href="javascript:;">男人</a></dd>
-                    <dd><a href="javascript:;">女人</a></dd>
-                </dl>
-                <dl class="classify-all mt10">
-                    <dt><i>•</i>其它</dt>
-
-                    <dd><a href="javascript:;">人文</a></dd>
-                    <dd><a href="javascript:;">公益</a></dd>
-                    <dd><a href="javascript:;">宗教</a></dd>
-                    <dd><a href="javascript:;">科技</a></dd>
-                    <dd><a href="javascript:;">手机</a></dd>
-                    <dd><a href="javascript:;">电脑</a></dd>
-                    <dd><a href="javascript:;">爱好</a></dd>
-                    <dd><a href="javascript:;">曲艺</a></dd>
-                    <dd><a href="javascript:;">摄影</a></dd>
-                    <dd><a href="javascript:;">宠物</a></dd>
-                    <dd><a href="javascript:;">快递</a></dd>
-                    <dd><a href="javascript:;">政府</a></dd>
-                    <dd><a href="javascript:;">更多&gt;</a></dd>
-                </dl>
+            <div class="item item&#45;&#45;style-3" data-animation-path-duration="3500" data-path-elasticity="500" data-morph-path="M 193.7,217.3 C 236.4,228.3 279.7,242.7 320.9,231.8 362.6,220.9 446.8,197.1 457.6,241.5 469.3,289.8 378.7,308.3 330.2,319.2 278.5,330.8 222.3,319.2 172.1,302.2 125.2,286.4 33.08,273.2 45.14,225.2 57.22,177.1 145.7,204.8 193.7,217.3 Z"
+                 data-path-translateY="-20" data-animation-image-duration="1000" data-animation-image-easing="easeOutQuint" data-image-rotate="45" data-image-scaleX="0.8" data-image-scaleY="0.8" data-animation-deco-duration="2000" data-animation-deco-easing="easeOutElastic"
+                 data-deco-scaleX="0.7" data-deco-rotate="-10">
+                <svg class="item__svg" width="500px" height="500px" viewBox="0 0 500 500">
+                    <clipPath id="clipShape3">
+                        <path class="item__clippath" d="M 184,127.4 C 235.4,92.39 319.7,79.27 359.9,132.2 383.2,163 357.1,216.6 355.8,258.8 354.8,291.2 371.3,332.9 352.9,356 306.1,414.4 205.1,419.3 153.7,367.2 123.8,336.8 128.6,272.1 136.1,225.2 142.1,187.8 157,145.7 184,127.4 Z"
+                        />
+                    </clipPath>
+                    <g class="item__deco">
+                        <use xlink:href="#deco3" />
+                    </g>
+                    <g clip-path="url(#clipShape3)">
+                        <image class="item__img" xlink:href="img/organic3.png" x="0" y="0" height="500px" width="500px" />
+                    </g>
+                </svg>
+                <div class="item__meta" id="Wf3D_three">
+                    <div class="item__number">
+                        <span class="item__specimen">THREE</span>
+                        <span class="item__reference">3D特效</span>
+                    </div>
+                    <h2 class="item__title">WFall&nbsp;&&nbsp;3D</h2>
+                    <h3 class="item__subtitle">3D体验，酷炫升级</h3>
+                </div>
             </div>
         </div>
-
-        <ul class="home-list fr">
-            <li><a href="javascript:;" target="_self" href="javascript:void(0);" onclick="SetHome(this,'https://www.wfall.cn');"><i></i>添加书签</a></li>
-            <li class="site-search"><a href="javascript:;"  onclick="siteSearch();">站内搜索</a></li>
-            <li class="site-search"><a href="javascript:;" class="notes" onclick="threeDim()">鲸落TV立体版</a></li>
-            <li class="site-search"><a href="javascript:;" class="notes" onclick="wfallVR()">VR虚拟现实</a></li>
-        </ul>
-
-        <!--<ul class="login fr">
-            <li><a href="javascript:;">登录</a></li>
-            <li><a href="javascript:;">注册</a></li>
-        </ul>-->
-
+    </main>
+</div>
+<!--以下是登录注册按钮-->
+<div class="buttons">
+    <button class="pulse" id="Litiban_btn">立体版WFall</button>
+    <button class="pulse" id="Game_btn">玩游戏</button>
+    <div class="mphone">
+        <button class="pulse" id="Lizi3D_btn">3D星矩阵</button>
+        <img style="left: 14px" class="mphone-img" src="img/wfalllizi.png" alt="">
+    </div>
+    <div class="mphone">
+        <button class="pulse" id="VR3D_btn">扫码体验裸眼3D</button>
+        <img class="mphone-img" src="img/wfallstarewm.png" alt="">
     </div>
 </div>
-<!--顶部 top-info-->
-
-
-<div class="row header mt15">
-    <div class="logo fl">
-        鲸落  <span class="logo_tv">TV</span>
-    </div>
-
-    <div class="column-name fl">Whale Fall</div>
-
-    <!--搜索框-->
-    <div class="search fl">
-
-        <!--<form action="javascript:;" target="_blank" id="j_search_form" onsubmit = "return false">-->
-            <div class="search-list-w" id="j_search_tab">
-                <ul class="search-list sx-list">
-                    <li rel="baidu" style="display:block" id="show_class">百&nbsp;&nbsp;度</li>
-                    <!--<li rel="sousuo" class="show2">搜本页</li>-->
-                    <li rel="baidu" class="show2">百&nbsp;&nbsp;度</li>
-                    <li rel="zhihu" class="show2">知&nbsp;&nbsp;乎</li>
-                    <li rel="taobao" class="show2">淘&nbsp;&nbsp;宝</li>
-                    <li rel="tianmao" class="show2">天&nbsp;&nbsp;猫</li>
-                </ul>
-                <i class="search-triangle triangle"></i>
-            </div>
-            <input type="text" class="search-text sx-text" name="wd" id="j_search_word">
-            <button class="search-btn" type="submit" id="j_search_btn">确&nbsp;&nbsp;定</button>
-        <!--</form>-->
-    </div>
-</div>
-<!--header 头部 --><div class="row nav mt20">
-    <ul class="nav-list">
-        <li class="nl-current"><a href="javascript:;">首页</a></li>
-
-        <!--<li ><a target="_self" href="/gouwu/">购物</a></li>
-        <li class="nl-current"><a target="_self" href="/shipin/">视频</a></li>
-        <li ><a target="_self" href="/meitu/">美图</a></li>
-        <li ><a target="_self" href="/xiaoshuo/">小说</a></li>
-        <li ><a target="_self" href="/youxi/">游戏</a></li>
-        <li ><a target="_self" href="/yinyue/">音乐</a></li>
-        <li ><a target="_self" href="/xiaohua/">笑话</a></li>
-        <li ><a target="_self" href="/dongman/">动漫</a></li>
-        <li><a href="javascript:;">更多</a></li>-->
-    </ul>
-</div>
-
-<div class="news-web row mt20">
-    <h2 class="news-title clearfix">视频名站推荐</h2>
-    <table class="all-web mt10">
-        <tr>
-            <!-- five -->
-            <td>
-                <a target='_blank' href="http://xlyy100.com/">
-                    <i class="small-icon"><img width="16" src='logimg/xlyy100.png'/></i>降龙影院                    <p>各平台VIP连续剧、电影免费看<br> <span class="mphone">可扫一扫手机端观看</span></p>
-                </a>
-                <img class="mphone-img" src="Maimg/xlyy100.png" alt="">
-            </td>
-            <td>
-                <a target='_blank' href="http://psw.tw/">
-                    <i class="small-icon"><img width="16" src='logimg/psw.png'/></i>片搜电影                    <p>各平台VIP连续剧、电影免费看<br> <span class="mphone">可扫一扫手机端观看</span></p>
-                </a>
-                <img class="mphone-img" src="Maimg/psw.png" alt="">
-            </td>
-            <td>
-                <a target='_blank' href="javascript:;">
-                    馍馍电影                     <p>最新最全的电影首发、VIP视频<br> <span class="mphone">仅支持扫一扫手机端观看</span></p>
-                </a>
-                <img class="mphone-img" src="Maimg/00m1.png" alt="">
-            </td>
-            <td>
-                <a target='_blank' href="http://www.gaolebo.com/">
-                    <i class="small-icon"><img width="16" src='logimg/gaolebo.ico'/></i>高乐播视频                    <p>各平台VIP连续剧、电影免费看<br> <span class="mphone">可扫一扫手机端观看</span></p>
-                </a>
-                <img class="mphone-img" src="Maimg/gaolebo.png" alt="">
-            </td>
-            <td>
-                <a target='_blank' href="http://www.mmore.xyz/">
-                    <i class="small-icon"><img width="16" src='logimg/mmore.png'/></i>影视解析                    <p>全网各平台VIP视频解析<br> <span class="mphone">可扫手机端观看，但不推荐</span></p>
-                </a>
-                <img class="mphone-img" src="Maimg/mmore.png" alt="">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a target='_blank' href="http://www.866r.com/">
-                    <i class="small-icon"><img width="16" src='logimg/866r.png'/></i>周末看                    <p>各平台VIP连续剧、电影免费看<br> <span class="mphone">可扫一扫手机端观看</span></p>
-                </a>
-                <img class="mphone-img" src="Maimg/866r.png" alt="">
-            </td>
-            <td>
-                <a target='_blank' href="http://www.pupudy.com/">
-                    <i class="small-icon"><img width="16" src='logimg/pupudy.png'/></i>噗噗电影网                    <p>各平台VIP连续剧、电影免费看<br> <span class="mphone">可扫一扫手机端观看</span></p>
-                </a>
-                <img class="mphone-img" src="Maimg/pupudy.png" alt="">
-            </td>
-            <td>
-                <a target='_blank' href="http://vip.52saf.com/">
-                <i class="small-icon"><img width="16" src='logimg/52saf.png'/></i>SAF影院                    <p>各平台VIP连续剧、电影免费看<br> <span class="mphone">可扫一扫手机端观看</span></p>
-            </a>
-                <img class="mphone-img" src="Maimg/52saf.png" alt="">
-            </td>
-            <td>
-                <a target='_blank' href="https://www.2345dy.com/">
-                    <i class="small-icon"><img width="16" src='logimg/2345dy.png'/></i>2345电影网                    <p>各平台VIP连续剧、电影免费看<br> <span class="mphone">可扫一扫手机端观看</span></p>
-                </a>
-                <img class="mphone-img" src="Maimg/2345dy.png" alt="">
-            </td>
-            <td>
-                <a target='_blank' href="http://tv.dsqndh.com/">
-                    <i class="small-icon"><img width="16" src='logimg/dsqndh.ico'/></i>屌丝青年                    <p>全网各平台VIP视频解析<br> <span class="mphone">可扫手机端观看，但不推荐</span></p>
-                </a>
-                <img class="mphone-img" src="Maimg/dsqndh.png" alt="">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a target='_blank' href="https://www.7474.tv/">
-                    <i class="small-icon"><img width="16" src='logimg/7474.png'/></i>骑士影院                    <p>各平台VIP连续剧、电影免费看<br> <span class="mphone">可扫一扫手机端观看</span></p>
-                </a>
-                <img class="mphone-img" src="Maimg/7474.png" alt="">
-            </td>
-        </tr>
-    </table>
-    <em class="notes">注：部分二维码在QQ、微信的扫一扫上无法正常跳转，可选择手机自带浏览器的扫一扫进行尝试，或选择QQ、微信之外的扫码工具。</em>
-</div>
-
-<div class="news-web row mt20">
-    <h2 class="news-title clearfix">视频综合</h2>
-    <table class="all-web mt10">
-        <!-- five -->
-        <tr>
-            <td>
-                <a target='_blank' href="http://bbyy.us/">播播影院</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.xiaoqiaomovie.com/">小乔影院</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.15dy.com/">15电影网</a>
-            </td>
-            <td>
-                <a target='_blank' href="https://www.fxvod.com/">繁星</a>
-            </td>
-            <td>
-                <a target='_blank' href="https://www.piaohuatv.tv/">飘花电影网</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a target='_blank' href="http://www.dianyingtop.com/">电影客栈</a>
-            </td>
-            <td>
-                <a target='_blank' href="https://www.eqq9.com/">悠久影院 </a>
-            </td>
-            <td>
-                <a target='_blank' href="https://www.loldytt.com/">电影天堂</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.1yy.cc/"> 第一影院 </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.dy007.com/"> 007神器特工 </a>
-            </td>
-    </tr>
-        <tr>
-            <td>
-                <a target='_blank' href="http://dianying.114la.com/"> 114啦视频 </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.kb20.cc/">酷播网</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.mp4wu.com/">MP4屋</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.1080.cn/">1080蓝光</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://v.baodianku.com/">爱客影院</a>
-            </td>
-    </tr>
-        <tr>
-            <td>
-                <a target='_blank' href="http://www.5ifxw.com/vip/">5I破解站</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.74zu.com/">74ZU</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.77zs.cn/">77ZS</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.5ifxw.com/zb/index2.php">装逼神器</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://h5.hunlipic.com/biaobai.php">表白网页制作</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a target='_blank' href="http://www.5ifxw.com/zhuangbi/">装逼表情制作</a>
-            </td>
-            <td>
-                <a target='_blank' href="http://www.5ifxw.com/jietu/">微信对话生成器</a>
-            </td>
-        </tr>
-    </table>
-</div>
-<div class="news-web row mt20">
-    <h2 class="news-title clearfix">电影</h2>
-    <table class="all-web mt10">
-        <!-- five -->
-        <tr>
-            <td>
-                <a target='_blank' href="http://movie.youku.com/">
-                    优酷电影                    <p>看最新大片_看海量经典</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://movie.tudou.com/">
-                    土豆电影视频                    <p>土豆电影很文艺，爱吐槽。</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://video.sina.com.cn/movie/">
-                    新浪大片                    <p>最新最全的国内外好看的电影</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://tv.sohu.com/movie/?lcode=AAAAKKEGDiY2J1yXDBIe-FsGcC2PLi3Z7gpoNazYHTa_boro9uZyDHCpkTI.d4y&lqd=10186">
-                    搜狐电影                    <p>提供正版高清电影在线观看</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://movie.kankan.com/?id=731002">
-                    迅雷看看电影频道                    <p>最新欧美华语等高清大片</p>
-                </a>
-            </td>
-        </tr><tr>
-        <td>
-            <a target='_blank' href="http://www.juchang.com/">酷6云中剧场</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://movie.letv.com/">乐视电影频道</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://movie.pptv.com/">PPTV电影</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://www.1905.com/vod/">电影网高清影院</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://www.pipi.cn/">皮皮高清影视</a>
-        </td>
-    </tr><tr>
-        <td>
-            <a target='_blank' href="http://www.2kan.tv/">80s手机电影网</a>
-        </td>
-    </tr>
-    </table>
-</div>
-<div class="news-web row mt20">
-    <h2 class="news-title clearfix">电视剧</h2>
-    <table class="all-web mt10">
-        <!-- five -->
-        <tr>
-            <td>
-                <a target='_blank' href="http://tv.youku.com/">
-                    优酷电视剧                    <p>中国第一影视频道</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://tv.sohu.com/drama/?lcode=AAAAKKPdsfrao7gB8izsN5WNN68rTFA6JHt8IXwSj9CAiGmOE3yyf2Dx9nE.sk5&lqd=10186">
-                    搜狐电视剧                    <p>搜狐旗下专业在线视频平台</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://tv.pptv.com/">
-                    PPTV电视剧                    <p>始终和你同一频道</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://tv.letv.com/">
-                    乐视电视剧                    <p>提供最新电视剧在线观看</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://tv.tudou.com/">
-                    土豆电视剧                    <p>每个人都是生活的导演 </p>
-                </a>
-            </td>
-        </tr><tr>
-        <td>
-            <a target='_blank' href="http://www.juchang.com/tv/">酷六电视剧</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://v.baidu.com/tvplayindex/">百度电视剧</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://v.qq.com/tv/">腾讯电视剧</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://www.pps.tv/tv/">爱奇艺电视剧</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://www.hunantv.com/tv/">芒果TV电视剧</a>
-        </td>
-    </tr><tr>
-    </tr>
-    </table>
-</div>
-<div class="news-web row mt20">
-    <h2 class="news-title clearfix">综艺</h2>
-    <table class="all-web mt10">
-        <!-- five -->
-        <tr>
-            <td>
-                <a target='_blank' href="http://tv.sohu.com/show/?lcode=AAAAJzO1uawcMraWi190Q98l4wrq6Blr_F09YIz20ML1vvk1juMWOww5t4M.xdl&lqd=10186">
-                    搜狐综艺                    <p>最全最火爆的综艺节目</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://zongyi.letv.com/">
-                    乐视综艺                    <p>国内外最新最火爆的综艺视频</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://v.qq.com/variety/">
-                    腾讯综艺                    <p>国内外最新最火爆的综艺视频</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://zy.youku.com/">
-                    优酷综艺                    <p>中国第一视频网站</p>
-                </a>
-            </td>
-            <td>
-                <a target='_blank' href="http://zy.tudou.com/">
-                    土豆综艺                    <p>最好的综艺节目视频平台</p>
-                </a>
-            </td>
-        </tr><tr>
-        <td>
-            <a target='_blank' href="http://v.baidu.com/tamashaindex/">百度综艺</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://zongyi.pptv.com/">PPTV综艺</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://zy.kankan.com/">迅雷看看综艺</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://www.fun.tv/variety/">风行综艺</a>
-        </td>
-        <td>
-            <a target='_blank' href="http://www.pps.tv/zongyi/">PPS综艺</a>
-        </td>
-    </tr><tr>
-    </tr>
-    </table>
-</div>
-
-
-<div class="footer">
-    <div class="row">
-        <div class="address pt20">
-            <!--<a href="javascript:;">意见反馈</a>
-            <span>|</span>
-            <a href="javascript:;">关于我们</a>
-            <span>|</span>
-            <a href="javascript:;">申请收录</a>
-            <span>|</span>
-            <a href="javascript:;">广告合作</a>
-            <span>|</span>
-            <a href="javascript:;">帮助中心</a>-->
-            &nbsp;&nbsp;Copyright &copy;鲸落TV上网导航.All Rights Reserved.
-        </div>
-        <!--<div class="address">
-            备案号：<a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备12043897号-2</a> ICP证：粤B2-20140066 网络文化经营许可证：粤网文[2014]0181-031
-        </div>-->
-        <div class="address">
-            <a href="http://www.bilibilipa.com/wfall.html" target="_blank">鲸落TV &nbsp&nbsp www.wfall.cn</a>
-        </div>
-    </div>
-</div>
-
 </body>
 <script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/init.js"></script>
-<script src="js/wfall.js"></script>
+<script src="js/f12.js"></script>
+<script src="js/svg.js"></script>
+<script src="js/index.js"></script>
 </html>

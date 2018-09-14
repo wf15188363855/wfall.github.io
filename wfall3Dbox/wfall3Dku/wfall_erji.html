@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beats耳机</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="//creatorosscdn.ddd.online/5.6.0/extend/app/atob.js?1532163071466"></script>
+    <script src="//creatorosscdn.ddd.online/5.6.0/extend/app/icreator.js?1532163071466"></script>
+    <script src="//creatorosscdn.ddd.online/5.6.0/extend/app/jszip.min.js?1532163071466"></script>
+    <script src="//creatorosscdn.ddd.online/5.6.0/extend/app/bowser.js?1532163071466"></script>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_271071_q8dzul5ba173z0k9.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        #loadingTip img{
+            display: none;
+            /*opacity: 0;*/
+        }
+        #operateLayer{
+            display: none;
+        }
+        .logo{
+            position: fixed;
+            right: 12px;
+            z-index: 9;
+            bottom: 10px;
+            color: white;
+        }
+        .logo p{
+            margin: 0;
+        }
+    </style>
+    <script>
+        window.projectJsonReqUrl = 'https://creator.ddd.online/webserver/getWorksJsonById?id=E0834K1l-KIeOs6k4-CHxz6ZdH-PeKHAXam'
+        window.projectUrl = 'https://www.ddd.online/find/detail/E0834K1l-KIeOs6k4-CHxz6ZdH-PeKHAXam'
+        window.logURL = '$_logoUrl_$'
+        window.ProjTitle = 'Beats耳机'
+        window.ProjDes = '点击切换观察视角'
+        window.coverImgUrl = '//creatorosscdn.ddd.online/coverImg/coverImg_3160923.png'
+        window.headUrl = 'https://icreator.oss-cn-shenzhen.aliyuncs.com/user/userAvatar/20180330101758_950.'
+        window.showWaterMarker = '0'
+        window.rqcode = 'https://www.ddd.online/jq/webEdit/project/getQRCode/E0834K1l-KIeOs6k4-CHxz6ZdH-PeKHAXam'
+        window.showScreenButton = '$_screenButton_$'
+        window.hideLogo = '$_hideLogo_$'
+        window.hideShare = '$_hideShare_$'
+        window.hideHead = '$_hideHead_$'
+        window.hideDownload = '$_hideDownload_$'
+    </script>
+    <link href="//creatorosscdn.ddd.online/5.6.0/assets/app.c06534ac8a9c792c9fdc.css" rel="stylesheet"></head>
+<body onload="disableInfo()">
+<div id="embedContent">
+    <div id="screenshotButton" class="screenshot-button" onclick="screenShot()" style="display: none">
+        <i class="iconfont icon-paizhao screenshot-icon"></i>
+        <div class="screenshot-text">
+            保存封面
+        </div>
+    </div>
+    <div id="screenshotSave" class="screenshot-button" style="height: 32px;width: 81px;display: none">
+        <i class="iconfont icon-htmal5icon22 screenshot-icon"></i>
+        <div class="screenshot-text">
+            保存
+        </div>
+    </div>
+    <div id="coverPreview" class="cover-preview" style="visibility: hidden">
+        <div id="coverImage" alt="封面图" class="cover-image"></div>
+    </div>
+    <div class="logo">
+        <div class="logo_name">
+            <p>鲸落www.WFall.cn</p>
+            <!--<img src="../../img/wf_logo.png" width="100" alt="">-->
+        </div>
+    </div>
+    <div id="operateLayer" class="product-operate-layer">
+        <div id="topOwnerInfo" class="top-owner-info"  style="display: none">
+            <div class="product-owner-info" id="headInfo" style="display: none">
+                <div>
+                    <img id="head" src="" class="owner-head"
+                         onclick="jumpToProduct()">
+                </div>
+                <div id="ownerInfo" class="owner-info" onclick="jumpToProduct()" style="display: none">
+                    <div class="product-name">
+                        <nobr>
+                            Beats耳机-动动三维
+                        </nobr>
+                    </div>
+                    <div class="product-owner">
+                        <nobr>
+                            作者: alit
+                        </nobr>
+                    </div>
+                </div>
+            </div>
+            <div class="top-button">
+                <div>
+                    <div class="product-button share"  onclick="showShareLayer(true)" id="share" style="display: none">
+                        <i class="iconfont icon-fenxiang product-icon"></i>
+                    </div>
+                    <div class="product-button download"  onclick="jumpToProduct()" id="download" style="display: none">
+                        <i class="iconfont icon-xiazai11 product-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-owner-info">
+            <div id="companyLogo"  style="display: none">
+                <div class="company-logo" onclick="jumpToProduct()"></div>
+            </div>
+            <i id="fullscreenExpand" class="iconfont icon-caozuo-quanping-zhankai fullscreen-button"
+               onclick="FullScreen()"></i>
+            <i id="fullscreenShrink" class="iconfont icon-caozuo-quanping-shousuo fullscreen-button"
+               style="display: none" onclick="FullScreen()"></i>
+        </div>
+    </div>
+    <div id="photoMask" class="product-operate-layer photo" style="display: none"></div>
+    <div class="product-operate-layer share" id="shareLayer" style="display: none">
+        <div class="product-operate-layer mask"></div>
+        <i class="iconfont icon-guanbi1 icon-close"  onclick="showShareLayer(false)"></i>
+        <div class="share-dialog">
+            <div class="share-dialog-body">
+                <div class="share-item">
+                    <div class="copy-link">
+                        <input type="text" readonly="readonly" id="shortLink">
+                        <p id="copy-link-btn" class="copy-link-btn" onclick="copyLink()" onmouseleave="changeCopyButton()">复制链接</p>
+                    </div>
+                </div>
+                <div class="share-item">
+                    <p class="share-item-label">分享至</p>
+                    <div class="share-plugin">
+
+                        <div class="icon">
+                            <i class="iconfont icon-qq share-icon" onclick="shareToqq()"></i>
+                            <i class="iconfont icon-weixin share-icon" onmouseenter="showORCode(true)"
+                               onmouseleave="showORCode(false)">
+                                <span>
+                                    <div id="orcode" class="weixin-rqcode-frame" style="display: none">
+                                        <img id="orcodeImage"
+                                             src=""
+                                             alt="微信预览图片" class="weixin-rqcode">
+                                    </div>
+                                </span>
+                            </i>
+                            <i class="iconfont icon-qqkongjian share-icon" onclick="shareToQzome()"></i>
+                            <i class="iconfont icon-weibo share-icon" onclick="shareToWeibo()"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="app-content">
+        <div id="app-container" style="">
+
+        </div>
+    </div>
+</div>
+<!--<script src="//creatorosscdn.ddd.online/5.6.0/extend/app/template.js?1532163071466"></script>-->
+<script type="text/javascript" src="//creatorosscdn.ddd.online/5.6.0/assets/app.2b49359298ee1bacc518.js"></script></body>
+
+</html>

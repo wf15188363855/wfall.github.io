@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>布加迪威龙</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="https://creatorosscdn.ddd.online/4.2.0/extend/app/atob.js?1519800694645"></script>
+    <script src="https://creatorosscdn.ddd.online/4.2.0/extend/app/icreator.js?1519800694645"></script>
+    <script src="https://creatorosscdn.ddd.online/4.2.0/extend/app/jszip.min.js?1519800694645"></script>
+    <script src="https://creatorosscdn.ddd.online/4.2.0/extend/app/signals.min.js?1519800694645"></script>
+    <script src="https://creatorosscdn.ddd.online/4.2.0/extend/app/bowser.js?1519800694645"></script>
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        #loadingTip img{
+            display: none;
+            /*opacity: 0;*/
+        }
+        #operateLayer{
+            display: none;
+        }
+        .logo{
+            position: fixed;
+            right: 12px;
+            z-index: 9;
+            bottom: 10px;
+            color: white;
+        }
+        .logo p{
+            margin: 0;
+        }
+    </style>
+    <script>
+        window.logURL = 'https://dddbusiness.oss-cn-hangzhou.aliyuncs.com/pro/enterprise/logo/20180903115510_4.';
+        window.ProjURL = 'https://icreator.oss-cn-shenzhen.aliyuncs.com/webEdit/projectSource/showConfigFile/6fbdac3c11294c0191a8f191ea33211d';
+        window.ProjTitle = '布加迪威龙';
+        window.ProjDes = '富有力量感的车身、充沛强劲的动力，它是世界顶级超跑车的典范。';
+        window.coverImgUrl = 'https://icreator.oss-cn-shenzhen.aliyuncs.com/webEdit/projectSource/coverImg/20170927172518_749.png';
+    </script>
+    <link href="https://creatorosscdn.ddd.online/4.2.0/assets/app.1c6863fb30cea7765468.css" rel="stylesheet"></head>
+<body onload="disableInfo()">
+<div id="app-container"></div>
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+        <!--<img src="../../img/wf_logo.png" width="100" alt="">-->
+    </div>
+</div>
+<script>
+
+    var locationUrl = location.href;
+    var wxShareUrl = 'http://demo.ddd.online/jq/wxShare/getSignature';
+    var wxShareImgUrl = window.coverImgUrl;
+    wxShareImgUrl = wxShareImgUrl.replace('http://','//');
+    wxShareImgUrl = wxShareImgUrl.replace('https://','//');
+    wxShareImgUrl = 'https:'+wxShareImgUrl;
+    // 正式服的签名接口
+    if(locationUrl.indexOf('dddcreative') !== -1){
+        wxShareUrl = 'http://www.dddcreative.com/jq/wxShare/getSignature';
+    }
+
+    // 正式服的签名接口
+    if(locationUrl.indexOf('ddd.online') !== -1){
+        wxShareUrl = 'https://www.ddd.online/jq/wxShare/getSignature';
+    }
+
+    // 测式服的签名接口
+    if(locationUrl.indexOf('demo.ddd.online') !== -1){
+        wxShareUrl = 'http://demo.ddd.online/jq/wxShare/getSignature';
+    }
+
+    // 普通用户为ddd.online的logo
+    if(window.coverImgUrl === ("$_coverImgUrl"+"_$")) {
+        wxShareImgUrl = window.logURL;
+
+        if(window.logURL === ("$_logoUrl"+"_$")) {
+            wxShareImgUrl = 'http://icreator.oss-cn-shenzhen.aliyuncs.com/user/userAvatar/20170428175339_471.png';
+        }
+    }
+
+    console.log('wxShareUrl=' + wxShareUrl);
+    console.log('wxShareImgUrl=' + wxShareImgUrl);
+
+    $.ajax({
+        method:'POST',
+        url:wxShareUrl,
+        data:{url:locationUrl},
+        success:function(res){
+            var appId = 'wx3859117bc750350c';
+            var timestamp = res.info.timestamp;
+            var nonceStr = res.info.noncestr;
+            var signature = res.info.signature;
+
+            wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: appId, // 必填，公众号的唯一标识
+                timestamp: timestamp, // 必填，生成签名的时间戳
+                nonceStr: nonceStr, // 必填，生成签名的随机串
+                signature: signature,// 必填，签名，见附录1
+                jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+        }
+    })
+
+    wx.ready(function () {
+        // 分享给朋友
+        wx.onMenuShareAppMessage({
+            title: ProjTitle, // 分享标题
+            desc: ProjDes, // 分享描述
+            link: locationUrl, // 分享链接
+            imgUrl: wxShareImgUrl+'?x-oss-process=style/wx_share', // 分享图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+
+        // 分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: ProjTitle, // 分享标题
+            link: locationUrl, // 分享链接
+            imgUrl: wxShareImgUrl+'?x-oss-process=style/wx_share', // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+</script>
+<script type="text/javascript" src="https://creatorosscdn.ddd.online/4.2.0/assets/app.453a0ccf08284609b9c1.js"></script></body>
+
+</html>

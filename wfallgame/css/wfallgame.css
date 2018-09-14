@@ -1,0 +1,186 @@
+body{-webkit-user-select: none;  -moz-user-select: none;  -ms-user-select: none;  user-select: none;}
+.logo{
+    position: relative;
+    z-index: 9999;
+    margin: 10px auto auto 10px;
+}
+.logo_name{
+    display: inline-block;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    font-size: 8px;
+    font-weight: 600;
+}
+.p-summary{
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    z-index: 2;
+    color: #fff;
+}
+.p-summary span{
+    margin-right: 20px;
+}
+.zhushi{
+    font-size: 12px;
+}
+.content{
+    width: 85%;
+    height: 75%;
+    background: rgba(255, 255, 255, 0.27);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.41), 0 0 1px 20px rgba(0, 0, 0, 0.08);
+    position: absolute;
+    top: 90px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    z-index: 9999;
+    border-radius: 15px;
+    border: none;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 10px 5px;
+    /*text-align: center;*/
+}
+.content::-webkit-scrollbar {
+    display: none;
+}
+.content_main{
+    display: flex;
+    justify-content: center;
+}
+.content_main .left{
+    padding: 0 12px;
+    overflow: hidden;
+    width: 500px;
+}
+.content_main .right{
+    width: 23%;
+    padding: 0 12px;
+}
+
+/*123*/
+.wfall-recommend-card{
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 24px;
+    background-color: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.wfall-recommend-card .recommend-pic{
+    width: 175px;
+    height: 100px;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.wfall-recommend-card .recommend-info{
+    width: calc(100% - 75px);
+    padding-left: 16px;
+}
+.wfall-recommend-card .recommend-info-name{
+    font-size: 14px;
+    color: #181818;
+    padding: 10px 0 4px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.wfall-recommend-card .recommend-info-username{
+    font-size: 12px;
+    color: #6a6a6a;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.wfall-recommend-card .recommend-data{
+    color: #999;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 18px;
+}
+.wfall-recommend-card .recommend-data-item{
+    width: 50%;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.wfall-recommend-card .recommend-data .iconfont{
+    font-size: 14px;
+}
+p{
+    margin: 0;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.recommend-data-item img{
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    top: -2px;
+}
+.mox{
+    border-radius: 15px;
+}
+.qr_link{
+    color: white;
+    padding: 10px 0px;
+}
+.qr_link img{
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    top: -2px;
+}
+.qr_link span{
+    border: 1px solid;
+    border-radius: 15px;
+    padding: 5px 15px;
+    margin-right: 10px;
+    cursor:pointer;
+}
+.left .wenben{
+    width: 297px;
+    height: 100px;
+    border-radius: 15px;
+    resize: none;
+    outline: none;
+    font-size: 14px;
+    border-color: white;
+    position: absolute;
+    top: 360px;
+}
+.guan{
+    display: none;
+}
+#game_tittle{
+    color: white;
+}
+#game_tittle p{
+    margin: 10px 0px;
+}
+#game_tittle span{
+    padding-right:10px;
+}
+#game_tittle span img{
+    border-radius: 15px;
+}

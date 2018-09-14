@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css?family=Homenaje");
+body{-webkit-user-select: none;  -moz-user-select: none;  -ms-user-select: none;  user-select: none;}
+.p-canvas-webgl {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+.p-summary {
+    position: absolute;
+    bottom: 3%;
+    left: 2%;
+    z-index: 2;
+    color: #fff;
+    font-family: 'Homenaje', sans-serif;
+}
+.p-summary h1 {
+    font-weight: 400;
+    letter-spacing: 0.2em;
+}
+.p-summary p {
+    letter-spacing: 0.2em;
+}
+.p-summary a {
+    color: #fff;
+}
+.logo{
+    position: relative;
+    z-index: 9999;
+    color: white;
+}
+.logo_name{
+    display: inline-block;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+/*▼以下是按钮css*/
+.fill:hover,
+.fill:focus {
+    box-shadow: inset 0 0 0 5em var(--hover);
+}
+.pulse:hover,
+.pulse:focus {
+    -webkit-animation: pulse 1s;
+    animation: pulse 1s;
+    box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+}
+@-webkit-keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+.close:hover,
+.close:focus {
+    box-shadow: inset -15em 0 0 0 var(--hover), inset 15em 0 0 0 var(--hover);
+}
+.raise:hover,
+.raise:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    -webkit-transform: translateY(-0.25em);
+    transform: translateY(-0.25em);
+}
+.up:hover,
+.up:focus {
+    box-shadow: inset 0 -15em 0 0 var(--hover);
+}
+.slide:hover,
+.slide:focus {
+    box-shadow: inset 15em 0 0 0 var(--hover);
+}
+.offset {
+    box-shadow: 0.3em 0.3em 0 0 var(--color), inset 0.3em 0.3em 0 0 var(--color);
+}
+.offset:hover,
+.offset:focus {
+    box-shadow: 0 0 0 0 var(--hover), inset 15em 3.5em 0 0 var(--hover);
+}
+.fill {
+    --color: #ffffff;
+    --hover: #a972cb;
+    border-radius: 15px;
+}
+.pulse {
+    --color: #ef6eae;
+    --hover: #ef8f6e;
+    border-radius: 15px;
+}
+.close {
+    --color: #ff7f82;
+    --hover: #ffdc7f;
+    border-radius: 15px;
+}
+.raise {
+    --color: #ffa260;
+    --hover: #e5ff60;
+    border-radius: 15px;
+}
+.up {
+    --color: #e4cb58;
+    --hover: #94e458;
+    border-radius: 15px;
+}
+.slide {
+    --color: #8fc866;
+    --hover: #66c887;
+    border-radius: 15px;
+}
+.offset {
+    --color: #19bc8b;
+    --hover: #1973bc;
+    border-radius: 15px;
+}
+button {
+    color: var(--color);
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
+}
+button:hover,
+button:focus {
+    border-color: var(--hover);
+    color: #fff;
+}
+button {
+    background: none;
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 0.5em 0.6em;
+    outline: none;
+    cursor:pointer;
+}
+h1 {
+    font-weight: 400;
+}
+code {
+    color: #e4cb58;
+    font: inherit;
+}
+.Account_Login{
+    font-size: 13px;
+}
+.content{
+    /*width: 95%;
+    height: 80%;*/
+    width: 75%;
+    height: 60%;
+    background: rgba(255, 255, 255, 0.27);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.41), 0 0 1px 20px rgba(0, 0, 0, 0.08);
+    position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;
+    z-index: 9999;
+    border-radius: 15px;
+    border: none;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-align: center;
+    -ms-overflow-style:none;
+}
+.content::-webkit-scrollbar {
+    display: none;
+}
+.p-summary span{
+    margin-right: 20px;
+}
+.mphone-img{
+    bottom: -100px;
+    left: 78px;
+    width: 100px;
+    height: 100px;
+    display: none;
+    z-index: 999;
+    position: absolute;
+    border: 5px solid white;
+    border-radius: 15px;
+}
+.small-icon{
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+}
+.tv_list{
+    position: relative;
+    display: inline-block;
+}
+p{
+    margin: 0;
+}
+.zhushi{
+    font-size: 12px;
+}
