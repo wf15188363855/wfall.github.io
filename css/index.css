@@ -329,8 +329,9 @@ code {
 }
 .buttons{
     position: fixed;
-    bottom: 0.5em;
-    right: 0.5em;
+    bottom: 0;
+    right: 0;
+    font-size: 12px;
 }
 .logo{
     position: relative;
@@ -362,8 +363,8 @@ code {
     position: relative;
 }
 .mphone-img{
-    bottom: 50px;
-    left: 37px;
+    bottom: 40px;
+    left: 19px;
     width: 80px;
     height: 80px;
     z-index: 999;
