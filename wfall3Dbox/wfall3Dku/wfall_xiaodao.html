@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>鲸落WFall</title>
+    <title>鲸落WFall小刀</title>
     <meta charset="utf-8">
     <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -14,59 +14,60 @@
     <script src="//creatorosscdn.ddd.online/5.7.0/extend/app/jszip.min.js?1536650541233"></script>
     <script src="//creatorosscdn.ddd.online/5.7.0/extend/app/bowser.js?1536650541233"></script>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_271071_q8dzul5ba173z0k9.css">
+    <link rel="stylesheet" href="css/wfall_erm.css">
     <script src="../../js/jquery-1.11.3.min.js"></script>
     <script src="../../js/f12.js"></script>
-    <style>
-        #loadingTip img{
-            display: none;
-            /*opacity: 0;*/
-        }
-        #operateLayer{
-            display: none;
-        }
-        .logo{
-            position: fixed;
-            right: 12px;
-            z-index: 9;
-            bottom: 10px;
-            color: white;
-        }
-        .logo p{
-            margin: 0;
-        }
-    </style>
     <script>
         window.projectJsonReqUrl = 'https://creator.ddd.online/webserver/getGoodsJsonById?id=lcYXP6dF-WEHYNwuw-Rioni7iu-N8OO3o6w'
         window.projectUrl = 'https://www.ddd.online/mall/detail/lcYXP6dF-WEHYNwuw-Rioni7iu-N8OO3o6w'
-        window.logURL = '$_logoUrl_$'
-        window.ProjTitle = '战斗小刀'
-        window.coverImgUrl = '//creatorosscdn.ddd.online/coverImg/coverImg_3165692.png'
-        window.headUrl = 'https://icreator.oss-cn-shenzhen.aliyuncs.com/user/userAvatar/20171130105733_600.png'
+        window.logURL = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.ProjTitle = '鲸落WFall小刀'
+        window.coverImgUrl = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.headUrl = 'https://www.wfall.cn/img/wfall_erweima.png'
         window.showWaterMarker = '0'
-        window.rqcode = 'https://www.ddd.online/jq/projectShop/getProjectQRCode/lcYXP6dF-WEHYNwuw-Rioni7iu-N8OO3o6w'
-        window.showScreenButton = '$_screenButton_$'
-        window.hideLogo = '$_hideLogo_$'
-        window.hideShare = '$_hideShare_$'
-        window.hideHead = '$_hideHead_$'
-        window.hideDownload = '$_hideDownload_$'
+        window.rqcode = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.showScreenButton = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.hideLogo = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.hideShare = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.hideHead = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.hideDownload = 'https://www.wfall.cn/img/wfall_erweima.png'
     </script>
     <link href="//creatorosscdn.ddd.online/5.7.0/assets/app.a2e7f9364542efd1688c.css" rel="stylesheet"></head>
 <body onload="disableInfo()">
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+<div id="wfall3Dku_tittle"></div>
 <div id="embedContent">
     <div id="projectDescribe" style="display: none">
-        战斗小刀低模
+            鲸落WFall小刀
     </div>
     <div id="screenshotButton" class="screenshot-button" onclick="screenShot()" onmouseenter="showScreenShotArea()"
          onmouseleave="hideScreenShotArea()" style="display: none">
         <i class="iconfont icon-paizhao screenshot-icon"></i>
         <div class="screenshot-text">
-
+            鲸落WFall小刀
         </div>
     </div>
     <div id="screenshotSave" class="screenshot-button" style="height: 32px;width: 81px;display: none">
         <i class="iconfont icon-htmal5icon22 screenshot-icon"></i>
         <div class="screenshot-text">
-
+            鲸落WFall小刀
         </div>
     </div>
     <div id="coverPreview" class="cover-preview" style="visibility: hidden">
@@ -75,6 +76,7 @@
     <div class="logo">
         <div class="logo_name">
             <p>鲸落www.WFall.cn</p>
+            <!--<a target='_blank' href="https://www.wfall.cn/"><p>鲸落www.WFall.cn</p></a>-->
             <!--<img src="../../img/wf_logo.png" width="100" alt="">-->
         </div>
     </div>
@@ -88,12 +90,12 @@
                 <div id="ownerInfo" class="owner-info" onclick="jumpToProduct()" style="display: none">
                     <div class="product-name">
                         <nobr>
-                            战斗小刀-动动三维
+                            鲸落WFall小刀
                         </nobr>
                     </div>
                     <div class="product-owner">
                         <nobr>
-                            作者: 青い空
+                            鲸落WFall小刀
                         </nobr>
                     </div>
                 </div>
@@ -172,5 +174,6 @@
 </div>
 <!--<script src="//creatorosscdn.ddd.online/5.7.0/extend/app/template.js?1536650541233"></script>-->
 <script type="text/javascript" src="//creatorosscdn.ddd.online/5.7.0/assets/app.affc487b9c7a76ad70c9.js"></script></body>
-
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_xiaodao.js"></script>
 </html>

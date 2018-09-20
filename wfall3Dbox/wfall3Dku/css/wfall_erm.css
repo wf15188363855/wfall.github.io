@@ -1,0 +1,147 @@
+#loadingTip img{
+    display: none;
+    /*opacity: 0;*/
+}
+#operateLayer{
+    display: none;
+}
+.logo{
+    position: fixed;
+    right: 12px;
+    z-index: 9;
+    bottom: 16px;
+    color: white;
+}
+.logo p{
+    margin: 0;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+#screenshotButton{
+    display: none!important;
+}
+#custom{
+    padding: 3px;
+    font-size: 0;
+    position: absolute;
+    z-index: 999;
+    bottom: 10px;
+    left: 10px;
+    opacity: .7;
+    background-color: #282828;
+    cursor: pointer;
+    pointer-events: auto;
+    color: #c9cbcd;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 30px;
+}
+.AboutUs_top {
+    margin-top: 15%
+}
+
+.AboutUs_top img {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    display: block
+}
+
+.AboutUs_top p {
+    text-align: center;
+    display: block;
+    margin: 0px;
+}
+
+.AboutUs_top_t {
+    font-weight: 700;
+    font-size: 20px;
+    color: #ffffff;
+    padding: 10px 0;
+}
+
+.AboutUs_top_b {
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.content {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+}
+input {
+    border: none;
+    outline: none;
+    width: 80%;
+}
+#qr_text {
+    border: 1px solid #ffffff;
+    width: 80%;
+    margin: 10% auto 0 auto;
+    padding: 3% 5%;
+    border-radius: 50px;
+    display: block;
+    font-size: 16px;
+    background-color: #646464;
+    color: #ffffff;
+}
+#qr_btn{
+    width: 90%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    font-size: 16px;
+    margin: 10% auto 0 auto;
+    display: block;
+    border: none;
+    background-color: #646464;
+    color: #e8e8e8;
+    text-align: center;
+}
+#erweima{
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    background: black;
+    opacity: 0.9;
+    height: 100%;
+    overflow-y: auto;
+}
+#close{
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    pointer-events: auto;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    z-index: 9999;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #ffffff;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #ffffff;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #ffffff;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #ffffff;
+}
+#qr_container canvas{
+    border: 10px solid white;
+    border-radius: 10px;
+}
+#wfall3Dku_tittle{
+    position: absolute;
+    color: white;
+    z-index: 99;
+    width: 100%;
+    text-align: center;
+    top: 10px;
+    font-size: 18px;
+}
