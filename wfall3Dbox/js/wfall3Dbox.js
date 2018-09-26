@@ -412,7 +412,7 @@ oBtn.onclick = function(){
 /*动态添加特效目录*/
 function add3Dlist() {
     oDiv = document.getElementById('wf3D_tittle');
-    oDiv.innerHTML = '<p>特效目录:</p><a href="wfall3Dbox.html"><span>BMWi8</span></a><a href="wfall3Dbox2.html"><span>钢琴</span></a><a href="wfall3Dbox3.html"><span>布加迪威龙</span></a><a href="wfall3Dbox4.html"><span>归家一角</span></a><a href="wfall3Dbox5.html"><span>废弃之城</span></a><a href="wfall3Dbox6.html"><span>大黄蜂</span></a><a href="wfall3Dbox7.html"><span>江南style</span></a><a href="wfall3Dbox8.html"><span>机器人头盔</span></a><a href="wfall3Dbox9.html"><span>3D匕首</span></a><a href="wfall3Dbox10.html"><span>Beats耳机</span></a><a href="wfall3Dbox11.html"><span>飞舞凤凰</span></a>';
+    oDiv.innerHTML = '<p>特效目录:</p><a href="wfall3Dbox.html"><span>BMWi8</span></a><a href="wfall3Dbox2.html"><span>钢琴</span></a><a href="wfall3Dbox3.html"><span>布加迪威龙</span></a><a href="wfall3Dbox4.html"><span>归家一角</span></a><a href="wfall3Dbox5.html"><span>废弃之城</span></a><a href="wfall3Dbox6.html"><span>大黄蜂</span></a><a href="wfall3Dbox7.html"><span>江南style</span></a><a href="wfall3Dbox8.html"><span>机器人头盔</span></a><a href="wfall3Dbox9.html"><span>3D匕首</span></a><a href="wfall3Dbox10.html"><span>Beats耳机</span></a><a href="wfall3Dbox11.html"><span>飞舞凤凰</span></a><a href="wfall3Dbox12.html"><span>闪电文字</span></a>';
 }
 add3Dlist();
 
