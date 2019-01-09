@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            background: #fef2d8;
+            margin: 0;
+            padding: 0;
+        }
+        .background {
+            position: relative;
+            width: 200px;
+            height: 260px;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        #SM_name {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-family: 'Merriweather';
+            color: #3c3c40;
+            padding: 10px;
+            height: 17%;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            width: 95%;
+            word-wrap: break-word;
+        }
+        .wall-e {
+            position: absolute;
+            top: 20px;
+            /*            left: 170px;*/
+        }
+        .body {
+            position: absolute;
+            top: 140px;
+            left: 44px;
+            width: 118px;
+            height: 60px;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            background: #fcd000;
+            border: 3px solid #3c3c40;
+        }
+        .body-top {
+            position: absolute;
+            top: -22px;
+            left: -2px;
+            width: 118px;
+            height: 20px;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+        }
+        .body-top::before {
+            position: absolute;
+            top: -4px;
+            left: -3px;
+            width: 118px;
+            height: 5px;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            background: #f7f7f5;
+            border: 3px solid #3c3c40;
+            content: "";
+        }
+        .hand-1 {
+            position: absolute;
+            top: -5px;
+            left: -23px;
+            width: 35px;
+            height: 27px;
+            border-radius: 2px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+        }
+        .hand-1::before {
+            position: absolute;
+            top: 27px;
+            left: 5px;
+            width: 20px;
+            height: 5px;
+            border-radius: 2px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+            content: "";
+        }
+        .hand-2 {
+            position: absolute;
+            top: -5px;
+            left: 100px;
+            width: 35px;
+            height: 27px;
+            border-radius: 2px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+            animation: up 3s infinite alternate ease-in-out;
+        }
+        .hand-2::before {
+            position: absolute;
+            top: 27px;
+            left: 5px;
+            width: 20px;
+            height: 5px;
+            border-radius: 2px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+            content: "";
+        }
+        .leg-1 {
+            position: absolute;
+            top: 60px;
+            left: -3px;
+            width: 52px;
+            height: 25px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+        }
+        .leg-2 {
+            position: absolute;
+            top: 60px;
+            left: 63px;
+            width: 52px;
+            height: 25px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+        }
+        .head {
+            position: absolute;
+            top: 52px;
+            left: 70px;
+            width: 63px;
+            height: 20px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+        }
+        .head::before {
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            width: 10px;
+            height: 35px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+            content: "";
+        }
+        .head::after {
+            position: absolute;
+            top: 46px;
+            left: 20px;
+            width: 20px;
+            height: 15px;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+            content: "";
+        }
+        .eye-1 {
+            position: absolute;
+            top: -5px;
+            left: -39px;
+            width: 60px;
+            height: 35px;
+            transform: rotate(-15deg);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+            animation: olhinn 3s infinite;
+        }
+        .eye-2 {
+            position: absolute;
+            top: -5px;
+            left: 40px;
+            width: 60px;
+            height: 35px;
+            transform: rotate(15deg);
+            border-top-right-radius: 20px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            background: #d2d3d2;
+            border: 3px solid #3c3c40;
+            animation: olhin 3s infinite;
+        }
+        .circle-1 {
+            position: absolute;
+            top: 4px;
+            left: 25px;
+            width: 22px;
+            height: 22px;
+            border-radius: 20px;
+            background: #af873c;
+            border: 3px solid #3c3c40;
+        }
+        .circle-1::after {
+            position: absolute;
+            top: 5px;
+            right: 4px;
+            width: 7px;
+            height: 7px;
+            border-radius: 20px;
+            background: #fff;
+            content: "";
+        }
+        .circle-2 {
+            position: absolute;
+            top: 4px;
+            left: 10px;
+            width: 22px;
+            height: 22px;
+            border-radius: 20px;
+            background: #af873c;
+            border: 3px solid #3c3c40;
+        }
+        .circle-2::after {
+            position: absolute;
+            top: 5px;
+            left: 4px;
+            width: 7px;
+            height: 7px;
+            border-radius: 20px;
+            background: #fff;
+            content: "";
+        }
+        .cable {
+            position: absolute;
+            top: -113px;
+            left: 20px;
+            width: 3px;
+            height: 110px;
+            background: #fff;
+        }
+        .leaf-1 {
+            position: absolute;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            border-bottom-right-radius: 30px;
+            border-top-left-radius: 30px;
+            background: #64ca38;
+            animation: fly 1s infinite alternate ease-in-out;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg);
+        }
+        .leaf-2 {
+            position: absolute;
+            top: 25px;
+            left: -20px;
+            width: 20px;
+            height: 20px;
+            border-bottom-left-radius: 30px;
+            border-top-right-radius: 30px;
+            background: #64ca38;
+            animation: fly 1s infinite alternate ease-in-out;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg);
+        }
+        .leaf-3 {
+            position: absolute;
+            top: 50px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            border-bottom-right-radius: 30px;
+            border-top-left-radius: 30px;
+            background: #64ca38;
+            animation: fly 1s infinite alternate ease-in-out;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg);
+        }
+        .leaf-4 {
+            position: absolute;
+            top: 75px;
+            left: -20px;
+            width: 20px;
+            height: 20px;
+            border-bottom-left-radius: 30px;
+            border-top-right-radius: 30px;
+            background: #64ca38;
+            animation: fly 1s infinite alternate ease-in-out;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg);
+        }
+        @-moz-keyframes olhin {
+            0% {
+                transform: rotate(26deg);
+            }
+            25% {
+                transform: rotate(10deg);
+            }
+            50% {
+                transform: rotate(16deg);
+            }
+            75% {
+                transform: rotate(-10deg);
+            }
+            100% {
+                transform: rotate(28deg);
+            }
+        }
+        @-webkit-keyframes olhin {
+            0% {
+                transform: rotate(26deg);
+            }
+            25% {
+                transform: rotate(10deg);
+            }
+            50% {
+                transform: rotate(16deg);
+            }
+            75% {
+                transform: rotate(-10deg);
+            }
+            100% {
+                transform: rotate(28deg);
+            }
+        }
+        @-o-keyframes olhin {
+            0% {
+                transform: rotate(26deg);
+            }
+            25% {
+                transform: rotate(10deg);
+            }
+            50% {
+                transform: rotate(16deg);
+            }
+            75% {
+                transform: rotate(-10deg);
+            }
+            100% {
+                transform: rotate(28deg);
+            }
+        }
+        @keyframes olhin {
+            0% {
+                transform: rotate(26deg);
+            }
+            25% {
+                transform: rotate(10deg);
+            }
+            50% {
+                transform: rotate(16deg);
+            }
+            75% {
+                transform: rotate(-10deg);
+            }
+            100% {
+                transform: rotate(28deg);
+            }
+        }
+        @-moz-keyframes olhinn {
+            0% {
+                transform: rotate(-26deg);
+            }
+            25% {
+                transform: rotate(-10deg);
+            }
+            50% {
+                transform: rotate(-16deg);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(-28deg);
+            }
+        }
+        @-webkit-keyframes olhinn {
+            0% {
+                transform: rotate(-26deg);
+            }
+            25% {
+                transform: rotate(-10deg);
+            }
+            50% {
+                transform: rotate(-16deg);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(-28deg);
+            }
+        }
+        @-o-keyframes olhinn {
+            0% {
+                transform: rotate(-26deg);
+            }
+            25% {
+                transform: rotate(-10deg);
+            }
+            50% {
+                transform: rotate(-16deg);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(-28deg);
+            }
+        }
+        @keyframes olhinn {
+            0% {
+                transform: rotate(-26deg);
+            }
+            25% {
+                transform: rotate(-10deg);
+            }
+            50% {
+                transform: rotate(-16deg);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(-28deg);
+            }
+        }
+        @-moz-keyframes up {
+            0% {
+                transform: translateY(0px);
+            }
+            25% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-25px);
+            }
+            75% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(-25px);
+            }
+        }
+        @-webkit-keyframes up {
+            0% {
+                transform: translateY(0px);
+            }
+            25% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-25px);
+            }
+            75% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(-25px);
+            }
+        }
+        @-o-keyframes up {
+            0% {
+                transform: translateY(0px);
+            }
+            25% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-25px);
+            }
+            75% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(-25px);
+            }
+        }
+        @keyframes up {
+            0% {
+                transform: translateY(0px);
+            }
+            25% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-25px);
+            }
+            75% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(-25px);
+            }
+        }
+        @-moz-keyframes fly {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-2px);
+            }
+        }
+        @-webkit-keyframes fly {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-2px);
+            }
+        }
+        @-o-keyframes fly {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-2px);
+            }
+        }
+        @keyframes fly {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-2px);
+            }
+        }
+
+        #body_name{
+            position: absolute;
+            z-index: 999;
+            bottom: 5px;
+            right: 10px;
+        }
+        #body_hua{
+            position: absolute;
+            z-index: 999;
+            top: -16px;
+            left: -44.5px;
+            color: #af873c;
+            width: 100px;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.2);
+            color: black;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+        .logo{
+            color: black;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+<div class="background">
+    <div class="wall-e">
+        <div class="head">
+            <div class="eye-1">
+                <div class="circle-1"></div>
+            </div>
+            <div class="eye-2">
+                <div class="circle-2"></div>
+            </div>
+        </div>
+        <div class="body">
+            <div id="body_name"><span id="body_name01">鲸</span>❤<span id="body_name02">落</span></div>
+            <div class="body-top"></div>
+            <div class="hand-1"></div>
+            <div class="hand-2">
+                <div class="cable">
+                    <div id="body_hua">I❤U</div>
+                    <div class="leaf-1"></div>
+                    <div class="leaf-2"></div>
+                    <div class="leaf-3"></div>
+                    <div class="leaf-4"></div>
+                </div>
+            </div>
+            <div class="leg-1"></div>
+            <div class="leg-2"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_aixinET.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落www.WFall.cn";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#body_name01").text(SM_text.substring(0,1));
+        $("#body_name02").text(SM_text.substring(1,2));
+        $("#SM_name").text(SM_text.substring(2));
+    })
+    $("#body_name01").text(SM_text.substring(0,1));
+    $("#body_name02").text(SM_text.substring(1,2));
+    $("#SM_name").text(SM_text.substring(2));
+</script>
+</html>

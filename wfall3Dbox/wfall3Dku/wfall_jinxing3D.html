@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            height: 100vh;
+            width: 100%;
+        }
+        #container canvas {
+            display: block;
+        }
+
+
+
+        #SM_name{
+            height: 25px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+            position: absolute;
+            color: white;
+            z-index: 99;
+            top: 15px;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.5);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+        .instructions_t {
+            position: absolute;
+            top: 30%;
+            left: 30px;
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            line-height: 30px;
+            width: 86%;
+            z-index: 99;
+            height: 22vh;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+<div class="instructions_t">
+    <p id="SM_name01"></p>
+    <p id="SM_name02"></p>
+    <p id="SM_name03"></p>
+    <p id="SM_name04"></p>
+    <p id="SM_name05"></p>
+    <p id="SM_name06"></p>
+</div>
+
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+<div id="container" class="container"></div>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_jinxing3D.js"></script>
+<script src="texiao_js/three.min.js"></script>
+<script src="texiao_js/OrbitControls.js"></script>
+</body>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落鲸落www.WFall.cn友谊和爱情之间的区别在于：友谊意味着两个人和世界，然而爱情意味着两个人就是世界。在友谊中一加一等于二；在爱情中一加一还是一！";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text.substring(0,2));
+        $("#SM_name01").text(SM_text.substring(2,16));
+        $("#SM_name02").text(SM_text.substring(16,32));
+        $("#SM_name03").text(SM_text.substring(32,47));
+        $("#SM_name04").text(SM_text.substring(47,61));
+        $("#SM_name05").text(SM_text.substring(61,78));
+        $("#SM_name06").text(SM_text.substring(78));
+    })
+    $("#SM_name").text(SM_text.substring(0,2));
+    $("#SM_name01").text(SM_text.substring(2,16));
+    $("#SM_name02").text(SM_text.substring(16,32));
+    $("#SM_name03").text(SM_text.substring(32,47));
+    $("#SM_name04").text(SM_text.substring(47,61));
+    $("#SM_name05").text(SM_text.substring(61,78));
+    $("#SM_name06").text(SM_text.substring(78));
+
+
+
+    console.clear();
+    let renderer;
+    let camera;
+    let controls;
+    let scene;
+    let globe;
+
+    const DIFFUSE_MAP = `img/venus-diffuse-4k-low.jpg`;
+    const NORMAL_MAP = `img/venus-normal-4k-low.jpg`;
+
+
+    function init() {
+        const container = document.getElementsByClassName('container')[0];
+        const w = container.offsetWidth;
+        const h = container.offsetHeight;
+
+        renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            preserveDrawingBuffer: true
+        });
+        renderer.setSize(w, h);
+        renderer.setClearColor(0x000000);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.domElement.getContext('webgl').getExtension('OES_standard_derivatives');
+        container.appendChild(renderer.domElement);
+
+        scene = new THREE.Scene();
+
+        camera = new THREE.PerspectiveCamera(65, w/h, 0.8, 1000);
+        camera.position.set(6, 3, 0);
+        camera.lookAt(scene.position);
+
+        controls = new THREE.OrbitControls( camera, renderer.domElement );
+        //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.2;
+        controls.rotateSpeed = 0.3;
+
+        const hemilight = new THREE.HemisphereLight(0xFFFFFF, 0x444444, 1);
+
+        scene.add(hemilight);
+
+        scene.add(camera);
+        loadTextures().then(createGlobe).then(render);
+
+    }
+
+    function createGlobe() {
+        return new Promise((resolve, reject) => {
+                    const globeGeo = new THREE.IcosahedronGeometry(2, 5);
+        // globe.geometry.computeTangents();
+        // globeGeo.computeTangents();
+        console.log('globeGeo');
+        const globeMat = new THREE.ShaderMaterial({
+            uniforms: detailedVenusUniforms,
+            vertexShader: detailedVenusVertShader,
+            fragmentShader: detailedVenusFragShader
+        });
+        globe = new THREE.Mesh(globeGeo, globeMat);
+        globe.rotation.set(0, Math.PI-1, 0);
+        scene.add(globe);
+        resolve();
+    })
+    }
+
+    function loadTextures() {
+        return new Promise((resolve, reject) => {
+                    const loader = new THREE.TextureLoader();
+        loader.setCrossOrigin("anonymous");
+        Promise.all([
+            loadTexture(loader, DIFFUSE_MAP, detailedVenusUniforms.diffuseMap),
+            loadTexture(loader, NORMAL_MAP, detailedVenusUniforms.normalMap)
+        ]).then(() => {
+            resolve();
+    });
+    });
+    }
+
+    function loadTexture(loader, textureUrl, uniform) {
+        return new Promise((resolve, reject) => {
+                    loader.load(textureUrl, function(texture) {
+                    uniform.value = texture;
+                    uniform.value.wrapS = THREE.RepeatWrapping;
+                    uniform.value.wrapT = THREE.RepeatWrapping;
+                    texture.needsUpdate = true;
+                    resolve(texture);
+                });
+    });
+    }
+
+    const detailedVenusUniforms = {
+        sunVector: { value: new THREE.Vector3(100, 0, 0) },
+        diffuseMap: { value: null },
+        normalMap: { value: null }
+    };
+
+    const detailedVenusVertShader = `
+  uniform vec3 sunVector;
+
+varying vec2 vUv;
+varying vec3 vNormal;
+varying vec3 vSunVector;
+varying vec3 vViewPosition;
+
+void main() {
+  vUv = uv;
+  vNormal = normal;
+
+  vec4 vertToLight = viewMatrix * vec4(sunVector, 1.0);
+  vec4 modelviewPos = modelViewMatrix * vec4(position, 1.0);
+  vViewPosition = -modelviewPos.xyz;
+  vSunVector = normalize(vertToLight.xyz + vViewPosition);
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`;
+    const detailedVenusFragShader = `
+#extension GL_OES_standard_derivatives : enable
+uniform sampler2D diffuseMap;
+uniform sampler2D normalMap;
+
+varying vec2 vUv;
+varying vec3 vNormal;
+varying vec3 vSunVector;
+varying mat3 tangentBinormal;
+varying vec3 vViewPosition;
+
+vec3 normalMappy( vec3 eye_pos, vec3 surf_norm ) {
+  //http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-13-normal-mapping/
+
+  vec3 q0 = dFdx( eye_pos.xyz );
+  vec3 q1 = dFdy( eye_pos.xyz );
+  vec2 st0 = dFdx( vUv.st );
+  vec2 st1 = dFdy( vUv.st );
+
+  vec3 S = normalize( q0 * st1.t - q1 * st0.t );
+  vec3 T = normalize( -q0 * st1.s + q1 * st0.s );
+  vec3 N = normalize( surf_norm );
+
+  vec3 mapN = texture2D( normalMap, vUv ).xyz * 2.0 - 1.0;
+  mapN.xy = vec2(0.7, 0.7) * mapN.xy;
+  mat3 tsn = mat3( S, T, N );
+  return normalize( tsn * mapN );
+
+}
+
+void main() {
+
+  vec3 normal = normalMappy( -vViewPosition, vNormal );
+
+  float lightIntensity = max(0.1, dot(normal, vSunVector));
+  vec4 lighting = vec4(lightIntensity, lightIntensity, lightIntensity, 1.0);
+
+  gl_FragColor = texture2D(diffuseMap, vUv) * lighting;
+}
+`;
+
+    function render() {
+        // globe.rotation.y += 0.003;
+        orbitLight(detailedVenusUniforms.sunVector.value);
+        window.requestAnimationFrame(render);
+        renderer.render(scene, camera);
+        controls.update();
+    }
+
+    function orbitLight(lightPosition) {
+        const center = new THREE.Vector3(0, 0, 0);
+        const distance = 1000;
+        const speed = 0.001;
+        const time = Date.now();
+
+        lightPosition.x = (center.x + distance) * Math.sin(time * -speed);
+        lightPosition.z = (center.z + distance) * Math.cos(time * speed);
+    }
+
+    init();
+
+    window.addEventListener('resize', function() {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    }, false);
+
+</script>
+</html>

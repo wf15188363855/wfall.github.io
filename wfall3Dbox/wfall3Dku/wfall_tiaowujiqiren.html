@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        body{
+            background: white;
+        }
+        .robot {
+            position: relative;
+            width: 350px;
+            margin: auto;
+        }
+        .robot .head {
+            position: absolute;
+            left: 105px;
+            animation: head 2s ease-in-out infinite;
+        }
+        .robot .body {
+            position: absolute;
+            z-index: 1;
+            top: 128px;
+            left: 80px;
+            animation: body 2s ease-in-out infinite;
+        }
+        .robot .larm {
+            position: absolute;
+            z-index: 100;
+            transform-origin: 80% 10%;
+            top: 132px;
+            left: 50px;
+            animation: larm 4s ease-in-out infinite;
+        }
+        .robot .rarm {
+            position: absolute;
+            z-index: 100;
+            transform-origin: 20% 10%;
+            top: 132px;
+            left: 240px;
+            animation: rarm 4s ease-in-out infinite;
+        }
+        .robot .lfoot {
+            position: absolute;
+            top: 270px;
+            left: 110px;
+            animation: lfoot 2s ease-in-out infinite;
+        }
+        .robot .rfoot {
+            position: absolute;
+            top: 270px;
+            left: 182px;
+            animation: rfoot 2s ease-in-out infinite;
+        }
+        @keyframes head {
+            25% {
+                transform: translateY(-10px);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+            75% {
+                transform: translateY(-10px);
+            }
+            90% {
+                transform: translateY(10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+            25% {
+                transform: translateX(10px);
+            }
+            75% {
+                transform: translateX(-10px);
+            }
+            25% {
+                transform: rotate(10deg);
+            }
+            75% {
+                transform: rotate(-10deg);
+            }
+        }
+        @keyframes body {
+            25% {
+                transform: translateY(10px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            75% {
+                transform: translateY(10px);
+            }
+            90% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+            25% {
+                transform: translateX(-10px);
+            }
+            75% {
+                transform: translateX(10px);
+            }
+            25% {
+                transform: rotate(-10deg);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
+        }
+        @keyframes larm {
+            25% {
+                transform: translateY(10px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            25% {
+                transform: rotate(-80deg);
+            }
+            50% {
+                transform: rotate(60deg);
+            }
+            75% {
+                transform: rotate(180deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+        @keyframes rarm {
+            25% {
+                transform: translateX(10px);
+            }
+            50% {
+                transform: translateX(-10px);
+            }
+            25% {
+                transform: rotate(-120deg);
+            }
+            50% {
+                transform: rotate(60deg);
+            }
+            75% {
+                transform: rotate(120deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+        @keyframes lfoot {
+            25% {
+                transform: translateY(-10px)
+            }
+            50% {
+                transform: translateY(0px)
+            }
+            75% {
+                transform: translateY(-10px)
+            }
+            100% {
+                transform: translateY(0px)
+            }
+        }
+        @keyframes rfoot {
+            25% {
+                transform: translateY(0px)
+            }
+            50% {
+                transform: translateY(-10px)
+            }
+            75% {
+                transform: translateY(0px)
+            }
+            95% {
+                transform: translateY(-10px)
+            }
+            100% {
+                transform: translateY(0px)
+            }
+        }
+        .larm_name{
+            position: absolute;
+            bottom: -3px;
+            left: 9px;
+            transform: rotate(-19deg);
+        }
+        .rarm_name{
+            position: absolute;
+            bottom: -11px;
+            right: 3px;
+            transform: rotate(18deg);
+        }
+        .body_name{
+            position: absolute;
+            bottom: 20px;
+            right: 10px;
+        }
+
+        #SM_name{
+            height: 45px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.2);
+            color: black;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+        .logo{
+            color: black;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+<div class="robot">
+    <div class="body">
+        <img src="img/body.svg"/>
+        <div class="body_name"><span id="body_name01">鲸</span>❤<span id="body_name02">落</span></div>
+    </div>
+    <div class="larm">
+        <img src="img/left-arm.svg"/>
+        <div class="larm_name">鲸</div>
+    </div>
+    <div class="rarm">
+        <img src="img/right-arm.svg"/>
+        <div class="rarm_name">I❤U</div>
+    </div>
+    <div class="rfoot">
+        <img src="img/foot.svg"/>
+    </div>
+    <div class="lfoot">
+        <img src="img/foot.svg"/>
+    </div>
+    <div class="head">
+        <img src="img/bob-head.svg" />
+    </div>
+</div>
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_tiaowujiqiren.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落www.WFall.cn";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#body_name01").text(SM_text.substring(0,1));
+        $("#body_name02").text(SM_text.substring(1,2));
+        $(".larm_name").text(SM_text.substring(1,2));
+        $("#SM_name").text(SM_text.substring(2));
+    })
+    $("#body_name01").text(SM_text.substring(0,1));
+    $("#body_name02").text(SM_text.substring(1,2));
+    $(".larm_name").text(SM_text.substring(1,2));
+    $("#SM_name").text(SM_text.substring(2));
+</script>
+</html>

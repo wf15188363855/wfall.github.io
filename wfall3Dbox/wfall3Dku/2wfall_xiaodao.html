@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>鲸落WFall小刀</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="//creatorosscdn.ddd.online/5.7.0/extend/app/text.min.js?1536650541233"></script>
+    <script src="//creatorosscdn.ddd.online/5.7.0/extend/app/artoolkit.min.js?1536650541233"></script>
+    <script src="//creatorosscdn.ddd.online/5.7.0/extend/app/atob.js?1536650541233"></script>
+    <script src="//creatorosscdn.ddd.online/5.7.0/extend/app/icreator.js?1536650541233"></script>
+    <script src="//creatorosscdn.ddd.online/5.7.0/extend/app/jszip.min.js?1536650541233"></script>
+    <script src="//creatorosscdn.ddd.online/5.7.0/extend/app/bowser.js?1536650541233"></script>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_271071_q8dzul5ba173z0k9.css">
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <script>
+        window.projectJsonReqUrl = 'https://creator.ddd.online/webserver/getGoodsJsonById?id=lcYXP6dF-WEHYNwuw-Rioni7iu-N8OO3o6w'
+        window.projectUrl = 'https://www.ddd.online/mall/detail/lcYXP6dF-WEHYNwuw-Rioni7iu-N8OO3o6w'
+        window.logURL = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.ProjTitle = '鲸落WFall小刀'
+        window.coverImgUrl = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.headUrl = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.showWaterMarker = '0'
+        window.rqcode = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.showScreenButton = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.hideLogo = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.hideShare = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.hideHead = 'https://www.wfall.cn/img/wfall_erweima.png'
+        window.hideDownload = 'https://www.wfall.cn/img/wfall_erweima.png'
+    </script>
+    <link href="//creatorosscdn.ddd.online/5.7.0/assets/app.a2e7f9364542efd1688c.css" rel="stylesheet"></head>
+<body onload="disableInfo()">
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+<div id="wfall3Dku_tittle"></div>
+<div id="embedContent">
+    <div id="projectDescribe" style="display: none">
+            鲸落WFall小刀
+    </div>
+    <div id="screenshotButton" class="screenshot-button" onclick="screenShot()" onmouseenter="showScreenShotArea()"
+         onmouseleave="hideScreenShotArea()" style="display: none">
+        <i class="iconfont icon-paizhao screenshot-icon"></i>
+        <div class="screenshot-text">
+            鲸落WFall小刀
+        </div>
+    </div>
+    <div id="screenshotSave" class="screenshot-button" style="height: 32px;width: 81px;display: none">
+        <i class="iconfont icon-htmal5icon22 screenshot-icon"></i>
+        <div class="screenshot-text">
+            鲸落WFall小刀
+        </div>
+    </div>
+    <div id="coverPreview" class="cover-preview" style="visibility: hidden">
+        <div id="coverImage" alt="封面图" class="cover-image"></div>
+    </div>
+    <div class="logo">
+        <div class="logo_name">
+            <p>鲸落www.WFall.cn</p>
+            <!--<a target='_blank' href="https://www.wfall.cn/"><p>鲸落www.WFall.cn</p></a>-->
+            <!--<img src="../../img/wf_logo.png" width="100" alt="">-->
+        </div>
+    </div>
+    <div id="operateLayer" class="product-operate-layer">
+        <div id="topOwnerInfo" class="top-owner-info" style="display: none">
+            <div class="product-owner-info" id="headInfo" style="display: none">
+                <div>
+                    <img id="head" src="" class="owner-head"
+                         onclick="jumpToProduct()">
+                </div>
+                <div id="ownerInfo" class="owner-info" onclick="jumpToProduct()" style="display: none">
+                    <div class="product-name">
+                        <nobr>
+                            鲸落WFall小刀
+                        </nobr>
+                    </div>
+                    <div class="product-owner">
+                        <nobr>
+                            鲸落WFall小刀
+                        </nobr>
+                    </div>
+                </div>
+            </div>
+            <div class="top-button">
+                <div>
+                    <div class="product-button share" onclick="showShareLayer(true)" id="share" style="display: none">
+                        <i class="iconfont icon-fenxiang product-icon"></i>
+                    </div>
+                    <div class="product-button download" onclick="jumpToProduct()" id="download" style="display: none">
+                        <i class="iconfont icon-xiazai11 product-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-owner-info">
+            <div id="companyLogo" style="display: none">
+                <div id="companyLogoImage" class="company-logo" onclick="jumpToProduct()"></div>
+            </div>
+            <i id="fullscreenExpand" class="iconfont icon-caozuo-quanping-zhankai fullscreen-button"
+               onclick="FullScreen()"></i>
+            <i id="fullscreenShrink" class="iconfont icon-caozuo-quanping-shousuo fullscreen-button"
+               style="display: none" onclick="FullScreen()"></i>
+        </div>
+    </div>
+    <div id="photoMask" class="product-operate-layer photo" style="display: none"></div>
+    <div class="product-operate-layer share" id="shareLayer" style="display: none">
+        <div class="product-operate-layer mask"></div>
+        <i class="iconfont icon-guanbi1 icon-close" onclick="showShareLayer(false)"></i>
+        <div class="share-dialog">
+            <div class="share-dialog-body">
+                <div class="share-item">
+                    <div class="copy-link">
+                        <input type="text" readonly="readonly" id="shortLink">
+                        <p id="copy-link-btn" class="copy-link-btn" onclick="copyLink()"
+                           onmouseleave="changeCopyButton()">复制链接</p>
+                    </div>
+                </div>
+                <div class="share-item">
+                    <p class="share-item-label">分享至</p>
+                    <div class="share-plugin">
+
+                        <div class="icon">
+                            <i class="iconfont icon-qq share-icon" onclick="shareToqq()"></i>
+                            <i class="iconfont icon-weixin share-icon" onmouseenter="showORCode(true)"
+                               onmouseleave="showORCode(false)">
+                                <span>
+                                    <div id="orcode" class="weixin-rqcode-frame" style="display: none">
+                                        <img id="orcodeImage"
+                                             src=""
+                                             alt="微信预览图片" class="weixin-rqcode">
+                                    </div>
+                                </span>
+                            </i>
+                            <i class="iconfont icon-qqkongjian share-icon" onclick="shareToQzome()"></i>
+                            <i class="iconfont icon-weibo share-icon" onclick="shareToWeibo()"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ar-open-safari" class="ar-open-safari" style="display: none">
+        <div class="ar-open-button" onclick="closeOpenSafari()"></div>
+    </div>
+    <div id="ar-open-scan" class="ar-open-safari" style="display: none">
+        <div id="scan-bar" class="scan-bar"></div>
+        <div id="ar-scan-button" class="ar-scan-button"></div>
+        <div id="ar-toggle-button" class="ar-toggle-button"></div>
+    </div>
+    <div id="app-content">
+        <div id="app-container" style="">
+        </div>
+    </div>
+</div>
+<!--<script src="//creatorosscdn.ddd.online/5.7.0/extend/app/template.js?1536650541233"></script>-->
+<script type="text/javascript" src="//creatorosscdn.ddd.online/5.7.0/assets/app.affc487b9c7a76ad70c9.js"></script></body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/2wfall_xiaodao.js"></script>
+</html>

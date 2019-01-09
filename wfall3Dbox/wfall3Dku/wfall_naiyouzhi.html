@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        body {
+            background: #000;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #ui {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            padding: 200px;
+            background: #000;
+            display: flex;
+            flex-wrap: wrap;
+            filter: blur(20px) contrast(30);
+            transform: scale(0.5,0.5);
+        }
+        #ui .ball {
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #ui .ball_inner {
+            width: 60px;
+            height: 60px;
+            background: #fff;
+            transition: 30000ms cubic-bezier(0.33, 1.7, 0.51, 0.82);
+        }
+        #ui .ball:hover .ball_inner {
+            transform: scale(0);
+            transition-duration: 300ms;
+        }
+        #instructions{
+            position: absolute;
+            top: 57%;
+            left: 50%;
+            color: white;
+            z-index: 9999;
+            transform: translate(-47%, -500%);
+            font-family: 'Dosis', sans-serif;
+            font-size: 1.5rem;
+            line-height: 1rem;
+            pointer-events: none;
+            filter: blur(0.5px) contrast(20);
+            letter-spacing: 0.5rem;
+        }
+
+
+
+        #SM_name{
+            height: 45px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+            position: absolute;
+            color: white;
+            top: 5px;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.2);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" maxlength="7" placeholder="请输入预览效果(7字内)">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+<!--<p>creamy</p>-->
+<p id="instructions">我是中国人</p>
+<div id="ui">
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+    <div class="ball">
+        <div class="ball_inner"></div>
+    </div>
+</div>
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_naiyouzhi.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落www.WFall.cn";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text.substring(0,2));
+        $("#instructions").text(SM_text.substring(2));
+    })
+    $("#SM_name").text(SM_text.substring(0,2));
+    $("#instructions").text(SM_text.substring(2));
+</script>
+</html>

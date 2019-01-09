@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600");
+        .more-pens {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 10;
+            font-family: "Montserrat";
+            font-size: 12px;
+        }
+        a.white-mode,
+        a.white-mode:link,
+        a.white-mode:visited,
+        a.white-mode:active {
+            font-family: "Montserrat";
+            font-size: 12px;
+            text-decoration: none;
+            background: #212121;
+            padding: 4px 8px;
+            color: #f7f7f7;
+        }
+        a.white-mode:hover,
+        a.white-mode:link:hover,
+        a.white-mode:visited:hover,
+        a.white-mode:active:hover {
+            background: #edf3f8;
+            color: #212121;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+        }
+
+
+
+        #SM_name{
+            height: 25px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+            position: absolute;
+            color: white;
+            z-index: 99;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.5);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+        .instructions_t {
+            position: absolute;
+            top: 30%;
+            left: 30px;
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            line-height: 1.25em;
+            width: 86%;
+            z-index: 99;
+            height: 43vh;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+<div class="instructions_t">
+    <p id="SM_name01"></p>
+    <p id="SM_name02"></p>
+    <p id="SM_name03"></p>
+    <p id="SM_name04"></p>
+    <p id="SM_name05"></p>
+    <p id="SM_name06"></p>
+</div>
+
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_cilixian.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落鲸落www.WFall.cn友谊和爱情之间的区别在于：友谊意味着两个人和世界，然而爱情意味着两个人就是世界。在友谊中一加一等于二；在爱情中一加一还是一！";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text.substring(0,2));
+        $("#SM_name01").text(SM_text.substring(2,16));
+        $("#SM_name02").text(SM_text.substring(16,32));
+        $("#SM_name03").text(SM_text.substring(32,47));
+        $("#SM_name04").text(SM_text.substring(47,61));
+        $("#SM_name05").text(SM_text.substring(61,78));
+        $("#SM_name06").text(SM_text.substring(78));
+    })
+    $("#SM_name").text(SM_text.substring(0,2));
+    $("#SM_name01").text(SM_text.substring(2,16));
+    $("#SM_name02").text(SM_text.substring(16,32));
+    $("#SM_name03").text(SM_text.substring(32,47));
+    $("#SM_name04").text(SM_text.substring(47,61));
+    $("#SM_name05").text(SM_text.substring(61,78));
+    $("#SM_name06").text(SM_text.substring(78));
+
+
+
+    let max_particles    = 2500;
+    let particles        = [];
+    let frequency        = 10;
+    let init_num         = max_particles;
+    let max_time         = frequency*max_particles;
+    let time_to_recreate = false;
+
+    // Enable repopolate
+    setTimeout(function(){
+        time_to_recreate = true;
+    }.bind(this), max_time)
+
+    // Popolate particles
+    popolate(max_particles);
+
+    var tela = document.createElement('canvas');
+    tela.width = $(window).width();
+    tela.height = $(window).height();
+    $("body").append(tela);
+
+    var canvas = tela.getContext('2d');
+
+    class Particle{
+        constructor(canvas){
+            let random = Math.random()
+            this.progress = 0;
+            this.canvas = canvas;
+            this.center = {
+                x: $(window).width()/2,
+                y: $(window).height()/2
+            }
+            this.point_of_attraction = {
+                x: $(window).width()/2,
+                y: $(window).height()/2
+            }
+
+
+
+            if( Math.random() > 0.5){
+                this.x = $(window).width()*Math.random()
+                this.y = Math.random() > 0.5 ? -Math.random() - 100 : $(window).height() + Math.random() + 100
+            }else{
+                this.x = Math.random() > 0.5 ? -Math.random() - 100 : $(window).width() + Math.random() + 100
+                this.y = $(window).height()*Math.random()
+
+            }
+
+            this.s = Math.random() * 2;
+            this.a = 0
+            this.w = $(window).width()
+            this.h = $(window).height()
+            this.radius = random > .2 ? Math.random()*1 : Math.random()*3
+            this.color  = random > .2 ? "#694FB9" : "#9B0127"
+            this.radius = random > .8 ? Math.random()*2.2 : this.radius
+            this.color  = random > .8 ? "#3CFBFF" : this.color
+        }
+
+        calculateDistance(v1, v2){
+            let x = Math.abs(v1.x - v2.x);
+            let y = Math.abs(v1.y - v2.y);
+            return Math.sqrt((x * x) + (y * y));
+        }
+
+        render(){
+            this.canvas.beginPath();
+            this.canvas.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+            this.canvas.lineWidth = 2;
+            this.canvas.fillStyle = this.color;
+            this.canvas.fill();
+            this.canvas.closePath();
+        }
+
+        move(){
+
+            let p1 = {
+                x: this.x,
+                y: this.y
+            }
+
+            let distance = this.calculateDistance(p1, this.point_of_attraction)
+            let force = Math.max(100, (1 + distance));
+
+            let attr_x = (this.point_of_attraction.x - this.x)/force;
+            let attr_y = (this.point_of_attraction.y - this.y)/force;
+
+            this.x += (Math.cos(this.a) * (this.s)) + attr_x;
+            this.y += (Math.sin(this.a) * (this.s)) + attr_y;
+            this.a += (Math.random() > 0.5 ? Math.random() * 0.9 - 0.45 : Math.random() * 0.4 - 0.2);
+
+            if( distance < (30 + Math.random()*100) ){
+                return false;
+            }
+
+            this.render();
+            this.progress++;
+            return true;
+        }
+    }
+
+    function popolate(num){
+        for (var i = 0; i < num; i++) {
+            setTimeout(
+                    function(x){
+                        return function(){
+                            // Add particle
+                            particles.push(new Particle(canvas))
+                        };
+                    }(i)
+                    ,frequency*i);
+        }
+        return particles.length
+    }
+
+    function createSphera(){
+        let radius = 180
+        let center = {
+            x: $(window).width()/2,
+            y: $(window).height()/2
+        }
+    }
+
+    function clear(){
+        canvas.globalAlpha=0.08;
+        canvas.fillStyle='#110031';
+        canvas.fillRect(0, 0, tela.width, tela.height);
+        canvas.globalAlpha=1;
+    }
+
+    /*
+     * Function to update particles in canvas
+     */
+    function update(){
+        particles = particles.filter(function(p) { return p.move() })
+        // Recreate particles
+        if(time_to_recreate){
+            if(particles.length < init_num){ popolate(1);/* console.log("Ricreo")*/ }
+        }
+        clear();
+        requestAnimationFrame(update.bind(this))
+    }
+    update()
+
+</script>
+</html>

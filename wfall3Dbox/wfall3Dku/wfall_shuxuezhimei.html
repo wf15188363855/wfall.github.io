@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .canvas {
+            display: block;
+        }
+
+
+        #SM_name{
+            height: 45px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 96%;
+            position: absolute;
+            color: white;
+            padding: 0 2%;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 15%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.2);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 9%;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_shuxuezhimei.js"></script>
+<script src="texiao_js/three.80.min.js"></script>
+<script src="texiao_js/EffectComposer.js"></script>
+<script src="texiao_js/FocusShader.js"></script>
+<script src="texiao_js/CopyShader.js"></script>
+<script src="texiao_js/RenderPass.js"></script>
+<script src="texiao_js/ShaderPass.js"></script>
+<script src="texiao_js/OrbitControls.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落www.WFall.cn";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text);
+    })
+    $("#SM_name").text(SM_text);
+
+
+
+    const bgColor = 0x000000;
+
+    // input for the attractor
+    const a = 0.95;
+    const b = 0.7;
+    const c = 0.6;
+    const d = 3.5;
+    const e = 0.25;
+    const f = 0.1;
+    const time = 0.01;
+
+    const numParticles = 25000;
+    let particles;
+
+    // vars for screen dimensions, all set in `setStage`
+    let canvasWidth;
+    let canvasHeight;
+    let midX;
+    let midY;
+
+    let rafId = null;
+
+    // setup threeJS
+
+    // create scene and container (world) for all geometries
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(bgColor, 0.015, 1700);
+    const world = new THREE.Object3D();
+    scene.add(world);
+    world.rotation.x = Math.PI / 1.4;
+
+    // camera
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 2000);
+    camera.position.z = 1000;
+
+    // renderer and shader passes
+    const renderer = new THREE.WebGLRenderer({
+        alpha: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(bgColor);
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    const composer = new THREE.EffectComposer(renderer);
+    const renderPass = new THREE.RenderPass(scene, camera);
+
+    const focusShader = new THREE.ShaderPass(THREE.FocusShader);
+    focusShader.uniforms.screenWidth.value = window.innerWidth;
+    focusShader.uniforms.screenHeight.value = window.innerHeight;
+    focusShader.uniforms.sampleDistance.value = 0.8;
+    focusShader.uniforms.waveFactor.value = 0.001;
+    focusShader.renderToScreen = true;
+
+    composer.addPass(renderPass);
+    composer.addPass(focusShader);
+
+    // controller
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.9;
+    controls.enableZoom = true;
+
+    const setStage = () => {
+        canvasWidth = window.innerWidth;
+        canvasHeight = window.innerHeight;
+        midX = canvasWidth >> 1;
+        midY = canvasHeight >> 1;
+    }
+
+    const create = () => {
+        // scale x, y, z position by this factor
+        const scale = 200;
+
+        // begin position
+        let x = 0.1;
+        let y = 0;
+        let z = 0;
+
+        // threeJS objects
+        const line = new THREE.Geometry();
+        const color = new THREE.Color(0xe63d06);
+        const material = new THREE.LineBasicMaterial({
+            color: color
+        });
+
+        let colors = [];
+
+        let num = numParticles;
+
+        // calculate points for attractor and push them in the geometry
+        for (let i = 0; i < numParticles; i++) {
+            let x1 = (z - b) * x - d * y;
+            let y1 = d * x + (z - b) * y;
+            let z1 = c + a * z - (Math.pow(z, 3) / 3) - (Math.pow(x, 2) + Math.pow(y, 2)) * (1 + e * z) + f * z * (Math.pow(x, 3));
+
+            x1 *= time;
+            y1 *= time;
+            z1 *= time;
+
+            x += x1;
+            y += y1;
+            z += z1;
+
+            // addd new vector to the geometry
+            const vector = new THREE.Vector3(x * scale, -y * scale, (z * scale) - 100);
+            line.vertices.push(vector);
+        }
+
+        line.colors = colors;
+        particles = new THREE.Line(line, material);
+        world.add(particles);
+    }
+
+    const loop = () => {
+        world.rotation.z += 0.01;
+
+        camera.lookAt(scene.position);
+        composer.render();
+
+        rafId = requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', () => {
+        setStage();
+
+    var pixelRatio = renderer.getPixelRatio();
+    var newWidth = Math.floor(canvasWidth / pixelRatio) || 1;
+    var newHeight = Math.floor(canvasHeight / pixelRatio) || 1;
+
+    focusShader.uniforms.screenWidth.value = canvasWidth;
+    focusShader.uniforms.screenHeight.value = canvasHeight;
+
+    composer.setSize(newWidth, newHeight);
+
+    camera.aspect = canvasWidth / canvasHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(canvasWidth, canvasHeight);
+    });
+
+    setStage();
+    create();
+    loop();
+
+    document.body.appendChild(renderer.domElement);
+</script>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Bree+Serif");
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: radial-gradient(circle, #ffe8ec 50%, #ffc0cb);
+            font-family: 'Bree Serif', serif;
+        }
+        .wrapper {
+            display: flex;
+            height: calc(100% - 80px);
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .head {
+            background: rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            color: #5a0010;
+        }
+        .head .title {
+            font-size: 1.6em;
+        }
+        .head .subtitle {
+            margin: 0 6px;
+            opacity: .5;
+        }
+        .bunny__ears::before,
+        .bunny__ears::after {
+            content: '';
+            background: #af7f54;
+            width: 100px;
+            height: 50px;
+            border-radius: 0 100%;
+            position: relative;
+            display: inline-block;
+            box-shadow: inset 16px 15px 10px 6px rgba(0, 0, 0, 0.22);
+        }
+        .bunny__head::before,
+        .bunny__head::after {
+            width: 40px;
+            height: 25px;
+            border-radius: 50%;
+            box-shadow: 0 -5px 0 0 #87613f;
+            position: absolute;
+        }
+        .bunny__whiskers .whiskers,
+        .bunny__whiskers .whiskers::after,
+        .bunny__whiskers .whiskers.right::after {
+            width: 70px;
+            height: 20px;
+            border-radius: 50%;
+            box-shadow: 0px -1px 0px 0px #000;
+        }
+        .bunny__mouth::before,
+        .bunny__mouth::after {
+            content: '';
+            border-radius: 50%;
+            background: #af7f54;
+            width: 20px;
+            height: 20px;
+            box-shadow: 0 3px 0 0 #000;
+            z-index: 1;
+        }
+        .bunny__eyes .eye {
+            -webkit-transform-style: flat;
+            -webkit-transform: translateZ(0);
+        }
+        .bunny {
+            position: relative;
+        }
+        .bunny__head {
+            background: #af7f54;
+            width: 120px;
+            height: 122px;
+            border-radius: 50%/80% 80% 40% 40%;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            box-shadow: inset -1px 36px 16px rgba(0, 0, 0, 0.21);
+            z-index: 2;
+            animation: swing 5s ease-in-out infinite;
+        }
+        .bunny__head::before {
+            content: '';
+            transform: rotateZ(-63deg);
+            left: 38px;
+            right: 0;
+        }
+        .bunny__head::after {
+            content: '';
+            transform: rotateZ(-34deg);
+            left: 48px;
+            right: 0;
+        }
+        .bunny__ears {
+            width: 200px;
+            position: absolute;
+            left: -38px;
+            right: 0;
+            display: flex;
+            flex-direction: row;
+            top: 25px;
+        }
+        .bunny__ears::before {
+            left: -24px;
+            transform: rotateZ(-245deg);
+        }
+        .bunny__ears::after {
+            right: -24px;
+            animation: balance 5s ease-in-out infinite;
+        }
+        .bunny__eyes {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: inherit;
+            position: absolute;
+            top: 48px;
+            left: 0;
+            right: 0;
+        }
+        .bunny__eyes .eye {
+            background: #000;
+            box-shadow: inset 3px 0px 0 #fff, inset 7px 0px 0 #2ecc71, 3px -4px 16px 9px rgba(0, 0, 0, 0.2), 1px -3px 1px 0 #000;
+            width: 25px;
+            height: 25px;
+            border-radius: 50% 80%;
+            overflow: hidden;
+            animation: blink 4s ease-in-out infinite;
+        }
+        .bunny__eyes .eye.right {
+            transform: rotateY(180deg);
+        }
+        .bunny__eyes .eye::before {
+            content: '';
+            background: #fff;
+            opacity: .85;
+            width: 12.5px;
+            height: 8.33333px;
+            display: block;
+            border-radius: 50%;
+            position: relative;
+            left: 10px;
+            top: 1px;
+        }
+        .bunny__nose {
+            position: relative;
+            width: 20px;
+            height: 10px;
+            border-radius: 50%;
+            bottom: -75px;
+            box-shadow: 0px 3px 0 0 pink, 0px -4px 0px -2px #87613f;
+            z-index: 2;
+            animation: breath 0.5s cubic-bezier(0.4, 0, 1, 1) infinite;
+        }
+        .bunny__mouth {
+            position: absolute;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            bottom: 25px;
+        }
+        .bunny__mouth .tooth {
+            position: absolute;
+            left: 50px;
+            right: 0;
+            bottom: -12px;
+            width: 10px;
+            height: 0px;
+            border-top: 15px solid #fff;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+        .bunny__body {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        .bunny__whiskers {
+            width: 140px;
+            position: absolute;
+            left: -10px;
+            right: 0;
+            top: 80px;
+        }
+        .bunny__whiskers .whiskers {
+            float: left;
+            position: relative;
+            left: -25px;
+        }
+        .bunny__whiskers .whiskers.right {
+            transform: rotateY(180deg);
+            position: relative;
+            left: 25px;
+        }
+        .bunny__whiskers .whiskers::after,
+        .bunny__whiskers .whiskers.right::after {
+            content: '';
+            float: left;
+            margin-top: 10px;
+            transform: rotateZ(-10deg);
+        }
+        .bunny__chest {
+            background: #af7f54;
+            width: 130px;
+            height: 100px;
+            box-shadow: inset -4px 22px 20px rgba(0, 0, 0, 0.21), inset 0 -19px 3px 8px rgba(0, 0, 0, 0.21);
+            border-radius: 40% 40% 60% 60%;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            top: -30px;
+            z-index: 1;
+        }
+        .bunny__chest .chest-details {
+            position: relative;
+            width: 45px;
+            height: 45px;
+            background: #b78c65;
+            box-shadow: inset 0 12px 6px -2px rgba(0, 0, 0, 0.15);
+            border-radius: 20% 20% 50% 50%;
+            top: 25px;
+            z-index: 1;
+        }
+        .bunny__chest .chest-details::before {
+            content: '';
+            width: 20px;
+            height: 15px;
+            border-radius: 50%;
+            box-shadow: 0 -5px 0 0 #9f724a;
+            transform: rotateZ(200deg);
+            display: table;
+            margin: 0 auto;
+        }
+        .bunny__chest .chest-details::after {
+            content: '';
+            width: 20px;
+            height: 15px;
+            border-radius: 50%;
+            box-shadow: 0 -5px 0 0 #9f724a;
+            transform: rotateZ(150deg);
+            display: table;
+            margin: -4px auto 0 auto;
+        }
+        .bunny__front-paws {
+            display: flex;
+            position: absolute;
+            left: 15px;
+            right: 0;
+        }
+        .bunny__front-paws .paw {
+            width: 30px;
+            height: 10px;
+            border-top: 60px solid #af7f54;
+            border-left: 15px solid transparent;
+            border-right: 5px solid transparent;
+            margin-top: 45px;
+        }
+        .bunny__front-paws .paw.right {
+            transform: rotateY(180deg);
+        }
+        .bunny__front-paws .paw::before {
+            content: '';
+            background: #9f724a;
+            width: 40px;
+            height: 20px;
+            display: block;
+            border-radius: 20px 50%;
+            position: relative;
+            left: -9px;
+            top: -5px;
+        }
+        .bunny__front-paws .paw::after {
+            content: '';
+            width: 8px;
+            height: 7px;
+            border-radius: 50%;
+            box-shadow: -2px 0 0 1px rgba(0, 0, 0, 0.4), -6px 0 0 1px #af7f54, -8px 0 0 1px rgba(0, 0, 0, 0.4);
+            display: block;
+            position: relative;
+            top: -14px;
+            left: 8px;
+        }
+        .bunny__back-paws {
+            width: 175px;
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            left: -22px;
+            right: 0;
+            bottom: 35px;
+        }
+        .bunny__back-paws .paw {
+            background: #af7f54;
+            width: 60px;
+            height: 30px;
+            border-radius: 60%/100% 40% 0 4px;
+            box-shadow: inset -21px 4px 19px 5px rgba(0, 0, 0, 0.27);
+        }
+        .bunny__back-paws .paw.right {
+            transform: rotateY(180deg);
+        }
+        .bunny__back-paws .paw::before {
+            content: '';
+            width: 8px;
+            height: 10px;
+            border-radius: 50%;
+            box-shadow: -2px 0 0 1px rgba(0, 0, 0, 0.4), -10px 0 0 1px #af7f54, -12px 0 0 1px rgba(0, 0, 0, 0.4);
+            display: block;
+            position: relative;
+            top: 18px;
+            left: 20px;
+        }
+        .ground {
+            background: rgba(0, 0, 0, 0.12);
+            width: 100%;
+            height: 70px;
+            border-radius: 50%;
+            display: table;
+            margin-top: -70px;
+        }
+        @keyframes swing {
+            0%, 50%, 90%, 100% {
+                transform: rotateZ(-12deg);
+            }
+            10%,
+            20%,
+            40% {
+                transform: rotateZ(0);
+            }
+        }
+        @keyframes breath {
+            to {
+                transform: scale(1.1) translateY(2px);
+            }
+        }
+        @keyframes blink {
+            0%, 97% {
+                height: 25px;
+                opacity: 1;
+            }
+            100% {
+                height: 18px;
+                opacity: 0.4;
+            }
+        }
+        @keyframes balance {
+            10%, 20%, 40% {
+                transform: rotateZ(232deg) rotateY(180deg);
+            }
+            0%,
+            50%,
+            90%,
+            100% {
+                transform: rotateZ(245deg) rotateY(180deg);
+            }
+        }
+
+
+
+        #SM_name{
+            height: 25px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+            position: absolute;
+            color: white;
+            z-index: 99;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.5);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+        .instructions_t {
+            position: absolute;
+            top: 30%;
+            left: 30px;
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            line-height: 1.25em;
+            width: 86%;
+            z-index: 99;
+            height: 43vh;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+<div class="instructions_t">
+    <p id="SM_name01"></p>
+    <p id="SM_name02"></p>
+    <p id="SM_name03"></p>
+    <p id="SM_name04"></p>
+    <p id="SM_name05"></p>
+    <p id="SM_name06"></p>
+</div>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+<div class="wrapper">
+    <div class="bunny">
+        <div class="bunny__head">
+            <div class="bunny__ears"></div>
+            <div class="bunny__eyes">
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+            </div>
+            <div class="bunny__nose"></div>
+            <div class="bunny__mouth">
+                <div class="tooth"></div>
+            </div>
+            <div class="bunny__whiskers">
+                <div class="whiskers left"></div>
+                <div class="whiskers right"></div>
+            </div>
+        </div>
+        <div class="bunny__body">
+            <div class="bunny__chest">
+                <div class="chest-details"></div>
+                <div class="bunny__front-paws">
+                    <div class="paw left"></div>
+                    <div class="paw right"></div>
+                </div>
+            </div>
+            <div class="bunny__back-paws">
+                <div class="paw left"></div>
+                <div class="paw right"></div>
+            </div>
+        </div>
+    </div>
+    <div class="ground"></div>
+</div>
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_xiaotuzai.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落鲸落www.WFall.cn友谊和爱情之间的区别在于：友谊意味着两个人和世界，然而爱情意味着两个人就是世界。在友谊中一加一等于二；在爱情中一加一还是一！";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text.substring(0,2));
+        $("#SM_name01").text(SM_text.substring(2,16));
+        $("#SM_name02").text(SM_text.substring(16,32));
+        $("#SM_name03").text(SM_text.substring(32,47));
+        $("#SM_name04").text(SM_text.substring(47,61));
+        $("#SM_name05").text(SM_text.substring(61,78));
+        $("#SM_name06").text(SM_text.substring(78));
+    })
+    $("#SM_name").text(SM_text.substring(0,2));
+    $("#SM_name01").text(SM_text.substring(2,16));
+    $("#SM_name02").text(SM_text.substring(16,32));
+    $("#SM_name03").text(SM_text.substring(32,47));
+    $("#SM_name04").text(SM_text.substring(47,61));
+    $("#SM_name05").text(SM_text.substring(61,78));
+    $("#SM_name06").text(SM_text.substring(78));
+</script>
+</html>

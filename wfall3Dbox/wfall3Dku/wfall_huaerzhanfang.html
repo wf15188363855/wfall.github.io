@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Unica+One");
+        .peddle-center {
+            stop-color: #ffe6f7;
+        }
+        .peddle-outside {
+            stop-color: #ffb3e6;
+        }
+        svg {
+            width: 100vw;
+            height: 100vh;
+        }
+        circle {
+            -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+        }
+        .peddle {
+            -webkit-transform: rotateY(0deg) rotateZ(0deg) scale(1);
+            transform: rotateY(0deg) rotateZ(0deg) scale(1);
+            -webkit-animation: bloom 5s ease-in-out infinite;
+            animation: bloom 5s ease-in-out infinite;
+        }
+        .blossom {
+            -webkit-animation: blossom 5s ease-in-out infinite;
+            animation: blossom 5s ease-in-out infinite;
+        }
+        .blossom:nth-child(1) {
+            -webkit-animation-delay: -112.2s;
+            animation-delay: -112.2s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(1) .peddle {
+            -webkit-animation-delay: -112.2s;
+            animation-delay: -112.2s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(2) {
+            -webkit-animation-delay: -201.6s;
+            animation-delay: -201.6s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(2) .peddle {
+            -webkit-animation-delay: -201.6s;
+            animation-delay: -201.6s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(3) {
+            -webkit-animation-delay: -149.4s;
+            animation-delay: -149.4s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(3) .peddle {
+            -webkit-animation-delay: -149.4s;
+            animation-delay: -149.4s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(4) {
+            -webkit-animation-delay: -192s;
+            animation-delay: -192s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(4) .peddle {
+            -webkit-animation-delay: -192s;
+            animation-delay: -192s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(5) {
+            -webkit-animation-delay: -79.8s;
+            animation-delay: -79.8s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(5) .peddle {
+            -webkit-animation-delay: -79.8s;
+            animation-delay: -79.8s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(6) {
+            -webkit-animation-delay: -91.8s;
+            animation-delay: -91.8s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(6) .peddle {
+            -webkit-animation-delay: -91.8s;
+            animation-delay: -91.8s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(7) {
+            -webkit-animation-delay: -241.8s;
+            animation-delay: -241.8s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(7) .peddle {
+            -webkit-animation-delay: -241.8s;
+            animation-delay: -241.8s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(8) {
+            -webkit-animation-delay: -4.2s;
+            animation-delay: -4.2s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(8) .peddle {
+            -webkit-animation-delay: -4.2s;
+            animation-delay: -4.2s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(9) {
+            -webkit-animation-delay: -101.4s;
+            animation-delay: -101.4s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(9) .peddle {
+            -webkit-animation-delay: -101.4s;
+            animation-delay: -101.4s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(10) {
+            -webkit-animation-delay: -247.2s;
+            animation-delay: -247.2s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(10) .peddle {
+            -webkit-animation-delay: -247.2s;
+            animation-delay: -247.2s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(11) {
+            -webkit-animation-delay: -1.2s;
+            animation-delay: -1.2s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(11) .peddle {
+            -webkit-animation-delay: -1.2s;
+            animation-delay: -1.2s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(12) {
+            -webkit-animation-delay: -82.2s;
+            animation-delay: -82.2s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(12) .peddle {
+            -webkit-animation-delay: -82.2s;
+            animation-delay: -82.2s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(13) {
+            -webkit-animation-delay: -273s;
+            animation-delay: -273s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(13) .peddle {
+            -webkit-animation-delay: -273s;
+            animation-delay: -273s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(14) {
+            -webkit-animation-delay: -58.2s;
+            animation-delay: -58.2s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(14) .peddle {
+            -webkit-animation-delay: -58.2s;
+            animation-delay: -58.2s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(15) {
+            -webkit-animation-delay: -25.8s;
+            animation-delay: -25.8s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(15) .peddle {
+            -webkit-animation-delay: -25.8s;
+            animation-delay: -25.8s;
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .blossom:nth-child(16) {
+            -webkit-animation-delay: -197.4s;
+            animation-delay: -197.4s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(16) .peddle {
+            -webkit-animation-delay: -197.4s;
+            animation-delay: -197.4s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(17) {
+            -webkit-animation-delay: -83.4s;
+            animation-delay: -83.4s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(17) .peddle {
+            -webkit-animation-delay: -83.4s;
+            animation-delay: -83.4s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(18) {
+            -webkit-animation-delay: -231s;
+            animation-delay: -231s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(18) .peddle {
+            -webkit-animation-delay: -231s;
+            animation-delay: -231s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(19) {
+            -webkit-animation-delay: -285s;
+            animation-delay: -285s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(19) .peddle {
+            -webkit-animation-delay: -285s;
+            animation-delay: -285s;
+            -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+        .blossom:nth-child(20) {
+            -webkit-animation-delay: -28.2s;
+            animation-delay: -28.2s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .blossom:nth-child(20) .peddle {
+            -webkit-animation-delay: -28.2s;
+            animation-delay: -28.2s;
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        @-webkit-keyframes blossom {
+            0% {
+                -webkit-transform: translate(-100px, -100px);
+                transform: translate(-100px, -100px);
+            }
+            100% {
+                -webkit-transform: translate(100px, 100px) rotate(20deg);
+                transform: translate(100px, 100px) rotate(20deg);
+            }
+        }
+        @keyframes blossom {
+            0% {
+                -webkit-transform: translate(-100px, -100px);
+                transform: translate(-100px, -100px);
+            }
+            100% {
+                -webkit-transform: translate(100px, 100px) rotate(20deg);
+                transform: translate(100px, 100px) rotate(20deg);
+            }
+        }
+        @-webkit-keyframes bloom {
+            0% {
+                -webkit-transform: rotateY(90deg) rotateZ(72deg) scale(0);
+                transform: rotateY(90deg) rotateZ(72deg) scale(0);
+            }
+            50% {
+                -webkit-transform: rotateY(0deg) rotateZ(0deg) scale(1);
+                transform: rotateY(0deg) rotateZ(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                -webkit-transform: translate(40px, 40px) rotate3d(1, 0.5, 1, 90deg);
+                transform: translate(40px, 40px) rotate3d(1, 0.5, 1, 90deg);
+            }
+        }
+        @keyframes bloom {
+            0% {
+                -webkit-transform: rotateY(90deg) rotateZ(72deg) scale(0);
+                transform: rotateY(90deg) rotateZ(72deg) scale(0);
+            }
+            50% {
+                -webkit-transform: rotateY(0deg) rotateZ(0deg) scale(1);
+                transform: rotateY(0deg) rotateZ(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                -webkit-transform: translate(40px, 40px) rotate3d(1, 0.5, 1, 90deg);
+                transform: translate(40px, 40px) rotate3d(1, 0.5, 1, 90deg);
+            }
+        }
+        /*Page Setup*/
+
+        svg {
+            width: 100vw;
+            height: 80vh;
+        }
+        body {
+            background: #143d52;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+
+
+
+        #SM_name{
+            height: 25px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+            position: absolute;
+            color: white;
+            z-index: 99;
+            top: 15px;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.5);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+        .instructions_t {
+            position: absolute;
+            top: 30%;
+            left: 30px;
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            line-height: 1.25em;
+            width: 86%;
+            z-index: 99;
+            height: 43vh;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name"></p>
+<div class="instructions_t">
+    <p id="SM_name01"></p>
+    <p id="SM_name02"></p>
+    <p id="SM_name03"></p>
+    <p id="SM_name04"></p>
+    <p id="SM_name05"></p>
+    <p id="SM_name06"></p>
+</div>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+
+<!--\, r=a+b\theta-->
+<svg viewBox="0 0 1000 1000">
+    <defs>
+        <symbol id="blossom" viewBox="-32.2 -55.9 64.5 111.7">
+            <g>
+                <radialGradient id="blossomGradient" cx="0.25" cy="-44" r="61.5081" gradientUnits="userSpaceOnUse">
+                    <stop class="peddle-center" offset="0"></stop>
+                    <stop class="peddle-outside" offset="1"></stop>
+                </radialGradient>
+                <path fill="url(#blossomGradient)" d="M32.2,0c0-23.9-13-44.7-32.2-55.9C-19.3-44.7-32.2-23.9-32.2,0s13,44.7,32.2,55.9C19.3,44.7,32.2,23.9,32.2,0z"></path>
+            </g>
+        </symbol>
+    </defs>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,592.1270706578638,258.27975767584905)">
+            <use class="peddle" xlink:href="#blossom" x="569.6270706578638" y="258.27975767584905" width="45" height="45" style="transform-origin:592.1270706578638px 258.27975767584905px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,592.1270706578638,258.27975767584905)">
+            <use class="peddle" xlink:href="#blossom" x="569.6270706578638" y="258.27975767584905" width="45" height="45" style="transform-origin:592.1270706578638px 258.27975767584905px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,592.1270706578638,258.27975767584905)">
+            <use class="peddle" xlink:href="#blossom" x="569.6270706578638" y="258.27975767584905" width="45" height="45" style="transform-origin:592.1270706578638px 258.27975767584905px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,592.1270706578638,258.27975767584905)">
+            <use class="peddle" xlink:href="#blossom" x="569.6270706578638" y="258.27975767584905" width="45" height="45" style="transform-origin:592.1270706578638px 258.27975767584905px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,592.1270706578638,258.27975767584905)">
+            <use class="peddle" xlink:href="#blossom" x="569.6270706578638" y="258.27975767584905" width="45" height="45" style="transform-origin:592.1270706578638px 258.27975767584905px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,542.5493278194839,206.16135880052923)">
+            <use class="peddle" xlink:href="#blossom" x="517.5493278194839" y="206.16135880052923" width="50" height="50" style="transform-origin:542.5493278194839px 206.16135880052923px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,542.5493278194839,206.16135880052923)">
+            <use class="peddle" xlink:href="#blossom" x="517.5493278194839" y="206.16135880052923" width="50" height="50" style="transform-origin:542.5493278194839px 206.16135880052923px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,542.5493278194839,206.16135880052923)">
+            <use class="peddle" xlink:href="#blossom" x="517.5493278194839" y="206.16135880052923" width="50" height="50" style="transform-origin:542.5493278194839px 206.16135880052923px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,542.5493278194839,206.16135880052923)">
+            <use class="peddle" xlink:href="#blossom" x="517.5493278194839" y="206.16135880052923" width="50" height="50" style="transform-origin:542.5493278194839px 206.16135880052923px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,542.5493278194839,206.16135880052923)">
+            <use class="peddle" xlink:href="#blossom" x="517.5493278194839" y="206.16135880052923" width="50" height="50" style="transform-origin:542.5493278194839px 206.16135880052923px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,464.16471409676745,183.8198799969335)">
+            <use class="peddle" xlink:href="#blossom" x="436.66471409676745" y="183.8198799969335" width="55" height="55" style="transform-origin:464.16471409676745px 183.8198799969335px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,464.16471409676745,183.8198799969335)">
+            <use class="peddle" xlink:href="#blossom" x="436.66471409676745" y="183.8198799969335" width="55" height="55" style="transform-origin:464.16471409676745px 183.8198799969335px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,464.16471409676745,183.8198799969335)">
+            <use class="peddle" xlink:href="#blossom" x="436.66471409676745" y="183.8198799969335" width="55" height="55" style="transform-origin:464.16471409676745px 183.8198799969335px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,464.16471409676745,183.8198799969335)">
+            <use class="peddle" xlink:href="#blossom" x="436.66471409676745" y="183.8198799969335" width="55" height="55" style="transform-origin:464.16471409676745px 183.8198799969335px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,464.16471409676745,183.8198799969335)">
+            <use class="peddle" xlink:href="#blossom" x="436.66471409676745" y="183.8198799969335" width="55" height="55" style="transform-origin:464.16471409676745px 183.8198799969335px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,375.8077120359137,206.20752589149365)">
+            <use class="peddle" xlink:href="#blossom" x="345.8077120359137" y="206.20752589149365" width="60" height="60" style="transform-origin:375.8077120359137px 206.20752589149365px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,375.8077120359137,206.20752589149365)">
+            <use class="peddle" xlink:href="#blossom" x="345.8077120359137" y="206.20752589149365" width="60" height="60" style="transform-origin:375.8077120359137px 206.20752589149365px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,375.8077120359137,206.20752589149365)">
+            <use class="peddle" xlink:href="#blossom" x="345.8077120359137" y="206.20752589149365" width="60" height="60" style="transform-origin:375.8077120359137px 206.20752589149365px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,375.8077120359137,206.20752589149365)">
+            <use class="peddle" xlink:href="#blossom" x="345.8077120359137" y="206.20752589149365" width="60" height="60" style="transform-origin:375.8077120359137px 206.20752589149365px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,375.8077120359137,206.20752589149365)">
+            <use class="peddle" xlink:href="#blossom" x="345.8077120359137" y="206.20752589149365" width="60" height="60" style="transform-origin:375.8077120359137px 206.20752589149365px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,303.34409566893277,276.33552218517985)">
+            <use class="peddle" xlink:href="#blossom" x="270.84409566893277" y="276.33552218517985" width="65" height="65" style="transform-origin:303.34409566893277px 276.33552218517985px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,303.34409566893277,276.33552218517985)">
+            <use class="peddle" xlink:href="#blossom" x="270.84409566893277" y="276.33552218517985" width="65" height="65" style="transform-origin:303.34409566893277px 276.33552218517985px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,303.34409566893277,276.33552218517985)">
+            <use class="peddle" xlink:href="#blossom" x="270.84409566893277" y="276.33552218517985" width="65" height="65" style="transform-origin:303.34409566893277px 276.33552218517985px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,303.34409566893277,276.33552218517985)">
+            <use class="peddle" xlink:href="#blossom" x="270.84409566893277" y="276.33552218517985" width="65" height="65" style="transform-origin:303.34409566893277px 276.33552218517985px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,303.34409566893277,276.33552218517985)">
+            <use class="peddle" xlink:href="#blossom" x="270.84409566893277" y="276.33552218517985" width="65" height="65" style="transform-origin:303.34409566893277px 276.33552218517985px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,272.3017257818975,382.45760185376946)">
+            <use class="peddle" xlink:href="#blossom" x="237.30172578189752" y="382.45760185376946" width="70" height="70" style="transform-origin:272.3017257818975px 382.45760185376946px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,272.3017257818975,382.45760185376946)">
+            <use class="peddle" xlink:href="#blossom" x="237.30172578189752" y="382.45760185376946" width="70" height="70" style="transform-origin:272.3017257818975px 382.45760185376946px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,272.3017257818975,382.45760185376946)">
+            <use class="peddle" xlink:href="#blossom" x="237.30172578189752" y="382.45760185376946" width="70" height="70" style="transform-origin:272.3017257818975px 382.45760185376946px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,272.3017257818975,382.45760185376946)">
+            <use class="peddle" xlink:href="#blossom" x="237.30172578189752" y="382.45760185376946" width="70" height="70" style="transform-origin:272.3017257818975px 382.45760185376946px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,272.3017257818975,382.45760185376946)">
+            <use class="peddle" xlink:href="#blossom" x="237.30172578189752" y="382.45760185376946" width="70" height="70" style="transform-origin:272.3017257818975px 382.45760185376946px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,299.7140961132666,499.6180360259891)">
+            <use class="peddle" xlink:href="#blossom" x="262.2140961132666" y="499.6180360259891" width="75" height="75" style="transform-origin:299.7140961132666px 499.6180360259891px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,299.7140961132666,499.6180360259891)">
+            <use class="peddle" xlink:href="#blossom" x="262.2140961132666" y="499.6180360259891" width="75" height="75" style="transform-origin:299.7140961132666px 499.6180360259891px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,299.7140961132666,499.6180360259891)">
+            <use class="peddle" xlink:href="#blossom" x="262.2140961132666" y="499.6180360259891" width="75" height="75" style="transform-origin:299.7140961132666px 499.6180360259891px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,299.7140961132666,499.6180360259891)">
+            <use class="peddle" xlink:href="#blossom" x="262.2140961132666" y="499.6180360259891" width="75" height="75" style="transform-origin:299.7140961132666px 499.6180360259891px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,299.7140961132666,499.6180360259891)">
+            <use class="peddle" xlink:href="#blossom" x="262.2140961132666" y="499.6180360259891" width="75" height="75" style="transform-origin:299.7140961132666px 499.6180360259891px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,387.64035413227157,595.510305242934)">
+            <use class="peddle" xlink:href="#blossom" x="347.64035413227157" y="595.510305242934" width="80" height="80" style="transform-origin:387.64035413227157px 595.510305242934px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,387.64035413227157,595.510305242934)">
+            <use class="peddle" xlink:href="#blossom" x="347.64035413227157" y="595.510305242934" width="80" height="80" style="transform-origin:387.64035413227157px 595.510305242934px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,387.64035413227157,595.510305242934)">
+            <use class="peddle" xlink:href="#blossom" x="347.64035413227157" y="595.510305242934" width="80" height="80" style="transform-origin:387.64035413227157px 595.510305242934px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,387.64035413227157,595.510305242934)">
+            <use class="peddle" xlink:href="#blossom" x="347.64035413227157" y="595.510305242934" width="80" height="80" style="transform-origin:387.64035413227157px 595.510305242934px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,387.64035413227157,595.510305242934)">
+            <use class="peddle" xlink:href="#blossom" x="347.64035413227157" y="595.510305242934" width="80" height="80" style="transform-origin:387.64035413227157px 595.510305242934px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,520.5137884836338,639.2735461151758)">
+            <use class="peddle" xlink:href="#blossom" x="478.0137884836338" y="639.2735461151758" width="85" height="85" style="transform-origin:520.5137884836338px 639.2735461151758px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,520.5137884836338,639.2735461151758)">
+            <use class="peddle" xlink:href="#blossom" x="478.0137884836338" y="639.2735461151758" width="85" height="85" style="transform-origin:520.5137884836338px 639.2735461151758px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,520.5137884836338,639.2735461151758)">
+            <use class="peddle" xlink:href="#blossom" x="478.0137884836338" y="639.2735461151758" width="85" height="85" style="transform-origin:520.5137884836338px 639.2735461151758px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,520.5137884836338,639.2735461151758)">
+            <use class="peddle" xlink:href="#blossom" x="478.0137884836338" y="639.2735461151758" width="85" height="85" style="transform-origin:520.5137884836338px 639.2735461151758px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,520.5137884836338,639.2735461151758)">
+            <use class="peddle" xlink:href="#blossom" x="478.0137884836338" y="639.2735461151758" width="85" height="85" style="transform-origin:520.5137884836338px 639.2735461151758px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,667.4937148191234,610.8560052904479)">
+            <use class="peddle" xlink:href="#blossom" x="622.4937148191234" y="610.8560052904479" width="90" height="90" style="transform-origin:667.4937148191234px 610.8560052904479px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,667.4937148191234,610.8560052904479)">
+            <use class="peddle" xlink:href="#blossom" x="622.4937148191234" y="610.8560052904479" width="90" height="90" style="transform-origin:667.4937148191234px 610.8560052904479px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,667.4937148191234,610.8560052904479)">
+            <use class="peddle" xlink:href="#blossom" x="622.4937148191234" y="610.8560052904479" width="90" height="90" style="transform-origin:667.4937148191234px 610.8560052904479px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,667.4937148191234,610.8560052904479)">
+            <use class="peddle" xlink:href="#blossom" x="622.4937148191234" y="610.8560052904479" width="90" height="90" style="transform-origin:667.4937148191234px 610.8560052904479px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,667.4937148191234,610.8560052904479)">
+            <use class="peddle" xlink:href="#blossom" x="622.4937148191234" y="610.8560052904479" width="90" height="90" style="transform-origin:667.4937148191234px 610.8560052904479px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,789.602245423823,508.210427739387)">
+            <use class="peddle" xlink:href="#blossom" x="742.102245423823" y="508.210427739387" width="95" height="95" style="transform-origin:789.602245423823px 508.210427739387px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,789.602245423823,508.210427739387)">
+            <use class="peddle" xlink:href="#blossom" x="742.102245423823" y="508.210427739387" width="95" height="95" style="transform-origin:789.602245423823px 508.210427739387px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,789.602245423823,508.210427739387)">
+            <use class="peddle" xlink:href="#blossom" x="742.102245423823" y="508.210427739387" width="95" height="95" style="transform-origin:789.602245423823px 508.210427739387px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,789.602245423823,508.210427739387)">
+            <use class="peddle" xlink:href="#blossom" x="742.102245423823" y="508.210427739387" width="95" height="95" style="transform-origin:789.602245423823px 508.210427739387px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,789.602245423823,508.210427739387)">
+            <use class="peddle" xlink:href="#blossom" x="742.102245423823" y="508.210427739387" width="95" height="95" style="transform-origin:789.602245423823px 508.210427739387px"></use>
+        </g>
+    </g>
+    <!--circle(cx=cx  cy=cy r=r style="transform-origin:"+ cx + "px " + cy + "px;")-->
+    <g class="blossom">
+        <g class="peddle-group" transform="rotate(288,850,350)">
+            <use class="peddle" xlink:href="#blossom" x="800" y="350" width="100" height="100" style="transform-origin:850px 350px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(216,850,350)">
+            <use class="peddle" xlink:href="#blossom" x="800" y="350" width="100" height="100" style="transform-origin:850px 350px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(144,850,350)">
+            <use class="peddle" xlink:href="#blossom" x="800" y="350" width="100" height="100" style="transform-origin:850px 350px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(72,850,350)">
+            <use class="peddle" xlink:href="#blossom" x="800" y="350" width="100" height="100" style="transform-origin:850px 350px"></use>
+        </g>
+        <g class="peddle-group" transform="rotate(0,850,350)">
+            <use class="peddle" xlink:href="#blossom" x="800" y="350" width="100" height="100" style="transform-origin:850px 350px"></use>
+        </g>
+    </g>
+</svg>
+
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_huaerzhanfang.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落鲸落www.WFall.cn友谊和爱情之间的区别在于：友谊意味着两个人和世界，然而爱情意味着两个人就是世界。在友谊中一加一等于二；在爱情中一加一还是一！";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text.substring(0,2));
+        $("#SM_name01").text(SM_text.substring(2,16));
+        $("#SM_name02").text(SM_text.substring(16,32));
+        $("#SM_name03").text(SM_text.substring(32,47));
+        $("#SM_name04").text(SM_text.substring(47,61));
+        $("#SM_name05").text(SM_text.substring(61,78));
+        $("#SM_name06").text(SM_text.substring(78));
+    })
+    $("#SM_name").text(SM_text.substring(0,2));
+    $("#SM_name01").text(SM_text.substring(2,16));
+    $("#SM_name02").text(SM_text.substring(16,32));
+    $("#SM_name03").text(SM_text.substring(32,47));
+    $("#SM_name04").text(SM_text.substring(47,61));
+    $("#SM_name05").text(SM_text.substring(61,78));
+    $("#SM_name06").text(SM_text.substring(78));
+</script>
+</html>

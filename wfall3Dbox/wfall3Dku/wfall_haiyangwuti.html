@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        body {
+            background: -webkit-linear-gradient(top, #273276, #f99432 175%);
+            background: linear-gradient(to bottom, #273276, #f99432 175%);
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+        }
+        body .intro {
+            position: absolute;
+            width: 30%;
+            height: auto;
+            background: #fff;
+            display: inline-block;
+            padding: 30px 50px;
+            bottom: 5%;
+            right: 5%;
+        }
+        body .intro p {
+            font-size: 18px;
+            color: #273276;
+            font-family: 'Francois One', sans-serif;
+            font-weight: 100;
+        }
+        body h1 {
+            position: absolute;
+            left: 5%;
+            top: 13%;
+            z-index: 9;
+            color: white;
+            font-size: 5vmin;
+            line-height: 1.5;
+            margin: 0;
+            text-align: left;
+            font-family: 'Francois One', sans-serif;
+        }
+        body h1 span {
+            -webkit-animation: bobbing 3s ease-in-out infinite alternate;
+            animation: bobbing 3s ease-in-out infinite alternate;
+            display: inline-block;
+            -webkit-transform-origin: 50% 100%;
+            transform-origin: 50% 100%;
+        }
+        body h1 span:nth-of-type(1) {
+            -webkit-animation-delay: -0.66667s;
+            animation-delay: -0.66667s;
+        }
+        body h1 span:nth-of-type(2) {
+            -webkit-animation-delay: -1.33333s;
+            animation-delay: -1.33333s;
+        }
+        body h1 span:nth-of-type(3) {
+            -webkit-animation-delay: -2s;
+            animation-delay: -2s;
+        }
+        body h1 span:nth-of-type(4) {
+            -webkit-animation-delay: -2.66667s;
+            animation-delay: -2.66667s;
+        }
+        body h1 span:nth-of-type(5) {
+            -webkit-animation-delay: -3.33333s;
+            animation-delay: -3.33333s;
+        }
+        body h1 span:nth-of-type(6) {
+            -webkit-animation-delay: -4s;
+            animation-delay: -4s;
+        }
+        body h1 span:nth-of-type(7) {
+            -webkit-animation-delay: -4.66667s;
+            animation-delay: -4.66667s;
+        }
+        body h1 span:nth-of-type(8) {
+            -webkit-animation-delay: -5.33333s;
+            animation-delay: -5.33333s;
+        }
+        body h1 span:nth-of-type(9) {
+            -webkit-animation-delay: -6s;
+            animation-delay: -6s;
+        }
+        body h1 span:nth-of-type(10) {
+            -webkit-animation-delay: -6.66667s;
+            animation-delay: -6.66667s;
+        }
+        body h1 span:nth-of-type(11) {
+            -webkit-animation-delay: -7.33333s;
+            animation-delay: -7.33333s;
+        }
+        body h1 span:nth-of-type(12) {
+            -webkit-animation-delay: -8s;
+            animation-delay: -8s;
+        }
+        body h1 span:nth-of-type(13) {
+            -webkit-animation-delay: -8.66667s;
+            animation-delay: -8.66667s;
+        }
+        body h1 span:nth-of-type(14) {
+            -webkit-animation-delay: -9.33333s;
+            animation-delay: -9.33333s;
+        }
+        body h1 span:nth-of-type(15) {
+            -webkit-animation-delay: -10s;
+            animation-delay: -10s;
+        }
+        body h1 span:nth-of-type(16) {
+            -webkit-animation-delay: -10.66667s;
+            animation-delay: -10.66667s;
+        }
+        body h1 span:nth-of-type(17) {
+            -webkit-animation-delay: -11.33333s;
+            animation-delay: -11.33333s;
+        }
+        body h1 span:nth-of-type(18) {
+            -webkit-animation-delay: -12s;
+            animation-delay: -12s;
+        }
+        body h1 span:nth-of-type(19) {
+            -webkit-animation-delay: -12.66667s;
+            animation-delay: -12.66667s;
+        }
+        body h1 span:nth-of-type(20) {
+            -webkit-animation-delay: -13.33333s;
+            animation-delay: -13.33333s;
+        }
+        @-webkit-keyframes bobbing {
+            0% {
+                -webkit-transform: translateY(0px) rotate(5deg);
+                transform: translateY(0px) rotate(5deg);
+            }
+            100% {
+                -webkit-transform: translateY(-20px) rotate(-5deg);
+                transform: translateY(-20px) rotate(-5deg);
+            }
+        }
+        @keyframes bobbing {
+            0% {
+                -webkit-transform: translateY(0px) rotate(5deg);
+                transform: translateY(0px) rotate(5deg);
+            }
+            100% {
+                -webkit-transform: translateY(-20px) rotate(-5deg);
+                transform: translateY(-20px) rotate(-5deg);
+            }
+        }
+        body .wrap {
+            position: absolute;
+            width: 75%;
+            height: 75%;
+            top: 12.5%;
+            left: 12.5%;
+            background: #273276;
+            overflow: hidden;
+            box-shadow: 0 50px 50px -40px #273276;
+        }
+        body .wrap:nth-of-type(3) {
+            -webkit-transform: scaleY(-1) scaleX(-1);
+            transform: scaleY(-1) scaleX(-1);
+            background: transparent;
+        }
+        body .wrap:nth-of-type(3) div {
+            background-size: 700px;
+            opacity: 0.25;
+        }
+        body .wrap:nth-of-type(2) {
+            background: transparent;
+        }
+        body .wrap:nth-of-type(2) .shark {
+            width: 500px;
+            height: 200px;
+            position: absolute;
+            left: calc(50% - 250px);
+            top: calc(50% - 100px);
+            -webkit-perspective: 1000px;
+            perspective: 1000px;
+        }
+        body .wrap:nth-of-type(2) .shark:before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: -webkit-radial-gradient(center, ellipse, #273276, rgba(0, 0, 0, 0) 75%);
+            background: radial-gradient(ellipse at center, #273276, rgba(0, 0, 0, 0) 75%);
+            border-radius: 100%;
+        }
+        body .wrap:nth-of-type(2) .shark .front {
+            width: 400px;
+            height: 250px;
+            background: url("img/shark.svg");
+            background-size: 525px;
+            background-position: right center;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        body .wrap:nth-of-type(2) .shark .tail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 250px;
+            width: 100px;
+            background: url("img/shark.svg");
+            background-size: 525px;
+            background-position: left center;
+            background-repeat: no-repeat;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transform-origin: 100% 50%;
+            transform-origin: 100% 50%;
+            -webkit-animation: swim 1s ease-in-out infinite alternate;
+            animation: swim 1s ease-in-out infinite alternate;
+        }
+        @-webkit-keyframes swim {
+            0% {
+                -webkit-transform: rotateY(-25deg);
+                transform: rotateY(-25deg);
+            }
+            100% {
+                -webkit-transform: rotateY(55deg);
+                transform: rotateY(55deg);
+            }
+        }
+        @keyframes swim {
+            0% {
+                -webkit-transform: rotateY(-25deg);
+                transform: rotateY(-25deg);
+            }
+            100% {
+                -webkit-transform: rotateY(55deg);
+                transform: rotateY(55deg);
+            }
+        }
+        body .cluster {
+            width: 125%;
+            position: absolute;
+            height: 125%;
+            background-size: contain;
+            left: -12.5%;
+            top: -12.5%;
+        }
+        body .cluster.one {
+            background-image: url("img/cluster1.svg");
+        }
+        body .cluster.two {
+            background-image: url("img/cluster2.svg");
+        }
+        body .cluster.three {
+            background-image: url("img/cluster3.svg");
+        }
+        body .cluster.four {
+            background-image: url("img/cluster4.svg");
+        }
+        /*body .cluster.five {
+            background-image: url("img/cluster5.svg");
+        }*/
+        .shark{
+            transform: scale(0.5,0.5);
+        }
+
+
+
+        #SM_name{
+            height: 45px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 96%;
+            position: absolute;
+            color: white;
+            padding: 0 2%;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 15%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.2);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 9%;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<div class="wrap">
+    <div class="cluster one"></div>
+    <div class="cluster two"></div>
+    <div class="cluster three"></div>
+    <div class="cluster four"></div>
+    <div class="cluster five"></div>
+</div>
+
+
+<div class="wrap">
+    <div class="shark">
+        <div class="front">
+        </div>
+        <div class="tail">
+        </div>
+    </div>
+</div>
+
+<h1>
+    <div class="name_01 name_all"></div>
+    <div class="name_02 name_all"></div>
+    <div class="name_04 name_all"></div>
+    <div class="name_05 name_all"></div>
+    <div class="name_06 name_all"></div>
+    <div class="name_07 name_all"></div>
+    <div class="name_08 name_all"></div>
+    <div class="name_09 name_all"></div>
+    <div class="name_10 name_all"></div>
+    <div class="name_11 name_all"></div>
+    <div class="name_12 name_all"></div>
+    <div class="name_13 name_all"></div>
+    <div class="name_14 name_all"></div>
+    <div class="name_15 name_all"></div>
+    <div class="name_16 name_all"></div>
+    <div class="name_17 name_all"></div>
+    <div class="name_18 name_all"></div>
+    <div class="name_19 name_all"></div>
+    <div class="name_20 name_all"></div>
+    <div class="name_21 name_all"></div>
+    <div class="name_22 name_all"></div>
+    <div class="name_23 name_all"></div>
+    <div class="name_24 name_all"></div>
+    <div class="name_25 name_all"></div>
+    <div class="name_26 name_all"></div>
+    <div class="name_27 name_all"></div>
+    <div class="name_28 name_all"></div>
+    <div class="name_29 name_all"></div>
+    <div class="name_30 name_all"></div>
+    <div class="name_31 name_all"></div>
+    <div class="name_32 name_all"></div>
+    <div class="name_33 name_all"></div>
+    <div class="name_34 name_all"></div>
+    <div class="name_35 name_all"></div>
+    <div class="name_36 name_all"></div>
+    <div class="name_37 name_all"></div>
+    <div class="name_38 name_all"></div>
+    <div class="name_39 name_all"></div>
+    <div class="name_40 name_all"></div>
+</h1>
+<div>
+    <input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+    <div id="SM_btn" class="SM_css">确定</div>
+    <p id="SM_name">鲸落www.WFall.cn</p>
+</div>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_haiyangwuti.js"></script>
+<script src="texiao_js/modernizr.js"></script>
+<script src="texiao_js/prefixfree.min.js"></script>
+<script src="texiao_js/TweenMax.min.js"></script>
+<script>
+    var $one = $('.one'),
+            $two = $('.two'),
+            $three = $('.three'),
+            $four = $('.four'),
+            $five = $('.five'),
+            $shark = $('.shark'),
+            $x_axis = $('#x-axis'),
+            $y_axis = $('#y-axis'),
+            $container = $('body'),
+            container_w = $container.width(),
+            container_h = $container.height();
+
+    $(window).on('mousemove.parallax', function(event) {
+        var pos_x = event.pageX,
+                pos_y = event.pageY,
+                left = 0,
+                top = 0,
+                bri = 0;
+
+        bri = container_h / 0.25 - pos_y;
+        left = container_w / 2 - pos_x;
+        top = container_h / 2 - pos_y;
+
+
+        /*TweenMax.to(
+         $x_axis,
+         1, {
+         css: {
+         transform: 'translateX(' + (left * -1) + 'px)'
+         },
+         ease: Expo.easeOut,
+         overwrite: 'all'
+         });
+
+         TweenMax.to(
+         $y_axis,
+         1, {
+         css: {
+         transform: 'translateY(' + (top * -1) + 'px)'
+         },
+         ease: Expo.easeOut,
+         overwrite: 'all'
+         });
+         TweenMax.to(
+         $one,
+         1, {
+         css: {
+         transform: 'translateX(' + (left * -0.06) + 'px) translateY(' + (top * -0.04) + 'px)',
+
+         },
+
+         ease: Expo.easeOut,
+         overwrite: 'all'
+         });
+         TweenMax.to(
+         $two,
+         1, {
+         css: {
+         transform: 'translateX(' + (left * 0.06) + 'px) translateY(' + (top * 0.04) + 'px)',
+
+         },
+
+         ease: Expo.easeOut,
+         overwrite: 'all'
+         });
+         TweenMax.to(
+         $three,
+         1, {
+         css: {
+         transform: 'translateX(' + (left * -0.02) + 'px) translateY(' + (top * 0.04) + 'px)',
+
+         },
+
+         ease: Expo.easeOut,
+         overwrite: 'all'
+         });
+         TweenMax.to(
+         $four,
+         1, {
+         css: {
+         transform: 'translateX(' + (left * 0.04) + 'px) translateY(' + (top * -0.02) + 'px) rotate(' + (left * -0.0025) + 'deg)',
+
+         },
+
+         ease: Expo.easeOut,
+         overwrite: 'all'
+         });
+         TweenMax.to(
+         $five,
+         1, {
+         css: {
+         transform: 'translateX(' + (left * -0.04) + 'px) translateY(' + (top * -0.02) + 'px) rotate(' + (top * -0.01) + 'deg)',
+
+         },
+
+         ease: Expo.easeOut,
+         overwrite: 'all'
+         });
+         TweenMax.to(
+         $shark,
+         1, {
+         css: {
+         transform: 'translateX(' + (left * -0.07) + 'px) translateY(' + (top * 0.04) + 'px) rotate(' + (top * 0.02) + 'deg)',
+
+         },
+
+         ease: Expo.easeOut,
+         overwrite: 'all'
+         });*/
+
+    });
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落www.WFall.cn";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text.substring(0,2));
+        $(".text").text(SM_text.substring(2));
+        var array = SM_text.split("");
+        $(".name_all").html("");
+        for (var i=0 ; i< array.length ; i++)
+        {
+            if(i<3){
+                $(".name_01").append("<span>" +array[i]+ "</span>");
+            }else if(i>2 && i<21){
+                $(".name_02").append("<span>" +array[i]+ "</span>");
+            }else if(i>20 && i<39){
+                $(".name_03").append("<span>" +array[i]+ "</span>");
+            }else if(i>38 && i<57){
+                $(".name_04").append("<span>" +array[i]+ "</span>");
+            }else if(i>56 && i<73){
+                $(".name_05").append("<span>" +array[i]+ "</span>");
+            }else if(i>72 && i<91){
+                $(".name_06").append("<span>" +array[i]+ "</span>");
+            }else if(i>90 && i<109){
+                $(".name_07").append("<span>" +array[i]+ "</span>");
+            }else if(i>108 && i<127){
+                $(".name_08").append("<span>" +array[i]+ "</span>");
+            }else if(i>126 && i<145){
+                $(".name_09").append("<span>" +array[i]+ "</span>");
+            }else if(i>144 && i<163){
+                $(".name_10").append("<span>" +array[i]+ "</span>");
+            }else if(i>162 && i<181){
+                $(".name_11").append("<span>" +array[i]+ "</span>");
+            }else if(i>180 && i<199){
+                $(".name_12").append("<span>" +array[i]+ "</span>");
+            }else if(i>198 && i<217){
+                $(".name_13").append("<span>" +array[i]+ "</span>");
+            }else if(i>216 && i<235){
+                $(".name_14").append("<span>" +array[i]+ "</span>");
+            }else if(i>234 && i<253){
+                $(".name_15").append("<span>" +array[i]+ "</span>");
+            }else if(i>252 && i<271){
+                $(".name_16").append("<span>" +array[i]+ "</span>");
+            }else if(i>270 && i<289){
+                $(".name_17").append("<span>" +array[i]+ "</span>");
+            }else if(i>288 && i<307){
+                $(".name_18").append("<span>" +array[i]+ "</span>");
+            }else if(i>306 && i<325){
+                $(".name_19").append("<span>" +array[i]+ "</span>");
+            }else if(i>324 && i<343){
+                $(".name_20").append("<span>" +array[i]+ "</span>");
+            }else if(i>342 && i<361){
+                $(".name_21").append("<span>" +array[i]+ "</span>");
+            }else if(i>360 && i<379){
+                $(".name_22").append("<span>" +array[i]+ "</span>");
+            }else if(i>378 && i<397){
+                $(".name_23").append("<span>" +array[i]+ "</span>");
+            }else if(i>396 && i<415){
+                $(".name_24").append("<span>" +array[i]+ "</span>");
+            }else if(i>414 && i<433){
+                $(".name_25").append("<span>" +array[i]+ "</span>");
+            }else if(i>432 && i<451){
+                $(".name_26").append("<span>" +array[i]+ "</span>");
+            }else if(i>450 && i<469){
+                $(".name_27").append("<span>" +array[i]+ "</span>");
+            }else if(i>468 && i<487){
+                $(".name_28").append("<span>" +array[i]+ "</span>");
+            }else if(i>486 && i<505){
+                $(".name_29").append("<span>" +array[i]+ "</span>");
+            }else if(i>504 && i<523){
+                $(".name_30").append("<span>" +array[i]+ "</span>");
+            }else if(i>522 && i<541){
+                $(".name_31").append("<span>" +array[i]+ "</span>");
+            }else if(i>540 && i<559){
+                $(".name_32").append("<span>" +array[i]+ "</span>");
+            }else if(i>558 && i<577){
+                $(".name_33").append("<span>" +array[i]+ "</span>");
+            }else if(i>576 && i<595){
+                $(".name_34").append("<span>" +array[i]+ "</span>");
+            }else if(i>594 && i<613){
+                $(".name_35").append("<span>" +array[i]+ "</span>");
+            }else if(i>612 && i<631){
+                $(".name_36").append("<span>" +array[i]+ "</span>");
+            }else if(i>630 && i<659){
+                $(".name_37").append("<span>" +array[i]+ "</span>");
+            }else if(i>658 && i<677){
+                $(".name_38").append("<span>" +array[i]+ "</span>");
+            }else if(i>676 && i<695){
+                $(".name_39").append("<span>" +array[i]+ "</span>");
+            }else if(i>694){
+                $(".name_40").append("<span>" +array[i]+ "</span>");
+            }
+        }
+    })
+    $("#SM_name").text(SM_text.substring(0,2));
+    $(".text").text(SM_text.substring(2));
+    var array = SM_text.split("");
+    $(".name_all").html("");
+    for (var i=0 ; i< array.length ; i++)
+    {
+        if(i<3){
+            $(".name_01").append("<span>" +array[i]+ "</span>");
+        }else if(i>2 && i<21){
+            $(".name_02").append("<span>" +array[i]+ "</span>");
+        }else if(i>20 && i<39){
+            $(".name_03").append("<span>" +array[i]+ "</span>");
+        }else if(i>38 && i<57){
+            $(".name_04").append("<span>" +array[i]+ "</span>");
+        }else if(i>56 && i<73){
+            $(".name_05").append("<span>" +array[i]+ "</span>");
+        }else if(i>72 && i<91){
+            $(".name_06").append("<span>" +array[i]+ "</span>");
+        }else if(i>90 && i<109){
+            $(".name_07").append("<span>" +array[i]+ "</span>");
+        }else if(i>108 && i<127){
+            $(".name_08").append("<span>" +array[i]+ "</span>");
+        }else if(i>126 && i<145){
+            $(".name_09").append("<span>" +array[i]+ "</span>");
+        }else if(i>144 && i<163){
+            $(".name_10").append("<span>" +array[i]+ "</span>");
+        }else if(i>162 && i<181){
+            $(".name_11").append("<span>" +array[i]+ "</span>");
+        }else if(i>180 && i<199){
+            $(".name_12").append("<span>" +array[i]+ "</span>");
+        }else if(i>198 && i<217){
+            $(".name_13").append("<span>" +array[i]+ "</span>");
+        }else if(i>216 && i<235){
+            $(".name_14").append("<span>" +array[i]+ "</span>");
+        }else if(i>234 && i<253){
+            $(".name_15").append("<span>" +array[i]+ "</span>");
+        }else if(i>252 && i<271){
+            $(".name_16").append("<span>" +array[i]+ "</span>");
+        }else if(i>270 && i<289){
+            $(".name_17").append("<span>" +array[i]+ "</span>");
+        }else if(i>288 && i<307){
+            $(".name_18").append("<span>" +array[i]+ "</span>");
+        }else if(i>306 && i<325){
+            $(".name_19").append("<span>" +array[i]+ "</span>");
+        }else if(i>324 && i<343){
+            $(".name_20").append("<span>" +array[i]+ "</span>");
+        }else if(i>342 && i<361){
+            $(".name_21").append("<span>" +array[i]+ "</span>");
+        }else if(i>360 && i<379){
+            $(".name_22").append("<span>" +array[i]+ "</span>");
+        }else if(i>378 && i<397){
+            $(".name_23").append("<span>" +array[i]+ "</span>");
+        }else if(i>396 && i<415){
+            $(".name_24").append("<span>" +array[i]+ "</span>");
+        }else if(i>414 && i<433){
+            $(".name_25").append("<span>" +array[i]+ "</span>");
+        }else if(i>432 && i<451){
+            $(".name_26").append("<span>" +array[i]+ "</span>");
+        }else if(i>450 && i<469){
+            $(".name_27").append("<span>" +array[i]+ "</span>");
+        }else if(i>468 && i<487){
+            $(".name_28").append("<span>" +array[i]+ "</span>");
+        }else if(i>486 && i<505){
+            $(".name_29").append("<span>" +array[i]+ "</span>");
+        }else if(i>504 && i<523){
+            $(".name_30").append("<span>" +array[i]+ "</span>");
+        }else if(i>522 && i<541){
+            $(".name_31").append("<span>" +array[i]+ "</span>");
+        }else if(i>540 && i<559){
+            $(".name_32").append("<span>" +array[i]+ "</span>");
+        }else if(i>558 && i<577){
+            $(".name_33").append("<span>" +array[i]+ "</span>");
+        }else if(i>576 && i<595){
+            $(".name_34").append("<span>" +array[i]+ "</span>");
+        }else if(i>594 && i<613){
+            $(".name_35").append("<span>" +array[i]+ "</span>");
+        }else if(i>612 && i<631){
+            $(".name_36").append("<span>" +array[i]+ "</span>");
+        }else if(i>630 && i<659){
+            $(".name_37").append("<span>" +array[i]+ "</span>");
+        }else if(i>658 && i<677){
+            $(".name_38").append("<span>" +array[i]+ "</span>");
+        }else if(i>676 && i<695){
+            $(".name_39").append("<span>" +array[i]+ "</span>");
+        }else if(i>694){
+            $(".name_40").append("<span>" +array[i]+ "</span>");
+        }
+    }
+</script>
+</html>

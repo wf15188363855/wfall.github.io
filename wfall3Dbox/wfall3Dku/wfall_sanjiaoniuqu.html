@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        html {
+            margin: 0;
+            background-color: black;
+            width: 100%;
+            overflow: hidden;
+        }
+        #canvas{
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+
+
+
+        #SM_name{
+            height: 45px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+            position: absolute;
+            color: white;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.2);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+        .instructions {
+            position: absolute;
+            top: 30%;
+            left: 30px;
+            color: ghostwhite;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            line-height: 1.25em;
+            pointer-events: none;
+            width: 86%;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<canvas id="canvas"></canvas>
+
+
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+
+<div class="instructions">
+    <p id="SM_name01"></p>
+    <p id="SM_name02"></p>
+    <p id="SM_name03"></p>
+    <p id="SM_name04"></p>
+    <p id="SM_name05"></p>
+    <p id="SM_name06"></p>
+</div>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_sanjiaoniuqu.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落鲸落www.WFall.cn友谊和爱情之间的区别在于：友谊意味着两个人和世界，然而爱情意味着两个人就是世界。在友谊中一加一等于二；在爱情中一加一还是一！";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text.substring(0,2));
+        $("#SM_name01").text(SM_text.substring(2,16));
+        $("#SM_name02").text(SM_text.substring(16,32));
+        $("#SM_name03").text(SM_text.substring(32,47));
+        $("#SM_name04").text(SM_text.substring(47,61));
+        $("#SM_name05").text(SM_text.substring(61,78));
+        $("#SM_name06").text(SM_text.substring(78));
+    })
+    $("#SM_name").text(SM_text.substring(0,2));
+    $("#SM_name01").text(SM_text.substring(2,16));
+    $("#SM_name02").text(SM_text.substring(16,32));
+    $("#SM_name03").text(SM_text.substring(32,47));
+    $("#SM_name04").text(SM_text.substring(47,61));
+    $("#SM_name05").text(SM_text.substring(61,78));
+    $("#SM_name06").text(SM_text.substring(78));
+
+
+
+    /*
+     I'm writing a blog post about how I made this Pen.
+     */
+
+    var canvas = document.getElementById("canvas");
+    var width = 300;
+    var height = Math.sqrt(0.75) * width;
+    var r = 0.25 * width / Math.sqrt(0.75);
+    canvas.width = width;
+    canvas.height = height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = "rgba(0, 0, 0, 0.03)";
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 3;
+
+    function Point(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    var a = new Point(canvas.width / 2, 0);
+    var b = new Point(0, canvas.height);
+    var c = new Point(canvas.width, canvas.height);
+    var center = new Point(canvas.width / 2, canvas.height - r);
+
+    var t = 0;
+
+    function draw() {
+        requestAnimationFrame(draw);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        drawLine(a, 0);
+        drawLine(b, Math.PI * 2 / 3);
+        drawLine(c, Math.PI * 4 / 3);
+        drawInnerLines();
+        t += 0.02;
+    }
+
+    function drawLine(point, delta) {
+        ctx.beginPath();
+        ctx.moveTo(point.x, point.y);
+        var x = Math.cos(t + delta) * r;
+        var y = Math.sin(t + delta) * r;
+        ctx.lineTo(center.x + x, center.y + y);
+        ctx.stroke();
+    }
+
+    function drawInnerLines() {
+        ctx.beginPath();
+
+        var delta = 0;
+        var x = Math.cos(t + delta) * r;
+        var y = Math.sin(t + delta) * r;
+        ctx.moveTo(center.x + x, center.y + y);
+
+        delta = Math.PI * 2 / 3;
+        x = Math.cos(t + delta) * r;
+        y = Math.sin(t + delta) * r;
+        ctx.lineTo(center.x + x, center.y + y);
+
+        delta = Math.PI * 4 / 3;
+        x = Math.cos(t + delta) * r;
+        y = Math.sin(t + delta) * r;
+        ctx.lineTo(center.x + x, center.y + y);
+
+        ctx.stroke();
+    }
+
+    draw();
+</script>
+</html>

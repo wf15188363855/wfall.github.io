@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        #canvas {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000f1d;
+        }
+
+
+
+        #SM_name{
+            height: 45px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+            position: absolute;
+            color: white;
+            top: 5px;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.2);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果（非汉字）" oninput="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'');">
+     
+
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+<div id="canvas"></div>
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_xuancaikulou.js"></script>
+<script src='texiao_js/three.min.kulou.js'></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "www.WFall.cn";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text);
+        texiao()
+    })
+    $("#SM_name").text(SM_text);
+    texiao()
+
+
+    function texiao() {
+        // Skull mesh by DGordillo http://www.blendswap.com/blends/view/4792
+
+        var renderer, scene, camera, group;
+        var mouseX = 0;
+        var mouseY = 0;
+
+        var skull, leftEye, rightEye;
+        var textMesh;
+        var pointLights = [];
+
+        init();
+        animate();
+
+        function init() {
+
+            // renderer
+            renderer = new THREE.WebGLRenderer({
+                alpha: true
+            });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            /*document.body.appendChild(renderer.domElement);*/
+            $("#canvas").html(renderer.domElement)
+
+            // camera
+            camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, .1, 10000);
+            camera.position.set(0, 0, 60);
+            camera.zoom = 2;
+            camera.updateProjectionMatrix();
+
+            // scene
+            scene = new THREE.Scene();
+            scene.updateMatrixWorld();
+
+            // lights
+            var light = new THREE.SpotLight(16726440, .5);
+            light.angle = 0.50;
+            light.decay = 1;
+            light.position.set(-50.56, -21.69, 50.41);
+            scene.add(light);
+
+            // var sphereSize = 10;
+            // var spotLightHelper = new THREE.SpotLightHelper( light, sphereSize );
+            //scene.add( spotLightHelper );
+
+            var pointLight = new THREE.PointLight(216285, 3.1);
+            pointLight.decay = 1;
+            pointLight.position.set(-2.37, -18.15, 20.48);
+            scene.add(pointLight);
+
+            //  var sphereSize = 1;
+            //  var pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
+            //  scene.add( pointLightHelper );
+
+            var sphere = new THREE.SphereGeometry(0.1, 16, 8);
+            for (var i = 0; i <= 8; i++) {
+                light = new THREE.PointLight(16726440, .8, 10);
+                light.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({
+                    color: 16726440
+                })));
+
+                scene.add(light);
+                pointLights.push(light);
+            }
+
+
+
+            // grid helper
+            var size = 100;
+            var divisions = 10;
+            var gridHelper = new THREE.GridHelper(size, divisions);
+            //scene.add( gridHelper );
+
+            // load meshes
+            var loader = new THREE.JSONLoader();
+            loader.load('img/skull.json', generateSkull);
+            loader.load('img/eyes.json', generateLeftEye);
+            loader.load('img/eyes.json', generateRightEye);
+
+            // create group
+            group = new THREE.Group();
+            group.position.x = 2;
+            scene.add(group);
+
+            // window resize
+            window.addEventListener('resize', onWindowResize, false);
+
+            // mouse move
+            document.addEventListener('mousemove', onMouseMove, false);
+
+            // load text
+            generateText();
+
+        };
+
+        // generate text
+        function generateText() {
+            var loader = new THREE.FontLoader();
+            loader.load('img/optimer_regular.json', function(font) {
+
+                var textGeometry = new THREE.TextGeometry(SM_text,{
+                    font: font,
+                    size: 5.5,
+                    height: 3,
+                    curveSegments: 20
+                });
+                /*var textGeometry = new THREE.TextGeometry(SM_text, {
+                 font: font,
+                 size: 5.5,
+                 height: 3,
+                 curveSegments: 20
+                 });zhengIloveyou*/
+
+                var textMaterial = new THREE.MeshPhongMaterial({
+                    color: 16726440,
+                    specular: 0xffffff
+                });
+
+                var mesh = new THREE.Mesh(textGeometry, textMaterial);
+                mesh.scale.z = mesh.scale.y = mesh.scale.x = .3;
+                mesh.position.y = -10;
+                mesh.position.x = -6;
+                mesh.rotation.y = .3;
+                scene.add(mesh);
+            });
+
+        };
+
+        // generate skull
+        function generateSkull(geometry, material) {
+            geometry.computeVertexNormals();
+
+            skull = new THREE.Mesh(geometry, material);
+            skull.scale.y = skull.scale.z = skull.scale.x = 8.37;
+
+            group.add(skull);
+        };
+
+        // generate eye
+        function generateLeftEye(geometry, material) {
+            geometry.computeVertexNormals();
+            geometry.center();
+
+            leftEye = new THREE.Mesh(geometry, material);
+            leftEye.scale.y = leftEye.scale.z = leftEye.scale.x = 8.5;
+            leftEye.position.set(-4.5, 1.7, 4.3);
+            leftEye.material.forEach(material => material.shininess = 40);
+
+            // var box = new THREE.BoxHelper( eye, 0xffff00 );
+            // scene.add( box );
+
+            group.add(leftEye);
+        };
+
+        // generate eye
+        function generateRightEye(geometry, material) {
+            geometry.computeVertexNormals();
+            geometry.center();
+
+            rightEye = new THREE.Mesh(geometry, material);
+            rightEye.scale.y = rightEye.scale.z = rightEye.scale.x = 8.5;
+            rightEye.position.set(0, 1.7, 4.3);
+            rightEye.material.forEach(material => material.shininess = 40);
+
+            // var box = new THREE.BoxHelper( eye, 0xffff00 );
+            // scene.add( box );
+
+            group.add(rightEye);
+        };
+
+        // Follows the mouse event
+        function onMouseMove(event) {
+            event.preventDefault();
+
+            cursorX = event.clientX;
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        };
+
+        // on resize
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // render
+        function render() {
+            renderer.render(scene, camera);
+        };
+
+        // animate
+        function animate(event) {
+
+            requestAnimationFrame(animate);
+
+            if (group) {
+                group.rotation.y = mouseX * .15;
+                group.rotation.x = mouseY * -.15;
+            }
+
+            if (rightEye && leftEye) {
+                leftEye.rotation.y = rightEye.rotation.y = mouseX * .50;
+                leftEye.rotation.x = rightEye.rotation.x = mouseY * -.50;
+            }
+
+            var time = Date.now() * 0.0008;
+            pointLights[0].position.x = Math.sin(time * 0.3) * 15;
+            pointLights[0].position.y = Math.sin(time * 0.5) * 10;
+            pointLights[0].position.z = Math.cos(time * 0.4) * 10;
+
+
+            pointLights[1].position.x = Math.sin(time * 0.6) * 10;
+            pointLights[1].position.y = Math.cos(time * 0.7) * 10;
+            pointLights[1].position.z = Math.sin(time * 0.3) * 15;
+
+            pointLights[2].position.x = Math.cos(time * 0.5) * 15;
+            pointLights[2].position.y = Math.cos(time * 0.6) * 10;
+            pointLights[2].position.z = Math.sin(time * 0.8) * 10;
+
+            pointLights[3].position.x = Math.sin(time * 0.3) * 10;
+            pointLights[3].position.y = Math.cos(time * 0.5) * 15;
+            pointLights[3].position.z = Math.cos(time * 0.7) * 10;
+
+            pointLights[4].position.x = Math.sin(time * 0.7) * 15;
+            pointLights[4].position.y = Math.sin(time * 0.3) * 20;
+            pointLights[4].position.z = Math.cos(time * 0.2) * 10;
+
+            pointLights[5].position.x = Math.sin(time * 0.5) * 20;
+            pointLights[5].position.y = Math.cos(time * 0.8) * 10;
+            pointLights[5].position.z = Math.sin(time * 0.5) * 15;
+
+            pointLights[6].position.x = Math.sin(time * 0.5) * 10;
+            pointLights[6].position.y = Math.cos(time * 0.8) * 10;
+            pointLights[6].position.z = Math.cos(time * 0.7) * 15;
+
+            pointLights[7].position.x = Math.sin(time * 0.3) * 10;
+            pointLights[7].position.y = Math.cos(time * 0.5) * 15;
+            pointLights[7].position.z = Math.sin(time * 0.2) * 10;
+
+            pointLights[8].position.x = Math.sin(time * 0.8) * 15;
+            pointLights[8].position.y = Math.cos(time * 0.3) * 10;
+            pointLights[8].position.z = Math.cos(time * 0.3) * 10;
+
+            render();
+        };
+    }
+
+</script>
+</html>

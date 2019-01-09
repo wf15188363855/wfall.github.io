@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+        #header {
+            position: absolute;
+            pointer-events: none;
+            font-size: 30px;
+            top: 1em;
+            width: 100%;
+            text-align: center;
+        }
+        #reset {
+            position: absolute;
+            padding: 0 0.5em;
+            border-radius: 6px;
+            opacity: 0.7;
+            right: 0.2em;
+            bottom: 0.2em;
+        }
+        #reset:hover {
+            opacity: 0.92;
+        }
+        .text {
+            -webkit-text-stroke: 2px #eee;
+            font-family: Impact;
+            font-size: 30px;
+            font-weight: bold;
+            display: none;
+        }
+        #c {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+
+
+        #SM_name{
+            height: 25px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+            position: absolute;
+            color: white;
+            z-index: 99;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.5);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+        .instructions_t {
+            position: absolute;
+            top: 30%;
+            left: 30px;
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            line-height: 1.25em;
+            pointer-events: none;
+            width: 86%;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+<div class="instructions_t">
+    <p id="SM_name01"></p>
+    <p id="SM_name02"></p>
+    <p id="SM_name03"></p>
+    <p id="SM_name04"></p>
+    <p id="SM_name05"></p>
+    <p id="SM_name06"></p>
+</div>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+<canvas id="c"></canvas>
+<div id="header" class="text">Click in the white space!!</div>
+<div id="reset" class="text">Reset</div>
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_shuimandonghua.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落鲸落www.WFall.cn友谊和爱情之间的区别在于：友谊意味着两个人和世界，然而爱情意味着两个人就是世界。在友谊中一加一等于二；在爱情中一加一还是一！";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text.substring(0,2));
+        $("#SM_name01").text(SM_text.substring(2,16));
+        $("#SM_name02").text(SM_text.substring(16,32));
+        $("#SM_name03").text(SM_text.substring(32,47));
+        $("#SM_name04").text(SM_text.substring(47,61));
+        $("#SM_name05").text(SM_text.substring(61,78));
+        $("#SM_name06").text(SM_text.substring(78));
+    })
+    $("#SM_name").text(SM_text.substring(0,2));
+    $("#SM_name01").text(SM_text.substring(2,16));
+    $("#SM_name02").text(SM_text.substring(16,32));
+    $("#SM_name03").text(SM_text.substring(32,47));
+    $("#SM_name04").text(SM_text.substring(47,61));
+    $("#SM_name05").text(SM_text.substring(61,78));
+    $("#SM_name06").text(SM_text.substring(78));
+
+
+
+    var canvas = document.getElementById("c"),
+            ctx = canvas.getContext("2d"),
+            w = (canvas.width = window.innerWidth),
+            h = (canvas.height = window.innerHeight);
+
+    var wall = 17,
+            air = 238;
+
+    var colors = ["tomato", "crimson", "teal", "darkmagenta", "seagreen", "saddlebrown", "royalblue"];
+    var colorCount = 0;
+    var cells;
+    var flood;
+    var stack;
+
+    function setup() {
+        stack = [];
+        cells = new Array(w);
+        flood = new Array(w);
+        for (var i = 0; i < w; i++) {
+            cells[i] = new Array(h);
+            flood[i] = new Array(h).fill(false);
+        }
+
+        ctx.fillStyle = "#eee";
+        ctx.fillRect(0, 0, w, h);
+        randomize(0.5);
+        for (var i = 0; i < 10; i++) smooth();
+        draw();
+    }
+
+    function randomize(prob) {
+        for (var x = 0; x < w; x++) {
+            for (var y = 0; y < h; y++) {
+                cells[x][y] = Math.random() < prob;
+            }
+        }
+    }
+    /*
+     process in the generation of the cave-like map
+     */
+    function smooth() {
+        var prev = cells[1][0];
+        var next = [];
+        for (var x = 0; x < w; x++) {
+            next[x] = [];
+            for (var y = 0; y < h; y++) {
+                var neighbors = 0;
+                for (var Nx = x - 1; Nx <= x + 1; Nx++) {
+                    for (var Ny = y - 1; Ny <= y + 1; Ny++) {
+                        if (Nx < 0 || Nx >= w || Ny < 0 || Ny >= h) neighbors++;
+                        else neighbors += cells[Nx][Ny] ? 1 : 0;
+                    }
+                }
+                next[x][y] = neighbors > 4;
+            }
+        }
+        cells = next;
+    }
+
+    function draw() {
+        var img = ctx.getImageData(0, 0, w, h);
+        for (var x = 0; x < w; x++) {
+            for (var y = 0; y < h; y++) {
+                var i = y * w + x;
+                var color = cells[x][y] ? wall : air;
+                img.data[i * 4] = color;
+                img.data[i * 4 + 1] = color;
+                img.data[i * 4 + 2] = color;
+            }
+        }
+        ctx.putImageData(img, 0, 0);
+    }
+    /*
+     starts the flood fill loop
+     it also pushes an point to the stack
+     */
+    function startFloodFill(x, y) {
+        if (!cells[x][y] && !flood[x][y]) {
+            var color = colors[colorCount];
+            colorCount = (colorCount + 1) % colors.length;
+            stack.push({
+                x: x,
+                y: y,
+                c: color
+            });
+        }
+    }
+
+    /*
+     it fills the empty spaces in the map
+     it pops every element in the stack to color it
+     finally it pushes the next blocks into a new stack
+     the new stack replaces the old one to animate
+     */
+    function floodFill() {
+        var newStack = [];
+        while (stack.length > 0) {
+            var p = stack.pop();
+
+            flood[p.x][p.y] = true;
+            ctx.fillStyle = p.c;
+            ctx.fillRect(p.x, p.y, 1, 1);
+
+            var x, y;
+            x = p.x + 1;
+            y = p.y;
+            if (x < w && !cells[x][y] && !flood[x][y]) {
+                newStack.push({
+                    x: x,
+                    y: y,
+                    c: p.c
+                });
+                flood[x][y] = true;
+            }
+            x = p.x - 1;
+            if (x >= 0 && !cells[x][y] && !flood[x][y]) {
+                newStack.push({
+                    x: x,
+                    y: y,
+                    c: p.c
+                });
+                flood[x][y] = true;
+            }
+            x = p.x;
+            y = p.y + 1;
+            if (y < h && !cells[x][y] && !flood[x][y]) {
+                newStack.push({
+                    x: x,
+                    y: y,
+                    c: p.c
+                });
+                flood[x][y] = true;
+            }
+            y = p.y - 1;
+            if (y >= 0 && !cells[x][y] && !flood[x][y]) {
+                newStack.push({
+                    x: x,
+                    y: y,
+                    c: p.c
+                });
+                flood[x][y] = true;
+            }
+        }
+        stack = newStack;
+        requestAnimationFrame(floodFill);
+    }
+    /*
+     click handler
+     */
+    canvas.addEventListener("click", e => {
+        startFloodFill(e.clientX, e.clientY);
+    });
+
+    document.getElementById("reset").addEventListener("click", e => {
+        setup();
+    });
+
+    setup();
+    floodFill();
+</script>
+</html>

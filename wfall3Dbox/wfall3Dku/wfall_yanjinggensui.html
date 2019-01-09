@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        body {
+            background: #dac82c;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        #cvs{
+            display: block;
+        }
+
+
+        #SM_name{
+            height: 45px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 96%;
+            position: absolute;
+            color: white;
+            padding: 0 2%;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 15%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.2);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 9%;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+<canvas id="cvs"></canvas>
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_yanjinggensui.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落www.WFall.cn";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text);
+    })
+    $("#SM_name").text(SM_text);
+
+
+    var canvas,
+            ctx,
+            width,
+            height,
+            mx,
+            my,
+            mouseIdle,
+            mouseIdleTick,
+            mouseIdleMax,
+            eyes,
+            PI,
+            TAU;
+
+    function Eye(opt) {
+        this.x = opt.x;
+        this.y = opt.y;
+        this.radius = opt.radius;
+        this.pupilX = this.x;
+        this.pupilY = this.y;
+        this.pupilRadius = this.radius / 2;
+        this.angle = 0;
+        this.magnitude = 0;
+        this.magnitudeMax = this.radius - this.pupilRadius;
+    }
+
+    Eye.prototype.step = function() {
+        var dx = mx - this.x,
+                dy = my - this.y,
+                dist = Math.sqrt(dx * dx + dy * dy);
+        this.angle = Math.atan2(dy, dx);
+        if (mouseIdle) {
+            this.magnitude = 0;
+        } else {
+            this.magnitude = Math.min(Math.abs(dist), this.magnitudeMax);
+        }
+        this.pupilX += ((this.x + Math.cos(this.angle) * this.magnitude) - this.pupilX) * 0.1;
+        this.pupilY += ((this.y + Math.sin(this.angle) * this.magnitude) - this.pupilY) * 0.1;
+    };
+
+    Eye.prototype.draw = function() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, TAU);
+        ctx.fillStyle = '#fbf9e6';
+        ctx.fill();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#424031';
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(this.pupilX, this.pupilY, this.pupilRadius, 0, TAU);
+        ctx.fillStyle = '#424031';
+        ctx.fill();
+    };
+
+    function init() {
+        canvas = document.querySelector('canvas');
+        ctx = canvas.getContext('2d');
+        mouseIdleMax = 100;
+        PI = Math.PI;
+        TAU = PI * 2;
+        eyes = [];
+        reset();
+        loop();
+    }
+
+    function reset() {
+        width = innerWidth;
+        height = innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        mx = width / 2;
+        my = height / 2;
+        mouseIdle = true;
+        eyes.length = 0;
+        eyes.push(new Eye({
+            x: width * 0.2,
+            y: height * 0.4,
+            radius: 70
+        }));
+        eyes.push(new Eye({
+            x: width * 0.8,
+            y: height * 0.4,
+            radius: 70
+        }));
+    }
+
+    function mousemove(e) {
+        mx = e.pageX;
+        my = e.pageY;
+        mouseIdleTick = mouseIdleMax;
+    }
+
+    function step() {
+        var i = eyes.length;
+        while (i--) {
+            eyes[i].step();
+        }
+
+        if (mouseIdleTick > 0) {
+            mouseIdleTick--;
+            mouseIdle = false;
+        } else {
+            mouseIdle = true;
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        var i = eyes.length;
+        while (i--) {
+            eyes[i].draw();
+        }
+
+        ctx.beginPath();
+        ctx.arc(width / 2, height * 0.65, 100, 0, PI);
+        ctx.fillStyle = '#424031';
+        ctx.fill();
+    }
+
+    function loop() {
+        requestAnimationFrame(loop);
+        step();
+        draw();
+    }
+
+    addEventListener('mousemove', mousemove);
+    addEventListener('resize', reset);
+
+    init();
+</script>
+</html>

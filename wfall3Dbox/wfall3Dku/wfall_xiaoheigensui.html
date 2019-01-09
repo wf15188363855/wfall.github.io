@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
+        body {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: #a0a0a0;
+            overflow: hidden
+        }
+        .tekst {
+            color: #505050;
+            margin: 0;
+            padding: 0;
+            font-family: 'Lato', arial, sans-serif;
+            text-transform: uppercase;
+            font-size: 14px;
+            line-height: 28px;
+            font-weight: bold;
+            display: block;
+            letter-spacing: 2px;
+            max-width: 100%;
+            text-align: center;
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            z-index: 1
+        }
+        a {
+            color: #fefefe;
+            text-decoration: none;
+            cursor: pointer
+        }
+        a:hover {
+            text-decoration: underline
+        }
+        .pozycja {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 100%;
+            -webkit-transform: translate(-50%, -111px);
+            -moz-transform: translate(-50%, -111px);
+            -ms-transform: translate(-50%, -111px);
+            -o-transform: translate(-50%, -111px);
+            transform: translate(-50%, -111px)
+        }
+        .ludek {
+            position: relative;
+            width: 200px;
+            height: 100%
+        }
+        .ludek .cialo,
+        .skora {
+            position: absolute;
+            width: 100%;
+            height: 105%;
+            top: 0;
+            left: 0;
+            background: #191919;
+            border-radius: 200px 200px 0 0;
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            -webkit-transform-origin: bottom center;
+            -moz-transform-origin: bottom center;
+            -ms-transform-origin: bottom center;
+            -o-transform-origin: bottom center;
+            transform-origin: bottom center
+        }
+        .ludek .skora {
+            overflow: hidden
+        }
+        .ludek .cialo .ucho {
+            position: absolute;
+            top: 80px;
+            width: 45px;
+            height: 45px;
+            background: #191919;
+            border-radius: 45px
+        }
+        .ludek .cialo .ucho.lewe {
+            left: -10%
+        }
+        .ludek .cialo .ucho.prawe {
+            right: -10%
+        }
+        .ludek .oko {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 85px;
+            background: #fefefe;
+            border-radius: 50%;
+            z-index: 1
+        }
+        .ludek .oko.lewe {
+            left: 47px
+        }
+        .ludek .oko.prawe {
+            left: 103px
+        }
+        .ludek .oko .zrenica {
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            background: #191919;
+            border-radius: 50%
+        }
+        .ludek .powieka_gorna {
+            width: 70%;
+            height: 30px;
+            position: absolute;
+            top: 50px;
+            left: 15%;
+            background: #191919;
+            border-radius: 30px 30px 0 0;
+            z-index: 3
+        }
+        .ludek .powieka_dolna {
+            width: 70%;
+            height: 30px;
+            position: absolute;
+            top: 140px;
+            left: 15%;
+            background: #191919;
+            border-radius: 0 0 30px 30px;
+            z-index: 3
+        }
+        .ludek .usta {
+            width: 80%;
+            height: 32px;
+            position: absolute;
+            top: 145px;
+            left: 10%;
+            background: #fefefe;
+            border-radius: 32px;
+            z-index: 4
+        }
+
+        .name{
+            color: white;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 210px;
+            word-wrap: break-word;
+            height: 170px;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+        .SM_css{
+            position: absolute;
+            top: 5%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(117, 117, 117, 0.2);
+            color: #ffffff;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+        }
+        #SM_btn{
+            top: 11%;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果"> <!--maxlength="9"-->
+<div id="SM_btn" class="SM_css">确定</div>
+<div class="pozycja">
+    <div class="ludek">
+        <div class="cialo">
+            <div class="ucho lewe"></div>
+            <div class="ucho prawe"></div>
+            <div class="skora">
+                <div class="oko lewe"><span class="zrenica"></span>
+                </div>
+                <div class="oko prawe"><span class="zrenica"></span>
+                </div>
+                <div class="powieka_gorna"></div>
+                <div class="powieka_dolna"></div>
+                <div class="usta"></div>
+            </div>
+            <div class="name"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_xiaoheigensui.js"></script>
+<script>
+    $(function() {
+        var tarcie = (1 / 6);
+        var cialo_x = 0,
+                cialoRuchX = 0,
+                uszy_x = 0,
+                uszy_y = 0,
+                uszyRuchX = 0,
+                uszyRuchY = 0,
+                zrenica_x = 0,
+                zrenica_y = 0,
+                zrenicaRuchX = 0,
+                zrenicaRuchY = 0,
+                oko_x = 0,
+                oko_y = 0,
+                okoRuchX = 0,
+                okoRuchY = 0,
+                powieka_gorna_x = 0,
+                powieka_gorna_y = 0,
+                powiekaGornaRuchX = 0,
+                powiekaGornaRuchY = 0,
+                powieka_dolna_x = 0,
+                powieka_dolna_y = 0,
+                powiekaDolnaRuchX = 0,
+                powiekaDolnaRuchY = 0,
+                usta_x = 0,
+                usta_y = 0,
+                ustaRuchX = 0,
+                ustaRuchY = 0;
+
+        function animacja() {
+            cialo_x += (cialoRuchX - cialo_x) * tarcie;
+            $('.cialo').css({
+                '-webkit-transform': 'rotate(' + -cialo_x + 'deg)',
+                'transform': 'rotate(' + -cialo_x + 'deg)'
+            });
+            uszy_x += (uszyRuchX - uszy_x) * tarcie;
+            uszy_y += (uszyRuchY - uszy_y) * tarcie;
+            if (uszy_x < 0) {
+                $('.ucho.lewe').css({
+                    '-webkit-transform': 'translate(' + -uszy_x * 7 + 'px, ' + -uszy_y + 'px)',
+                    'transform': 'translate(' + -uszy_x * 7 + 'px, ' + -uszy_y + 'px)'
+                });
+                $('.ucho.prawe').css({
+                    '-webkit-transform': 'translate(' + -uszy_x + 'px, ' + -uszy_y + 'px)',
+                    'transform': 'translate(' + -uszy_x + 'px, ' + -uszy_y + 'px)'
+                });
+            } else {
+                $('.ucho.lewe').css({
+                    '-webkit-transform': 'translate(' + -uszy_x + 'px, ' + -uszy_y + 'px)',
+                    'transform': 'translate(' + -uszy_x + 'px, ' + -uszy_y + 'px)'
+                });
+                $('.ucho.prawe').css({
+                    '-webkit-transform': 'translate(' + -uszy_x * 7 + 'px, ' + -uszy_y + 'px)',
+                    'transform': 'translate(' + -uszy_x * 7 + 'px, ' + -uszy_y + 'px)'
+                });
+            }
+            zrenica_x += (zrenicaRuchX - zrenica_x) * (tarcie * 3);
+            zrenica_y += (zrenicaRuchY - zrenica_y) * (tarcie * 3);
+            $('.zrenica').css({
+                '-webkit-transform': 'translate(' + -zrenica_x + 'px, ' + -zrenica_y + 'px)',
+                'transform': 'translate(' + -zrenica_x + 'px, ' + -zrenica_y + 'px)'
+            });
+            oko_x += (okoRuchX - oko_x) * tarcie;
+            oko_y += (okoRuchY - oko_y) * tarcie;
+            if (oko_x < 0) {
+                $('.oko.lewe').css({
+                    'z-index': '2',
+                    '-webkit-transform': 'translate(' + -oko_x * 2 + 'px, ' + -oko_y + 'px)',
+                    'transform': 'translate(' + -oko_x * 2 + 'px, ' + -oko_y + 'px)'
+                });
+                $('.oko.prawe').css({
+                    'z-index': '1',
+                    '-webkit-transform': 'translate(' + -oko_x + 'px, ' + -oko_y + 'px)',
+                    'transform': 'translate(' + -oko_x + 'px, ' + -oko_y + 'px)'
+                });
+            } else {
+                $('.oko.prawe').css({
+                    'z-index': '2',
+                    '-webkit-transform': 'translate(' + -oko_x * 2 + 'px, ' + -oko_y + 'px)',
+                    'transform': 'translate(' + -oko_x * 2 + 'px, ' + -oko_y + 'px)'
+                });
+                $('.oko.lewe').css({
+                    'z-index': '1',
+                    '-webkit-transform': 'translate(' + -oko_x + 'px, ' + -oko_y + 'px)',
+                    'transform': 'translate(' + -oko_x + 'px, ' + -oko_y + 'px)'
+                });
+            }
+            powieka_gorna_x += (powiekaGornaRuchX - powieka_gorna_x) * tarcie;
+            powieka_gorna_y += (powiekaGornaRuchY - powieka_gorna_y) * tarcie;
+            $('.powieka_gorna').css({
+                '-webkit-transform': 'translate(' + -powieka_gorna_x + 'px, ' + -powieka_gorna_y + 'px)',
+                'transform': 'translate(' + -powieka_gorna_x + 'px, ' + -powieka_gorna_y + 'px)'
+            });
+            powieka_dolna_x += (powiekaDolnaRuchX - powieka_dolna_x) * tarcie;
+            powieka_dolna_y += (powiekaDolnaRuchY - powieka_dolna_y) * tarcie;
+            $('.powieka_dolna').css({
+                '-webkit-transform': 'translate(' + -powieka_dolna_x + 'px, ' + -powieka_dolna_y + 'px)',
+                'transform': 'translate(' + -powieka_dolna_x + 'px, ' + -powieka_dolna_y + 'px)'
+            });
+            usta_x += (ustaRuchX - usta_x) * tarcie;
+            usta_y += (ustaRuchY - usta_y) * tarcie;
+            $('.usta').css({
+                '-webkit-transform': 'translate(' + -usta_x + 'px, ' + -usta_y + 'px)',
+                'transform': 'translate(' + -usta_x + 'px, ' + -usta_y + 'px)'
+            });
+            window.requestAnimationFrame(animacja);
+        }
+        $(window).on('mousemove click', function(e) {
+            var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+            var lMouseY = Math.max(-100, Math.min(100, ($(window).height() / 2) - e.clientY));
+            cialoRuchX = (5 * lMouseX) / 200;
+            uszyRuchX = (3 * -lMouseX) / 100;
+            uszyRuchY = (10 * -lMouseY) / 100;
+            zrenicaRuchX = (25 * lMouseX) / 200;
+            zrenicaRuchY = (13 * lMouseY) / 100;
+            okoRuchX = (20 * lMouseX) / 100;
+            if (lMouseY <= 0) {
+                okoRuchY = (10 * lMouseY) / 100;
+                powiekaDolnaRuchY = (25 * lMouseY) / 100;
+            } else {
+                okoRuchY = (30 * lMouseY) / 100;
+                powiekaDolnaRuchY = (55 * lMouseY) / 100;
+            }
+            powiekaGornaRuchX = (25 * lMouseX) / 100;
+            powiekaGornaRuchY = (35 * lMouseY) / 100;
+            powiekaDolnaRuchX = (25 * lMouseX) / 100;
+            ustaRuchX = (35 * lMouseX) / 100;
+            ustaRuchY = (10 * lMouseY) / 100;
+        });
+        animacja();
+
+
+        var SM_text;
+        var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+        if(username){
+            SM_text = username;      /*将URL的name赋值给页面tittle*/
+        }else {
+            SM_text = "鲸落www.WFall.cn";
+        }
+
+        $("#SM_btn").click(function () {
+            SM_text = $("#SM_input").val();
+            $(".name").text(SM_text);
+        })
+        $(".name").text(SM_text);
+    });
+</script>
+</html>

@@ -276,12 +276,12 @@ Vector2 = function(a, b) {
         for (var i = 0; i < letters.length; i++) {
             for (var y = 0; y < letters[i].length; y++) {
                 for (var x = 0; x < letters[i][y].length; x++) {
-                    letters[i][y][x] == "+" ? letDests.push(new Vector2(x * opts.pTD + w / 2 - ((letters.length / 2) * opts.pTD * 4) + (i * opts.pTD * 5)-80, y * opts.pTD + h / 3-180)) : void 0;
+                    letters[i][y][x] == "+" ? letDests.push(new Vector2(x * opts.pTD + w / 2 - ((letters.length / 2) * opts.pTD * 4) + (i * opts.pTD * 5)-80, y * opts.pTD + h / 3-260)) : void 0;/***"h / 3-260"调整"www.wfall.cn上下位置"***/
                 }
-                console.log(letDests)
+                /*console.log(letDests)*/
             }
         }
-        console.log(letDests);
+        /*console.log(letDests);*/
         opts.pA < letDests.length ? opts.pA = letDests.length + opts.aP : opts.pA = letDests.length + opts.aP;
     }
 
@@ -412,7 +412,7 @@ oBtn.onclick = function(){
 /*动态添加特效目录*/
 function add3Dlist() {
     oDiv = document.getElementById('wf3D_tittle');
-    oDiv.innerHTML = '<p>特效目录:</p><a href="wfall3Dbox.html"><span>BMWi8</span></a><a href="wfall3Dbox2.html"><span>钢琴</span></a><a href="wfall3Dbox3.html"><span>布加迪威龙</span></a><a href="wfall3Dbox4.html"><span>归家一角</span></a><a href="wfall3Dbox5.html"><span>废弃之城</span></a><a href="wfall3Dbox6.html"><span>大黄蜂</span></a><a href="wfall3Dbox7.html"><span>江南style</span></a><a href="wfall3Dbox8.html"><span>机器人头盔</span></a><a href="wfall3Dbox9.html"><span>3D匕首</span></a><a href="wfall3Dbox10.html"><span>Beats耳机</span></a><a href="wfall3Dbox11.html"><span>飞舞凤凰</span></a><a href="wfall3Dbox12.html"><span>闪电文字</span></a>';
+    oDiv.innerHTML = '<p>特效目录:</p><a href="wfall3Dbox.html"><span>3D水晶</span></a><a href="wfall3Dbox2.html"><span>爱心ET</span></a><a href="wfall3Dbox3.html"><span>水波文字</span></a><a href="wfall3Dbox4.html"><span>彩虹圆点</span></a><a href="wfall3Dbox5.html"><span>彩虹粒子</span></a><a href="wfall3Dbox6.html"><span>彩虹迷雾</span></a><a href="wfall3Dbox7.html"><span>垂直帘幕</span></a><a href="wfall3Dbox8.html"><span>磁力线</span></a><a href="wfall3Dbox9.html"><span>烟花绽放</span></a><a href="wfall3Dbox10.html"><span>飞鸟动画</span></a><a href="wfall3Dbox11.html"><span>光束线</span></a><a href="wfall3Dbox12.html"><span>海底鱼群</span></a><a href="wfall3Dbox13.html"><span>海洋物体</span></a><a href="wfall3Dbox14.html"><span>黑客</span></a><a href="wfall3Dbox15.html"><span>花儿绽放</span></a><a href="wfall3Dbox16.html"><span>蝴蝶飞舞</span></a><a href="wfall3Dbox17.html"><span>蝴蝶粒子</span></a><a href="wfall3Dbox18.html"><span>3D火焰</span></a><a href="wfall3Dbox19.html"><span>交互星空</span></a><a href="wfall3Dbox20.html"><span>镜像粒子坠落</span></a><a href="wfall3Dbox21.html"><span>立体金星</span></a><a href="wfall3Dbox22.html"><span>集群圆点</span></a><a href="wfall3Dbox23.html"><span>旋转雷电</span></a><a href="wfall3Dbox24.html"><span>哭闹番茄</span></a><a href="wfall3Dbox25.html"><span>蓝色流星雨</span></a><a href="wfall3Dbox26.html"><span>铃铛狗</span></a><a href="wfall3Dbox27.html"><span>粒子流动</span></a><a href="wfall3Dbox28.html"><span>3D乱流</span></a><a href="wfall3Dbox29.html"><span>魔幻羽化动效</span></a><a href="wfall3Dbox30.html"><span>魔幻粒子</span></a><a href="wfall3Dbox31.html"><span>奶油脂</span></a><a href="wfall3Dbox32.html"><span>拖到碗里来</span></a><a href="wfall3Dbox33.html"><span>卡通日月</span></a><a href="wfall3Dbox34.html"><span>三角旋转</span></a><a href="wfall3Dbox35.html"><span>三维烟花</span></a><a href="wfall3Dbox36.html"><span>闪电文字</span></a><a href="wfall3Dbox37.html"><span>圣诞树</span></a><a href="wfall3Dbox38.html"><span>点击染色</span></a><a href="wfall3Dbox39.html"><span>3D螺纹</span></a><a href="wfall3Dbox40.html"><span>跳舞机器人</span></a><a href="wfall3Dbox41.html"><span>图像碎末变幻</span></a><a href="wfall3Dbox42.html"><span>文字3D</span></a><a href="wfall3Dbox43.html"><span>文本粒子</span></a><a href="wfall3Dbox44.html"><span>镜像机器人</span></a><a href="wfall3Dbox45.html"><span>白线舞者</span></a><a href="wfall3Dbox46.html"><span>跟屁虫小黑</span></a><a href="wfall3Dbox47.html"><span>顽皮小猫</span></a><a href="wfall3Dbox48.html"><span>摇头兔子</span></a><a href="wfall3Dbox49.html"><span>立体像素羊</span></a><a href="wfall3Dbox50.html"><span>下雨动画</span></a><a href="wfall3Dbox51.html"><span>星空背景</span></a><a href="wfall3Dbox52.html"><span>炫彩骷髅</span></a><a href="wfall3Dbox53.html"><span>血色粒子</span></a><a href="wfall3Dbox54.html"><span>小黄眼色跟随</span></a><a href="wfall3Dbox55.html"><span>萤火虫</span></a><a href="wfall3Dbox56.html"><span>3D纸团飞舞</span></a>';
 }
 add3Dlist();
 

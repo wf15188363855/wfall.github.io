@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+        .world {
+            position: absolute;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background-color: #CCDCDA;
+        }
+        .world-night {
+            background-color: #1E0F4C;
+        }
+        .toggle {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 16px #C40062;
+            background: #F8007E url('img/sun_nyr4z3.svg') center center / 60% no-repeat;
+            cursor: pointer;
+        }
+        .toggle-night {
+            box-shadow: 0 4px 16px #626EC9;
+            background: #9A96E8 url('img/star_u865qq.svg') center 46% / 60% no-repeat;
+        }
+        .toggle-music {
+            position: absolute;
+            top: 5rem;
+            left: 1rem;
+            width: 3rem;
+            height: 3rem;
+            background: url('img/music_s7aiet.svg') center center / 60% no-repeat;
+            cursor: pointer;
+        }
+        .music-off {
+            background: url('img/music-off_nrnsni.svg') center center / 60% no-repeat;
+        }
+        .toggle-music,.toggle-night{
+            display: none;
+        }
+
+
+
+        #SM_name{
+            height: 25px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+            position: absolute;
+            color: white;
+            z-index: 99;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.5);
+            color: white;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+        .instructions_t {
+            position: absolute;
+            top: 30%;
+            left: 30px;
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            line-height: 1.25em;
+            width: 86%;
+            z-index: 99;
+            height: 43vh;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+<div class="instructions_t">
+    <p id="SM_name01"></p>
+    <p id="SM_name02"></p>
+    <p id="SM_name03"></p>
+    <p id="SM_name04"></p>
+    <p id="SM_name05"></p>
+    <p id="SM_name06"></p>
+</div>
+
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+<div class="world"></div>
+<a rel="nofollow" rel="noreferrer" class="toggle toggle-night"></a>
+<a rel="nofollow" rel="noreferrer" class="toggle-music"></a>
+
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_xiaoyangtiaoyue.js"></script>
+
+<script src='texiao_js/three.min.js'></script>
+<script src='texiao_js/OrbitControls.js'></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落鲸落www.WFall.cn友谊和爱情之间的区别在于：友谊意味着两个人和世界，然而爱情意味着两个人就是世界。在友谊中一加一等于二；在爱情中一加一还是一！";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text.substring(0,2));
+        $("#SM_name01").text(SM_text.substring(2,16));
+        $("#SM_name02").text(SM_text.substring(16,32));
+        $("#SM_name03").text(SM_text.substring(32,47));
+        $("#SM_name04").text(SM_text.substring(47,61));
+        $("#SM_name05").text(SM_text.substring(61,78));
+        $("#SM_name06").text(SM_text.substring(78));
+    })
+    $("#SM_name").text(SM_text.substring(0,2));
+    $("#SM_name01").text(SM_text.substring(2,16));
+    $("#SM_name02").text(SM_text.substring(16,32));
+    $("#SM_name03").text(SM_text.substring(32,47));
+    $("#SM_name04").text(SM_text.substring(47,61));
+    $("#SM_name05").text(SM_text.substring(61,78));
+    $("#SM_name06").text(SM_text.substring(78));
+
+
+
+    'use strict';
+
+    let scene,
+            camera,
+            renderer,
+            raycaster,
+            controls,
+            mouse,
+            mouseDown,
+            world,
+            night = false;
+
+    let sheep,
+            cloud,
+            sky;
+
+    let width,
+            height;
+
+    let skyColor;
+
+    function init() {
+        width = window.innerWidth,
+                height = window.innerHeight;
+
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        camera.lookAt(scene.position);
+        camera.position.set(0, 0.7, 8);
+
+        renderer = new THREE.WebGLRenderer({
+            alpha: true
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableZoom = false;
+
+        raycaster = new THREE.Raycaster();
+        mouse = new THREE.Vector2();
+
+        addLights();
+        drawSheep();
+        drawCloud();
+        drawSky();
+
+        world = document.querySelector('.world');
+        world.appendChild(renderer.domElement);
+
+        document.addEventListener('mousedown', onMouseDown);
+        document.addEventListener('mouseup', onMouseUp);
+        /*document.addEventListener('touchstart', onTouchStart);
+         document.addEventListener('touchend', onTouchEnd);*/
+        world.addEventListener('touchstart', onTouchStart);
+        world.addEventListener('touchend', onTouchEnd);
+        window.addEventListener('resize', onResize);
+    }
+
+    function addLights() {
+        const light = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.9);
+        scene.add(light);
+
+        const directLight1 = new THREE.DirectionalLight(0xffd798, 0.8);
+        directLight1.castShadow = true;
+        directLight1.position.set(9.5, 8.2, 8.3);
+        scene.add(directLight1);
+
+        const directLight2 = new THREE.DirectionalLight(0xc9ceff, 0.5);
+        directLight2.castShadow = true;
+        directLight2.position.set(-15.8, 5.2, 8);
+        scene.add(directLight2);
+    }
+
+    function drawSheep() {
+        sheep = new Sheep();
+        scene.add(sheep.group);
+    }
+
+    function drawCloud() {
+        cloud = new Cloud();
+        scene.add(cloud.group);
+    }
+
+    function drawSky() {
+        sky = new Sky();
+        sky.showNightSky(night);
+        scene.add(sky.group);
+    }
+
+    function onResize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+    }
+
+    function onMouseDown(event) {
+        mouseDown = true;
+    }
+
+    function onTouchStart(event) {
+        const targetClass = event.target.classList[0];
+        if (targetClass === 'toggle' || targetClass === 'toggle-music') return;
+        /*event.preventDefault();*/
+        mouseDown = true;
+    }
+
+    function onMouseUp() {
+        mouseDown = false;
+    }
+
+    function onTouchEnd(event) {
+        const targetClass = event.target.classList[0];
+        if (targetClass === 'toggle' || targetClass === 'toggle-music') return;
+        event.preventDefault();
+        mouseDown = false;
+    }
+
+    function rad(degrees) {
+        return degrees * (Math.PI / 180);
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        render();
+    }
+
+    function render() {
+
+        sheep.jumpOnMouseDown();
+        if (sheep.group.position.y > 0.4) cloud.bend();
+
+        sky.moveSky();
+
+        renderer.render(scene, camera);
+    }
+
+    class Sheep {
+        constructor() {
+            this.group = new THREE.Group();
+            this.group.position.y = 0.4;
+
+            this.woolMaterial = new THREE.MeshStandardMaterial({
+                color: 0xffffff,
+                roughness: 1,
+                shading: THREE.FlatShading
+            });
+            this.skinMaterial = new THREE.MeshStandardMaterial({
+                color: 0xffaf8b,
+                roughness: 1,
+                shading: THREE.FlatShading
+            });
+            this.darkMaterial = new THREE.MeshStandardMaterial({
+                color: 0x4b4553,
+                roughness: 1,
+                shading: THREE.FlatShading
+            });
+
+            this.vAngle = 0;
+
+            this.drawBody();
+            this.drawHead();
+            this.drawLegs();
+        }
+        drawBody() {
+            const bodyGeometry = new THREE.IcosahedronGeometry(1.7, 0);
+            const body = new THREE.Mesh(bodyGeometry, this.woolMaterial);
+            body.castShadow = true;
+            body.receiveShadow = true;
+            this.group.add(body);
+        }
+        drawHead() {
+            const head = new THREE.Group();
+            head.position.set(0, 0.65, 1.6);
+            head.rotation.x = rad(-20);
+            this.group.add(head);
+
+            const foreheadGeometry = new THREE.BoxGeometry(0.7, 0.6, 0.7);
+            const forehead = new THREE.Mesh(foreheadGeometry, this.skinMaterial);
+            forehead.castShadow = true;
+            forehead.receiveShadow = true;
+            forehead.position.y = -0.15;
+            head.add(forehead);
+
+            const faceGeometry = new THREE.CylinderGeometry(0.5, 0.15, 0.4, 4, 1);
+            const face = new THREE.Mesh(faceGeometry, this.skinMaterial);
+            face.castShadow = true;
+            face.receiveShadow = true;
+            face.position.y = -0.65;
+            face.rotation.y = rad(45);
+            head.add(face);
+
+            const woolGeometry = new THREE.BoxGeometry(0.84, 0.46, 0.9);
+            const wool = new THREE.Mesh(woolGeometry, this.woolMaterial);
+            wool.position.set(0, 0.12, 0.07);
+            wool.rotation.x = rad(20);
+            head.add(wool);
+
+            const rightEyeGeometry = new THREE.CylinderGeometry(0.08, 0.1, 0.06, 6);
+            const rightEye = new THREE.Mesh(rightEyeGeometry, this.darkMaterial);
+            rightEye.castShadow = true;
+            rightEye.receiveShadow = true;
+            rightEye.position.set(0.35, -0.48, 0.33);
+            rightEye.rotation.set(rad(130.8), 0, rad(-45));
+            head.add(rightEye);
+
+            const leftEye = rightEye.clone();
+            leftEye.position.x = -rightEye.position.x;
+            leftEye.rotation.z = -rightEye.rotation.z;
+            head.add(leftEye);
+
+            const rightEarGeometry = new THREE.BoxGeometry(0.12, 0.5, 0.3);
+            rightEarGeometry.translate(0, -0.25, 0);
+            this.rightEar = new THREE.Mesh(rightEarGeometry, this.skinMaterial);
+            this.rightEar.castShadow = true;
+            this.rightEar.receiveShadow = true;
+            this.rightEar.position.set(0.35, -0.12, -0.07);
+            this.rightEar.rotation.set(rad(20), 0, rad(50));
+            head.add(this.rightEar);
+
+            this.leftEar = this.rightEar.clone();
+            this.leftEar.position.x = -this.rightEar.position.x;
+            this.leftEar.rotation.z = -this.rightEar.rotation.z;
+            head.add(this.leftEar);
+        }
+        drawLegs() {
+            const legGeometry = new THREE.CylinderGeometry(0.3, 0.15, 1, 4);
+            legGeometry.translate(0, -0.5, 0);
+            this.frontRightLeg = new THREE.Mesh(legGeometry, this.darkMaterial);
+            this.frontRightLeg.castShadow = true;
+            this.frontRightLeg.receiveShadow = true;
+            this.frontRightLeg.position.set(0.7, -0.8, 0.5);
+            this.frontRightLeg.rotation.x = rad(-12);
+            this.group.add(this.frontRightLeg);
+
+            this.frontLeftLeg = this.frontRightLeg.clone();
+            this.frontLeftLeg.position.x = -this.frontRightLeg.position.x;
+            this.frontLeftLeg.rotation.z = -this.frontRightLeg.rotation.z;
+            this.group.add(this.frontLeftLeg);
+
+            this.backRightLeg = this.frontRightLeg.clone();
+            this.backRightLeg.position.z = -this.frontRightLeg.position.z;
+            this.backRightLeg.rotation.x = -this.frontRightLeg.rotation.x;
+            this.group.add(this.backRightLeg);
+
+            this.backLeftLeg = this.frontLeftLeg.clone();
+            this.backLeftLeg.position.z = -this.frontLeftLeg.position.z;
+            this.backLeftLeg.rotation.x = -this.frontLeftLeg.rotation.x;
+            this.group.add(this.backLeftLeg);
+        }
+        jump(speed) {
+            this.vAngle += speed;
+            this.group.position.y = Math.sin(this.vAngle) + 1.38;
+
+            const legRotation = Math.sin(this.vAngle) * Math.PI / 6 + 0.4;
+
+            this.frontRightLeg.rotation.z = legRotation;
+            this.backRightLeg.rotation.z = legRotation;
+            this.frontLeftLeg.rotation.z = -legRotation;
+            this.backLeftLeg.rotation.z = -legRotation;
+
+            const earRotation = Math.sin(this.vAngle) * Math.PI / 3 + 1.5;
+
+            this.rightEar.rotation.z = earRotation;
+            this.leftEar.rotation.z = -earRotation;
+        }
+        jumpOnMouseDown() {
+            if (mouseDown) {
+                this.jump(0.05);
+            } else {
+                if (this.group.position.y <= 0.4) return;
+                this.jump(0.08);
+            }
+        }
+    }
+
+    class Cloud {
+        constructor() {
+            this.group = new THREE.Group();
+            this.group.position.y = -2;
+            this.group.scale.set(1.5, 1.5, 1.5);
+
+            this.material = new THREE.MeshStandardMaterial({
+                color: 0xacb3fb,
+                roughness: 1,
+                shading: THREE.FlatShading
+            });
+
+            this.vAngle = 0;
+
+            this.drawParts();
+
+            this.group.traverse((part) => {
+                part.castShadow = true;
+            part.receiveShadow = true;
+        });
+        }
+        drawParts() {
+            const partGeometry = new THREE.IcosahedronGeometry(1, 0);
+            this.upperPart = new THREE.Mesh(partGeometry, this.material);
+            this.group.add(this.upperPart);
+
+            this.leftPart = this.upperPart.clone();
+            this.leftPart.position.set(-1.2, -0.3, 0);
+            this.leftPart.scale.set(0.8, 0.8, 0.8);
+            this.group.add(this.leftPart);
+
+            this.rightPart = this.leftPart.clone();
+            this.rightPart.position.x = -this.leftPart.position.x;
+            this.group.add(this.rightPart);
+
+            this.frontPart = this.leftPart.clone();
+            this.frontPart.position.set(0, -0.4, 0.9);
+            this.frontPart.scale.set(0.7, 0.7, 0.7);
+            this.group.add(this.frontPart);
+
+            this.backPart = this.frontPart.clone();
+            this.backPart.position.z = -this.frontPart.position.z;
+            this.group.add(this.backPart);
+        }
+        bend() {
+            this.vAngle += 0.08;
+
+            this.upperPart.position.y = -Math.cos(this.vAngle) * 0.12;
+            this.leftPart.position.y = -Math.cos(this.vAngle) * 0.1 - 0.3;
+            this.rightPart.position.y = -Math.cos(this.vAngle) * 0.1 - 0.3;
+            this.frontPart.position.y = -Math.cos(this.vAngle) * 0.08 - 0.3;
+            this.backPart.position.y = -Math.cos(this.vAngle) * 0.08 - 0.3;
+        }
+    }
+
+    class Sky {
+        constructor() {
+            this.group = new THREE.Group();
+
+            this.daySky = new THREE.Group();
+            this.nightSky = new THREE.Group();
+
+            this.group.add(this.daySky);
+            this.group.add(this.nightSky);
+
+            this.colors = {
+                day: [0xFFFFFF, 0xEFD2DA, 0xC1EDED, 0xCCC9DE],
+                night: [0x5DC7B5, 0xF8007E, 0xFFC363, 0xCDAAFD, 0xDDD7FE],
+            };
+
+            this.drawSky('day');
+            this.drawSky('night');
+            this.drawNightLights();
+        }
+        drawSky(phase) {
+            for (let i = 0; i < 30; i++) {
+                const geometry = new THREE.IcosahedronGeometry(0.4, 0);
+                const material = new THREE.MeshStandardMaterial({
+                    color: this.colors[phase][Math.floor(Math.random() * this.colors[phase].length)],
+                    roughness: 1,
+                    shading: THREE.FlatShading
+                });
+                const mesh = new THREE.Mesh(geometry, material);
+
+                mesh.position.set((Math.random() - 0.5) * 30, (Math.random() - 0.5) * 30, (Math.random() - 0.5) * 30);
+                if (phase === 'day') {
+                    this.daySky.add(mesh);
+                } else {
+                    this.nightSky.add(mesh);
+                }
+            }
+        }
+        drawNightLights() {
+            const geometry = new THREE.SphereGeometry(0.1, 5, 5);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0xFF51B6,
+                roughness: 1,
+                shading: THREE.FlatShading
+            });
+
+            for (let i = 0; i < 3; i++) {
+                const light = new THREE.PointLight(0xF55889, 2, 30);
+                const mesh = new THREE.Mesh(geometry, material);
+                light.add(mesh);
+
+                light.position.set((Math.random() - 2) * 6, (Math.random() - 2) * 6, (Math.random() - 2) * 6);
+                light.updateMatrix();
+                light.matrixAutoUpdate = false;
+
+                this.nightSky.add(light);
+            }
+        }
+        showNightSky(condition) {
+            if (condition) {
+                this.daySky.position.set(100, 100, 100);
+                this.nightSky.position.set(0, 0, 0);
+            } else {
+                this.daySky.position.set(0, 0, 0);
+                this.nightSky.position.set(100, 100, 100);
+            }
+        }
+        moveSky() {
+            this.group.rotation.x += 0.001;
+            this.group.rotation.y -= 0.004;
+        }
+    }
+
+    /*const toggleBtn = document.querySelector('.toggle');
+     toggleBtn.addEventListener('click', toggleNight);
+
+     const worldMusic = document.querySelector('.world-music');
+     const btnMusic = document.querySelector('.toggle-music');
+     let playMusic = false;
+     btnMusic.addEventListener('click', toggleMusic);
+     worldMusic.volume = 0.3;
+     worldMusic.loop = true;*/
+
+    /*function toggleNight() {
+     night = !night;
+
+     toggleBtn.classList.toggle('toggle-night');
+     world.classList.toggle('world-night');
+
+     sky.showNightSky(night);
+     }*/
+
+    /*function toggleMusic() {
+     playMusic = !playMusic;
+     btnMusic.classList.toggle('music-off');
+     playMusic ? worldMusic.play() : worldMusic.pause();
+     }*/
+
+    init();
+    animate();
+</script>
+</html>

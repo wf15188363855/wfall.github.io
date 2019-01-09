@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>鲸落WFall</title>
+    <link rel="icon" href="../../img/logo_small.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/wfall_erm.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/f12.js"></script>
+    <style>
+        @keyframes dog-head {
+            0% {
+                transform: rotate(80deg);
+                -webkit-transform: rotate(80deg);
+                -moz-transform: rotate(80deg);
+                -o-transform: rotate(80deg);
+                -ms-transform: rotate(80deg);
+            }
+            20% {
+                transform: rotate(80deg);
+                -webkit-transform: rotate(80deg);
+                -moz-transform: rotate(80deg);
+                -o-transform: rotate(80deg);
+                -ms-transform: rotate(80deg);
+            }
+            60% {
+                transform: rotate(90deg);
+                -webkit-transform: rotate(90deg);
+                -moz-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                -ms-transform: rotate(90deg);
+            }
+            100% {
+                transform: rotate(80deg);
+                -webkit-transform: rotate(80deg);
+                -moz-transform: rotate(80deg);
+                -o-transform: rotate(80deg);
+                -ms-transform: rotate(80deg);
+            }
+        }
+        @keyframes paw {
+            0% {
+                transform: rotate(-10deg) translate(0, -10px);
+                -webkit-transform: rotate(-10deg) translate(0, -10px);
+                -moz-transform: rotate(-10deg) translate(0, -10px);
+                -o-transform: rotate(-10deg) translate(0, -10px);
+                -ms-transform: rotate(-10deg) translate(0, -10px);
+            }
+            20% {
+                transform: rotate(20deg) translate(0, 0);
+                -webkit-transform: rotate(20deg) translate(0, 0);
+                -moz-transform: rotate(20deg) translate(0, 0);
+                -o-transform: rotate(20deg) translate(0, 0);
+                -ms-transform: rotate(20deg) translate(0, 0);
+            }
+            100% {
+                transform: rotate(-10deg) translate(0, -10px);
+                -webkit-transform: rotate(-10deg) translate(0, -10px);
+                -moz-transform: rotate(-10deg) translate(0, -10px);
+                -o-transform: rotate(-10deg) translate(0, -10px);
+                -ms-transform: rotate(-10deg) translate(0, -10px);
+            }
+        }
+        @keyframes shadow {
+            0% {
+                transform: scale(1) rotate(-5deg);
+                -webkit-transform: scale(1) rotate(-5deg);
+                -moz-transform: scale(1) rotate(-5deg);
+                -o-transform: scale(1) rotate(-5deg);
+                -ms-transform: scale(1) rotate(-5deg);
+            }
+            50% {
+                transform: scale(1.04) rotate(-5deg);
+                -webkit-transform: scale(1.04) rotate(-5deg);
+                -moz-transform: scale(1.04) rotate(-5deg);
+                -o-transform: scale(1.04) rotate(-5deg);
+                -ms-transform: scale(1.04) rotate(-5deg);
+            }
+            100% {
+                transform: scale(1) rotate(-5deg);
+                -webkit-transform: scale(1) rotate(-5deg);
+                -moz-transform: scale(1) rotate(-5deg);
+                -o-transform: scale(1) rotate(-5deg);
+                -ms-transform: scale(1) rotate(-5deg);
+            }
+        }
+        @keyframes run {
+            0% {
+                transform: scale(1);
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -o-transform: scale(1);
+                -ms-transform: scale(1);
+            }
+            20% {
+                transform: scale(1.02) translate(0, -3px);
+                -webkit-transform: scale(1.02) translate(0, -3px);
+                -moz-transform: scale(1.02) translate(0, -3px);
+                -o-transform: scale(1.02) translate(0, -3px);
+                -ms-transform: scale(1.02) translate(0, -3px);
+            }
+            100% {
+                transform: scale(1);
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -o-transform: scale(1);
+                -ms-transform: scale(1);
+            }
+        }
+        @keyframes eye {
+            0% {
+                transform: translate(0, 0px);
+                -webkit-transform: translate(0, 0px);
+                -moz-transform: translate(0, 0px);
+                -o-transform: translate(0, 0px);
+                -ms-transform: translate(0, 0px);
+            }
+            38% {
+                transform: translate(0, 0px);
+                -webkit-transform: translate(0, 0px);
+                -moz-transform: translate(0, 0px);
+                -o-transform: translate(0, 0px);
+                -ms-transform: translate(0, 0px);
+            }
+            40% {
+                transform: translate(-3px, 5px);
+                -webkit-transform: translate(-3px, 5px);
+                -moz-transform: translate(-3px, 5px);
+                -o-transform: translate(-3px, 5px);
+                -ms-transform: translate(-3px, 5px);
+            }
+            45% {
+                transform: translate(6px, 9px);
+                -webkit-transform: translate(6px, 9px);
+                -moz-transform: translate(6px, 9px);
+                -o-transform: translate(6px, 9px);
+                -ms-transform: translate(6px, 9px);
+            }
+            92% {
+                transform: translate(6px, 9px);
+                -webkit-transform: translate(6px, 9px);
+                -moz-transform: translate(6px, 9px);
+                -o-transform: translate(6px, 9px);
+                -ms-transform: translate(6px, 9px);
+            }
+            95% {
+                transform: translate(-3px, 5px);
+                -webkit-transform: translate(-3px, 5px);
+                -moz-transform: translate(-3px, 5px);
+                -o-transform: translate(-3px, 5px);
+                -ms-transform: translate(-3px, 5px);
+            }
+            100% {
+                transform: translate(0, 0px);
+                -webkit-transform: translate(0, 0px);
+                -moz-transform: translate(0, 0px);
+                -o-transform: translate(0, 0px);
+                -ms-transform: translate(0, 0px);
+            }
+        }
+        @keyframes medal {
+            0% {
+                bottom: 0px;
+                left: 50px;
+            }
+            60% {
+                bottom: 10px;
+                left: 55px;
+            }
+            100% {
+                bottom: 0px;
+                left: 50px;
+            }
+        }
+        body {
+            background: #38cd9f;
+        }
+        .doge {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+        }
+        .doge__trunk {
+            width: 154px;
+            height: 120px;
+            border-radius: 47%;
+            background: #fef9e8;
+            transform: rotate(-15deg);
+            -webkit-transform: rotate(-15deg);
+            -moz-transform: rotate(-15deg);
+            -o-transform: rotate(-15deg);
+            -ms-transform: rotate(-15deg);
+            z-index: 5;
+            animation: run 0.4s infinite 0.2s cubic-bezier(0.4, 0.34, 0.16, 0.79);
+        }
+        .doge__tail {
+            position: absolute;
+            width: 30px;
+            height: 28px;
+            background: #fef9e8;
+            right: -10px;
+            top: 13px;
+            border-radius: 50%;
+            animation: run 0.4s infinite 0.21s cubic-bezier(0.4, 0.34, 0.16, 0.79);
+        }
+        .doge__collar {
+            width: 60px;
+            height: 77px;
+            background: #f27779;
+            top: 10px;
+            left: 10px;
+            position: absolute;
+            border-radius: 50%;
+            transform: rotate(60deg);
+            -webkit-transform: rotate(60deg);
+            -moz-transform: rotate(60deg);
+            -o-transform: rotate(60deg);
+            -ms-transform: rotate(60deg);
+            z-index: 9;
+        }
+        .doge__collar .doge__medal {
+            width: 21px;
+            height: 18px;
+            background: #f7e191;
+            border-radius: 50%;
+            bottom: 0px;
+            left: 50px;
+            z-index: 999;
+            position: absolute;
+            animation: medal 2.2s infinite 0.5s cubic-bezier(0.4, 0.34, 0.16, 0.79);
+        }
+        .doge__head {
+            border-radius: 47%;
+            position: absolute;
+            background: #fef9e8;
+            transform: rotate(80deg);
+            -webkit-transform: rotate(80deg);
+            -moz-transform: rotate(80deg);
+            -o-transform: rotate(80deg);
+            -ms-transform: rotate(80deg);
+            width: 105px;
+            height: 110px;
+            top: -32px;
+            left: -30px;
+            z-index: 13;
+            animation: dog-head 3.8s infinite 1s cubic-bezier(0.4, 0.34, 0.16, 0.79);
+        }
+        .doge__head .head__left-ear {
+            position: absolute;
+            border: 32px solid transparent;
+            border-left: 30px solid #2d2d2d;
+            border-radius: 10px;
+            transform: rotate(-110deg);
+            -webkit-transform: rotate(-110deg);
+            -moz-transform: rotate(-110deg);
+            -o-transform: rotate(-110deg);
+            -ms-transform: rotate(-110deg);
+            top: -55px;
+            right: 40px;
+        }
+        .doge__head .head__right-ear {
+            position: absolute;
+            border: 32px solid transparent;
+            border-left: 30px solid #2d2d2d;
+            border-radius: 10px;
+            transform: rotate(-250deg);
+            -webkit-transform: rotate(-250deg);
+            -moz-transform: rotate(-250deg);
+            -o-transform: rotate(-250deg);
+            -ms-transform: rotate(-250deg);
+            bottom: -55px;
+            right: 40px;
+        }
+        .doge__head .head__left-eye {
+            position: absolute;
+            height: 22px;
+            width: 22px;
+            background: #2d2d2d;
+            border-radius: 50%;
+            top: 12px;
+            left: 38px;
+        }
+        .doge__head .head__left-eye:before {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            z-index: 99999;
+            top: 4px;
+            left: 6px;
+            animation: eye 10s infinite 0.18s linear;
+        }
+        .doge__head .head__right-eye {
+            position: absolute;
+            height: 22px;
+            width: 22px;
+            background: #2d2d2d;
+            border-radius: 50%;
+            top: 75px;
+            left: 38px;
+        }
+        .doge__head .head__right-eye:before {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            z-index: 99999;
+            top: 4px;
+            left: 6px;
+            animation: eye 10s infinite 0.18s linear;
+        }
+        .doge__head .head__mouth {
+            position: absolute;
+            transform: rotate(-180deg);
+            -webkit-transform: rotate(-180deg);
+            -moz-transform: rotate(-180deg);
+            -o-transform: rotate(-180deg);
+            -ms-transform: rotate(-180deg);
+            border: 34px solid transparent;
+            border-left: 48px solid #434244;
+            border-radius: 17px;
+            bottom: 23px;
+            right: 2px;
+        }
+        .doge__head .head__mouth:after {
+            content: "";
+            position: absolute;
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            border: 18px solid transparent;
+            border-left: 18px solid rgba(43, 46, 42, 0.6);
+            border-radius: 17px;
+            bottom: -18px;
+            right: 13px;
+        }
+        .doge__head .head__nose {
+            position: absolute;
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            border: 10px solid transparent;
+            border-left: 10px solid #232323;
+            border-radius: 17px;
+            bottom: 47px;
+            right: 19px;
+        }
+        .doge__front-left-paw {
+            width: 20px;
+            height: 60px;
+            border-radius: 10px;
+            position: absolute;
+            bottom: -29px;
+            left: 19px;
+            background: #fef9e8;
+            animation: paw 0.8s infinite 0.18s cubic-bezier(0.4, 0.34, 0.16, 0.79);
+            transform-origin: 50% 0%;
+        }
+        .doge__front-right-paw {
+            width: 20px;
+            height: 60px;
+            border-radius: 10px;
+            position: absolute;
+            bottom: -34px;
+            left: 75px;
+            background: #fef9e8;
+            animation: paw 0.8s infinite 0s cubic-bezier(0.4, 0.34, 0.16, 0.79);
+            transform-origin: 50% 0%;
+        }
+        .doge__back-left-paw {
+            width: 20px;
+            height: 60px;
+            border-radius: 10px;
+            position: absolute;
+            bottom: -13px;
+            left: 117px;
+            background: #f1e9d3;
+            z-index: -1;
+            animation: paw 0.8s infinite 0.3s cubic-bezier(0.4, 0.34, 0.16, 0.79);
+            transform-origin: 50% 0%;
+        }
+        .doge__back-right-paw {
+            width: 20px;
+            height: 60px;
+            border-radius: 10px;
+            position: absolute;
+            bottom: -11px;
+            left: 52px;
+            background: #f1e9d3;
+            z-index: -1;
+            animation: paw 0.9s infinite 0.2s cubic-bezier(0.4, 0.34, 0.16, 0.79);
+            transform-origin: 50% 0%;
+        }
+        .doge:after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 190px;
+            height: 60px;
+            border-radius: 90%;
+            animation: shadow 0.4s infinite 0.4s cubic-bezier(0.4, 0.34, 0.16, 0.79);
+            background: rgba(0, 0, 0, 0.24);
+            z-index: -2;
+            transform: rotate(-5deg);
+            -webkit-transform: rotate(-5deg);
+            -moz-transform: rotate(-5deg);
+            -o-transform: rotate(-5deg);
+            -ms-transform: rotate(-5deg);
+            top: 102px;
+            left: -10px;
+        }
+
+
+
+        #SM_name{
+            height: 25px;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+            width: 100%;
+            position: absolute;
+            color: black;
+            z-index: 99;
+        }
+        .SM_css{
+            position: absolute;
+            bottom: 17%;
+            left: 0;
+            right: 0;
+            display: block;
+            outline: none;
+            background-color: rgba(132, 132, 132, 0.5);
+            color: black;
+            border: none;
+            width: 60%;
+            min-width: 100px;
+            max-width: 100%;
+            margin: auto;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            border-radius: 50px;
+            text-align: center;
+            z-index: 9999;
+        }
+        #SM_btn{
+            bottom: 11%;
+        }
+        .instructions_t {
+            position: absolute;
+            top: 30%;
+            left: 30px;
+            color: black;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            line-height: 1.25em;
+            width: 86%;
+            z-index: 99;
+            height: 43vh;
+            overflow: hidden;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+        .logo{
+            color: black;
+        }
+    </style>
+</head>
+<body onload="disableInfo()">
+<input type="text" id="SM_input" class="SM_css" placeholder="请输入预览效果">
+<div id="SM_btn" class="SM_css">确定</div>
+<p id="SM_name">鲸落www.WFall.cn</p>
+<div class="instructions_t">
+    <p id="SM_name01"></p>
+    <p id="SM_name02"></p>
+    <p id="SM_name03"></p>
+    <p id="SM_name04"></p>
+    <p id="SM_name05"></p>
+    <p id="SM_name06"></p>
+</div>
+
+
+<div class="logo">
+    <div class="logo_name">
+        <p>鲸落www.WFall.cn</p>
+    </div>
+</div>
+<div id="custom">
+    <img width="25" height="25" src="img/shezhi.png" alt="">
+</div>
+<div id="erweima" style="display: none">
+    <div id="close"><img width="25" height="25" src="img/chahao.png" alt=""></div>
+    <div class="AboutUs_top">
+        <img src="img/wfall_logo.png" alt="logo">
+        <p class="AboutUs_top_t">鲸落</p>
+        <p class="AboutUs_top_b">www.WFall.cn<br>生成个人专属特效</p>
+    </div>
+    <div>
+        <input id="qr_text" type="text" placeholder="请输入专属特效名称" value=""/>
+        <span id="qr_btn" value="button">生成专属二维码</span><br/>
+    </div>
+    <div class="content">
+        <div id="qr_container" style="margin:auto; position:relative;text-align: center;"></div>
+    </div>
+</div>
+
+
+
+<div class="doge">
+    <div class="doge__trunk"></div>
+    <div class="doge__tail"></div>
+    <div class="doge__head">
+        <div class="head__left-ear"></div>
+        <div class="head__right-ear"></div>
+        <div class="head__left-eye"></div>
+        <div class="head__right-eye"></div>
+        <div class="head__mouth"></div>
+        <div class="head__nose"></div>
+    </div>
+    <div class="doge__collar">
+        <div class="doge__medal"></div>
+    </div>
+    <div class="doge__front-left-paw"></div>
+    <div class="doge__front-right-paw"></div>
+    <div class="doge__back-left-paw"></div>
+    <div class="doge__back-right-paw"></div>
+</div>
+</body>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/wfall_lingdanggou.js"></script>
+<script>
+    var SM_text;
+    var  username = GetUrlByParamName("username");     /*获取拼接name参数*/
+    if(username){
+        SM_text = username;      /*将URL的name赋值给页面tittle*/
+    }else {
+        SM_text = "鲸落鲸落www.WFall.cn友谊和爱情之间的区别在于：友谊意味着两个人和世界，然而爱情意味着两个人就是世界。在友谊中一加一等于二；在爱情中一加一还是一！";
+    }
+
+
+    $("#SM_btn").click(function () {
+        SM_text = $("#SM_input").val();
+        $("#SM_name").text(SM_text.substring(0,2));
+        $("#SM_name01").text(SM_text.substring(2,16));
+        $("#SM_name02").text(SM_text.substring(16,32));
+        $("#SM_name03").text(SM_text.substring(32,47));
+        $("#SM_name04").text(SM_text.substring(47,61));
+        $("#SM_name05").text(SM_text.substring(61,78));
+        $("#SM_name06").text(SM_text.substring(78));
+    })
+    $("#SM_name").text(SM_text.substring(0,2));
+    $("#SM_name01").text(SM_text.substring(2,16));
+    $("#SM_name02").text(SM_text.substring(16,32));
+    $("#SM_name03").text(SM_text.substring(32,47));
+    $("#SM_name04").text(SM_text.substring(47,61));
+    $("#SM_name05").text(SM_text.substring(61,78));
+    $("#SM_name06").text(SM_text.substring(78));
+</script>
+</html>
