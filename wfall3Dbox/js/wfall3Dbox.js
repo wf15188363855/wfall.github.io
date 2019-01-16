@@ -276,7 +276,7 @@ Vector2 = function(a, b) {
         for (var i = 0; i < letters.length; i++) {
             for (var y = 0; y < letters[i].length; y++) {
                 for (var x = 0; x < letters[i][y].length; x++) {
-                    letters[i][y][x] == "+" ? letDests.push(new Vector2(x * opts.pTD + w / 2 - ((letters.length / 2) * opts.pTD * 4) + (i * opts.pTD * 5)-80, y * opts.pTD + h / 3-260)) : void 0;/***"h / 3-260"调整"www.wfall.cn上下位置"***/
+                    letters[i][y][x] == "+" ? letDests.push(new Vector2(x * opts.pTD + w / 2 - ((letters.length / 2) * opts.pTD * 4) + (i * opts.pTD * 5)-80, y * opts.pTD + h / 3-180)) : void 0;/***"h / 3-260"调整"www.wfall.cn上下位置"***/
                 }
                 /*console.log(letDests)*/
             }
