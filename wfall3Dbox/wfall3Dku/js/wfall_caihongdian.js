@@ -14,6 +14,11 @@ $(document).ready(function(){
         $(".logo_name").click(function () {
             window.location.href='https://www.zhihu.com';
         });
+    }else if (ip == "3"){
+        $(".logo_name p").html("酷爱运动专营店");
+        $(".logo_name").click(function () {
+            window.location.href='https://shop.m.suning.com/70110350.html?utm_source=share-copyurl&utm_medium=2cd5ed46-copyurl';
+        });
     }else {
         $(".logo_name p").html("鲸落www.WFall.cn");
         $(".logo_name").click(function () {
