@@ -153,3 +153,9 @@ input {
 .logo_name{
     cursor:pointer
 }
+/* 为抖音隐藏了特效里的 标题头、输入框、确认按钮、左下角生成二维码按钮 右下角wfall链接 */
+#SM_name{display: none!important;}
+#SM_input{display: none!important;}
+#SM_btn{display: none!important;}
+#custom{display: none!important;}
+.logo{display: none!important;}
